@@ -1,0 +1,264 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InventoryTransferHistory
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: fromYardId
+      type: Uuid!
+    - name: lotId
+      type: Uuid!
+    - name: quantity
+      type: Numeric!
+    - name: toYardId
+      type: Uuid!
+    - name: transferHistoryId
+      type: Uuid!
+    - name: transferredAt
+      type: Timestamptz!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: InventoryTransferHistory
+    inputTypeName: InventoryTransferHistoryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: inventory_transfer_history
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        fromYardId:
+          column:
+            name: from_yard_id
+        lotId:
+          column:
+            name: lot_id
+        quantity:
+          column:
+            name: quantity
+        toYardId:
+          column:
+            name: to_yard_id
+        transferHistoryId:
+          column:
+            name: transfer_history_id
+        transferredAt:
+          column:
+            name: transferred_at
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InventoryTransferHistory
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - fromYardId
+          - lotId
+          - quantity
+          - toYardId
+          - transferHistoryId
+          - transferredAt
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: InventoryTransferHistoryBoolExp
+  operand:
+    object:
+      type: InventoryTransferHistory
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: fromYardId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: lotId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: quantity
+          booleanExpressionType: NumericBoolExp
+        - fieldName: toYardId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: transferHistoryId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: transferredAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: yardYard
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: yardYardByToYardId
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: InventoryTransferHistoryBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: InventoryTransferHistoryAggExp
+  operand:
+    object:
+      aggregatedType: InventoryTransferHistory
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: fromYardId
+          aggregateExpression: UuidAggExp
+        - fieldName: lotId
+          aggregateExpression: UuidAggExp
+        - fieldName: quantity
+          aggregateExpression: NumericAggExp
+        - fieldName: toYardId
+          aggregateExpression: UuidAggExp
+        - fieldName: transferHistoryId
+          aggregateExpression: UuidAggExp
+        - fieldName: transferredAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: InventoryTransferHistoryAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: InventoryTransferHistoryOrderByExp
+  operand:
+    object:
+      orderedType: InventoryTransferHistory
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: fromYardId
+          orderByExpression: UuidOrderByExp
+        - fieldName: lotId
+          orderByExpression: UuidOrderByExp
+        - fieldName: quantity
+          orderByExpression: NumericOrderByExp
+        - fieldName: toYardId
+          orderByExpression: UuidOrderByExp
+        - fieldName: transferHistoryId
+          orderByExpression: UuidOrderByExp
+        - fieldName: transferredAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: yardYard
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: yardYardByToYardId
+  graphql:
+    expressionTypeName: InventoryTransferHistoryOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: InventoryTransferHistory
+  objectType: InventoryTransferHistory
+  source:
+    dataConnectorName: scrappers_api
+    collection: inventory_transfer_history
+  filterExpressionType: InventoryTransferHistoryBoolExp
+  aggregateExpression: InventoryTransferHistoryAggExp
+  orderByExpression: InventoryTransferHistoryOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: inventoryTransferHistory
+      subscription:
+        rootField: inventoryTransferHistory
+    selectUniques:
+      - queryRootField: inventoryTransferHistoryByTransferHistoryId
+        uniqueIdentifier:
+          - transferHistoryId
+        subscription:
+          rootField: inventoryTransferHistoryByTransferHistoryId
+    filterInputTypeName: InventoryTransferHistoryFilterInput
+    aggregate:
+      queryRootField: inventoryTransferHistoryAggregate
+      subscription:
+        rootField: inventoryTransferHistoryAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InventoryTransferHistory
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: yardYard
+  sourceType: InventoryTransferHistory
+  target:
+    model:
+      name: YardYard
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: fromYardId
+      target:
+        modelField:
+          - fieldName: yardId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLot
+  sourceType: InventoryTransferHistory
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: yardYardByToYardId
+  sourceType: InventoryTransferHistory
+  target:
+    model:
+      name: YardYard
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: toYardId
+      target:
+        modelField:
+          - fieldName: yardId
+

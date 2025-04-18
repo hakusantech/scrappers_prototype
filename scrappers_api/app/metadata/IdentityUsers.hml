@@ -1,0 +1,282 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: IdentityUsers
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: email
+      type: Text!
+    - name: passwordHash
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: userId
+      type: Uuid!
+    - name: username
+      type: Text!
+  graphql:
+    typeName: IdentityUsers
+    inputTypeName: IdentityUsersInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: identity_users
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        email:
+          column:
+            name: email
+        passwordHash:
+          column:
+            name: password_hash
+        updatedAt:
+          column:
+            name: updated_at
+        userId:
+          column:
+            name: user_id
+        username:
+          column:
+            name: username
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: IdentityUsers
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - email
+          - passwordHash
+          - updatedAt
+          - userId
+          - username
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: IdentityUsersBoolExp
+  operand:
+    object:
+      type: IdentityUsers
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: email
+          booleanExpressionType: TextBoolExp
+        - fieldName: passwordHash
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: username
+          booleanExpressionType: TextBoolExp
+      comparableRelationships:
+        - relationshipName: identityAuditLogs
+        - relationshipName: identityUserRoles
+        - relationshipName: pricingApprovalRoutes
+        - relationshipName: supportSupportTickets
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: IdentityUsersBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: IdentityUsersAggExp
+  operand:
+    object:
+      aggregatedType: IdentityUsers
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: email
+          aggregateExpression: TextAggExp
+        - fieldName: passwordHash
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+        - fieldName: username
+          aggregateExpression: TextAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: IdentityUsersAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: IdentityUsersOrderByExp
+  operand:
+    object:
+      orderedType: IdentityUsers
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: email
+          orderByExpression: TextOrderByExp
+        - fieldName: passwordHash
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+        - fieldName: username
+          orderByExpression: TextOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: IdentityUsersOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: IdentityUsers
+  objectType: IdentityUsers
+  source:
+    dataConnectorName: scrappers_api
+    collection: identity_users
+  filterExpressionType: IdentityUsersBoolExp
+  aggregateExpression: IdentityUsersAggExp
+  orderByExpression: IdentityUsersOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: identityUsers
+      subscription:
+        rootField: identityUsers
+    selectUniques:
+      - queryRootField: identityUsersByEmail
+        uniqueIdentifier:
+          - email
+        subscription:
+          rootField: identityUsersByEmail
+      - queryRootField: identityUsersByUserId
+        uniqueIdentifier:
+          - userId
+        subscription:
+          rootField: identityUsersByUserId
+      - queryRootField: identityUsersByUsername
+        uniqueIdentifier:
+          - username
+        subscription:
+          rootField: identityUsersByUsername
+    filterInputTypeName: IdentityUsersFilterInput
+    aggregate:
+      queryRootField: identityUsersAggregate
+      subscription:
+        rootField: identityUsersAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: IdentityUsers
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityAuditLogs
+  sourceType: IdentityUsers
+  target:
+    model:
+      name: IdentityAuditLog
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: IdentityAuditLogAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: identityAuditLogsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityUserRoles
+  sourceType: IdentityUsers
+  target:
+    model:
+      name: IdentityUserRoles
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: IdentityUserRolesAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: identityUserRolesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingApprovalRoutes
+  sourceType: IdentityUsers
+  target:
+    model:
+      name: PricingApprovalRoute
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: PricingApprovalRouteAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: approvedBy
+  graphql:
+    aggregateFieldName: pricingApprovalRoutesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: supportSupportTickets
+  sourceType: IdentityUsers
+  target:
+    model:
+      name: SupportSupportTicket
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: SupportSupportTicketAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: supportSupportTicketsAggregate
+

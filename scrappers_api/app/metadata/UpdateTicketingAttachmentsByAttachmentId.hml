@@ -1,0 +1,342 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsAttachmentId
+  description: Update the 'attachment_id' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsAttachmentId
+    inputTypeName: UpdateColumnTicketingAttachmentsAttachmentIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_attachment_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsAttachmentId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsCreatedAt
+  description: Update the 'created_at' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsCreatedAt
+    inputTypeName: UpdateColumnTicketingAttachmentsCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsTicketId
+  description: Update the 'ticket_id' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsTicketId
+    inputTypeName: UpdateColumnTicketingAttachmentsTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsType
+  description: Update the 'type' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: AttachmentTypeEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsType
+    inputTypeName: UpdateColumnTicketingAttachmentsTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_type
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsUpdatedAt
+  description: Update the 'updated_at' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsUpdatedAt
+    inputTypeName: UpdateColumnTicketingAttachmentsUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingAttachmentsUrl
+  description: Update the 'url' column in the 'ticketing_attachments' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingAttachmentsUrl
+    inputTypeName: UpdateColumnTicketingAttachmentsUrlInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_attachments_url
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingAttachmentsUrl
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingAttachmentsByAttachmentIdUpdateColumns
+  description: Update the columns of the 'ticketing_attachments' collection
+  fields:
+    - name: attachmentId
+      type: UpdateColumnTicketingAttachmentsAttachmentId
+      description: Update the 'attachment_id' column in the 'ticketing_attachments'
+        collection.
+    - name: createdAt
+      type: UpdateColumnTicketingAttachmentsCreatedAt
+      description: Update the 'created_at' column in the 'ticketing_attachments' collection.
+    - name: ticketId
+      type: UpdateColumnTicketingAttachmentsTicketId
+      description: Update the 'ticket_id' column in the 'ticketing_attachments' collection.
+    - name: type
+      type: UpdateColumnTicketingAttachmentsType
+      description: Update the 'type' column in the 'ticketing_attachments' collection.
+    - name: updatedAt
+      type: UpdateColumnTicketingAttachmentsUpdatedAt
+      description: Update the 'updated_at' column in the 'ticketing_attachments' collection.
+    - name: url
+      type: UpdateColumnTicketingAttachmentsUrl
+      description: Update the 'url' column in the 'ticketing_attachments' collection.
+  graphql:
+    typeName: UpdateTicketingAttachmentsByAttachmentIdUpdateColumns
+    inputTypeName: UpdateTicketingAttachmentsByAttachmentIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_attachments_by_attachment_id_update_columns
+      fieldMapping:
+        attachmentId:
+          column:
+            name: attachment_id
+        createdAt:
+          column:
+            name: created_at
+        ticketId:
+          column:
+            name: ticket_id
+        type:
+          column:
+            name: type
+        updatedAt:
+          column:
+            name: updated_at
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingAttachmentsByAttachmentIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - attachmentId
+          - createdAt
+          - ticketId
+          - type
+          - updatedAt
+          - url
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingAttachmentsByAttachmentIdResponse
+  description: Responses from the 'update_ticketing_attachments_by_attachment_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingAttachments!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateTicketingAttachmentsByAttachmentIdResponse
+    inputTypeName: UpdateTicketingAttachmentsByAttachmentIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_attachments_by_attachment_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingAttachmentsByAttachmentIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTicketingAttachmentsByAttachmentId
+  outputType: UpdateTicketingAttachmentsByAttachmentIdResponse!
+  arguments:
+    - name: keyAttachmentId
+      type: Uuid!
+    - name: postCheck
+      type: TicketingAttachmentsBoolExp
+      description: Update permission post-condition predicate over the
+        'ticketing_attachments' collection
+    - name: preCheck
+      type: TicketingAttachmentsBoolExp
+      description: Update permission pre-condition predicate over the
+        'ticketing_attachments' collection
+    - name: updateColumns
+      type: UpdateTicketingAttachmentsByAttachmentIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_ticketing_attachments_by_attachment_id
+    argumentMapping:
+      keyAttachmentId: key_attachment_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateTicketingAttachmentsByAttachmentId
+    rootFieldKind: Mutation
+  description: Update any row on the 'ticketing_attachments' collection using the
+    'attachment_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTicketingAttachmentsByAttachmentId
+  permissions:
+    - role: admin
+      allowExecution: true
+

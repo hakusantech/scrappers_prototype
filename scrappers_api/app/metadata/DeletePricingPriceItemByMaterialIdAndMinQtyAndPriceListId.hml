@@ -1,0 +1,81 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListIdResponse
+  description: Responses from the
+    'delete_pricing_price_item_by_material_id_and_min_qty_and_price_list_id'
+    procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceItem!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListIdResponse
+    inputTypeName: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_pricing_price_item_by_material_id_and_min_qty_and_price_list_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListId
+  outputType: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListIdResponse!
+  arguments:
+    - name: keyMaterialId
+      type: Uuid!
+    - name: keyMinQty
+      type: Numeric!
+    - name: keyPriceListId
+      type: Uuid!
+    - name: preCheck
+      type: PricingPriceItemBoolExp
+      description: Delete permission predicate over the 'pricing_price_item' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_pricing_price_item_by_material_id_and_min_qty_and_price_list_id
+    argumentMapping:
+      keyMaterialId: key_material_id
+      keyMinQty: key_min_qty
+      keyPriceListId: key_price_list_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deletePricingPriceItemByMaterialIdAndMinQtyAndPriceListId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'pricing_price_item' collection using the
+    'material_id', 'min_qty' and 'price_list_id' keys
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePricingPriceItemByMaterialIdAndMinQtyAndPriceListId
+  permissions:
+    - role: admin
+      allowExecution: true
+

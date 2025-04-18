@@ -1,0 +1,232 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PricingApprovalRoute
+  fields:
+    - name: approvalRouteId
+      type: Uuid!
+    - name: approvedAt
+      type: Timestamptz
+    - name: approvedBy
+      type: Uuid
+    - name: createdAt
+      type: Timestamptz!
+    - name: priceListId
+      type: Uuid!
+    - name: requiredRole
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: PricingApprovalRoute
+    inputTypeName: PricingApprovalRouteInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: pricing_approval_route
+      fieldMapping:
+        approvalRouteId:
+          column:
+            name: approval_route_id
+        approvedAt:
+          column:
+            name: approved_at
+        approvedBy:
+          column:
+            name: approved_by
+        createdAt:
+          column:
+            name: created_at
+        priceListId:
+          column:
+            name: price_list_id
+        requiredRole:
+          column:
+            name: required_role
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PricingApprovalRoute
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - approvalRouteId
+          - approvedAt
+          - approvedBy
+          - createdAt
+          - priceListId
+          - requiredRole
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PricingApprovalRouteBoolExp
+  operand:
+    object:
+      type: PricingApprovalRoute
+      comparableFields:
+        - fieldName: approvalRouteId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: approvedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: approvedBy
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: priceListId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: requiredRole
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: identityUser
+        - relationshipName: pricingPriceList
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PricingApprovalRouteBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PricingApprovalRouteAggExp
+  operand:
+    object:
+      aggregatedType: PricingApprovalRoute
+      aggregatableFields:
+        - fieldName: approvalRouteId
+          aggregateExpression: UuidAggExp
+        - fieldName: approvedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: approvedBy
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: priceListId
+          aggregateExpression: UuidAggExp
+        - fieldName: requiredRole
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: PricingApprovalRouteAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PricingApprovalRouteOrderByExp
+  operand:
+    object:
+      orderedType: PricingApprovalRoute
+      orderableFields:
+        - fieldName: approvalRouteId
+          orderByExpression: UuidOrderByExp
+        - fieldName: approvedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: approvedBy
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: priceListId
+          orderByExpression: UuidOrderByExp
+        - fieldName: requiredRole
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: identityUser
+        - relationshipName: pricingPriceList
+  graphql:
+    expressionTypeName: PricingApprovalRouteOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: PricingApprovalRoute
+  objectType: PricingApprovalRoute
+  source:
+    dataConnectorName: scrappers_api
+    collection: pricing_approval_route
+  filterExpressionType: PricingApprovalRouteBoolExp
+  aggregateExpression: PricingApprovalRouteAggExp
+  orderByExpression: PricingApprovalRouteOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: pricingApprovalRoute
+      subscription:
+        rootField: pricingApprovalRoute
+    selectUniques:
+      - queryRootField: pricingApprovalRouteByApprovalRouteId
+        uniqueIdentifier:
+          - approvalRouteId
+        subscription:
+          rootField: pricingApprovalRouteByApprovalRouteId
+    filterInputTypeName: PricingApprovalRouteFilterInput
+    aggregate:
+      queryRootField: pricingApprovalRouteAggregate
+      subscription:
+        rootField: pricingApprovalRouteAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PricingApprovalRoute
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityUser
+  sourceType: PricingApprovalRoute
+  target:
+    model:
+      name: IdentityUsers
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: approvedBy
+      target:
+        modelField:
+          - fieldName: userId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingPriceList
+  sourceType: PricingApprovalRoute
+  target:
+    model:
+      name: PricingPriceList
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: priceListId
+      target:
+        modelField:
+          - fieldName: priceListId
+

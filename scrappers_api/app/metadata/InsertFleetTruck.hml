@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFleetTruckObject
+  fields:
+    - name: capacityKg
+      type: Numeric
+    - name: createdAt
+      type: Timestamptz
+    - name: plateNumber
+      type: Text!
+    - name: truckId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertFleetTruckObject
+    inputTypeName: InsertFleetTruckObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_fleet_truck_object
+      fieldMapping:
+        capacityKg:
+          column:
+            name: capacity_kg
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFleetTruckObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - capacityKg
+          - createdAt
+          - plateNumber
+          - truckId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFleetTruckResponse
+  description: Responses from the 'insert_fleet_truck' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetTruck!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertFleetTruckResponse
+    inputTypeName: InsertFleetTruckResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_fleet_truck_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFleetTruckResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertFleetTruck
+  outputType: InsertFleetTruckResponse!
+  arguments:
+    - name: objects
+      type: "[InsertFleetTruckObject!]!"
+    - name: postCheck
+      type: FleetTruckBoolExp
+      description: Insert permission predicate over the 'fleet_truck' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_fleet_truck
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertFleetTruck
+    rootFieldKind: Mutation
+  description: Insert into the fleet_truck table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertFleetTruck
+  permissions:
+    - role: admin
+      allowExecution: true
+

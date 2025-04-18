@@ -1,0 +1,439 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TicketingWeightTicket
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: finalizedAt
+      type: Timestamptz
+    - name: netWeight
+      type: Numeric
+    - name: priceApplied
+      type: Numeric
+    - name: status
+      type: TicketStatusEnum!
+    - name: supplierId
+      type: Uuid!
+    - name: tareWeight
+      type: Numeric!
+    - name: ticketId
+      type: Uuid!
+    - name: ticketType
+      type: TicketTypeEnum!
+    - name: totalWeight
+      type: Numeric!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: vehicleId
+      type: Uuid
+    - name: yardId
+      type: Uuid!
+  graphql:
+    typeName: TicketingWeightTicket
+    inputTypeName: TicketingWeightTicketInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: ticketing_weight_ticket
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        finalizedAt:
+          column:
+            name: finalized_at
+        netWeight:
+          column:
+            name: net_weight
+        priceApplied:
+          column:
+            name: price_applied
+        status:
+          column:
+            name: status
+        supplierId:
+          column:
+            name: supplier_id
+        tareWeight:
+          column:
+            name: tare_weight
+        ticketId:
+          column:
+            name: ticket_id
+        ticketType:
+          column:
+            name: ticket_type
+        totalWeight:
+          column:
+            name: total_weight
+        updatedAt:
+          column:
+            name: updated_at
+        vehicleId:
+          column:
+            name: vehicle_id
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TicketingWeightTicket
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - finalizedAt
+          - netWeight
+          - priceApplied
+          - status
+          - supplierId
+          - tareWeight
+          - ticketId
+          - ticketType
+          - totalWeight
+          - updatedAt
+          - vehicleId
+          - yardId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketingWeightTicketBoolExp
+  operand:
+    object:
+      type: TicketingWeightTicket
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: finalizedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: netWeight
+          booleanExpressionType: NumericBoolExp
+        - fieldName: priceApplied
+          booleanExpressionType: NumericBoolExp
+        - fieldName: status
+          booleanExpressionType: TicketStatusEnumBoolExp
+        - fieldName: supplierId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: tareWeight
+          booleanExpressionType: NumericBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: ticketType
+          booleanExpressionType: TicketTypeEnumBoolExp
+        - fieldName: totalWeight
+          booleanExpressionType: NumericBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: vehicleId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: yardId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: financeInvoices
+        - relationshipName: ordersLinkedTickets
+        - relationshipName: ticketingAttachments
+        - relationshipName: ticketingComplianceInfos
+        - relationshipName: ticketingMaterialLines
+        - relationshipName: partnerSupplier
+        - relationshipName: fleetVehicle
+        - relationshipName: yardYard
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketingWeightTicketBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketingWeightTicketAggExp
+  operand:
+    object:
+      aggregatedType: TicketingWeightTicket
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: finalizedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: netWeight
+          aggregateExpression: NumericAggExp
+        - fieldName: priceApplied
+          aggregateExpression: NumericAggExp
+        - fieldName: status
+          aggregateExpression: TicketStatusEnumAggExp
+        - fieldName: supplierId
+          aggregateExpression: UuidAggExp
+        - fieldName: tareWeight
+          aggregateExpression: NumericAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: ticketType
+          aggregateExpression: TicketTypeEnumAggExp
+        - fieldName: totalWeight
+          aggregateExpression: NumericAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: vehicleId
+          aggregateExpression: UuidAggExp
+        - fieldName: yardId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: TicketingWeightTicketAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketingWeightTicketOrderByExp
+  operand:
+    object:
+      orderedType: TicketingWeightTicket
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: finalizedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: netWeight
+          orderByExpression: NumericOrderByExp
+        - fieldName: priceApplied
+          orderByExpression: NumericOrderByExp
+        - fieldName: status
+          orderByExpression: TicketStatusEnumOrderByExp
+        - fieldName: supplierId
+          orderByExpression: UuidOrderByExp
+        - fieldName: tareWeight
+          orderByExpression: NumericOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: ticketType
+          orderByExpression: TicketTypeEnumOrderByExp
+        - fieldName: totalWeight
+          orderByExpression: NumericOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: vehicleId
+          orderByExpression: UuidOrderByExp
+        - fieldName: yardId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: partnerSupplier
+        - relationshipName: fleetVehicle
+        - relationshipName: yardYard
+  graphql:
+    expressionTypeName: TicketingWeightTicketOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: TicketingWeightTicket
+  objectType: TicketingWeightTicket
+  source:
+    dataConnectorName: scrappers_api
+    collection: ticketing_weight_ticket
+  filterExpressionType: TicketingWeightTicketBoolExp
+  aggregateExpression: TicketingWeightTicketAggExp
+  orderByExpression: TicketingWeightTicketOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ticketingWeightTicket
+      subscription:
+        rootField: ticketingWeightTicket
+    selectUniques:
+      - queryRootField: ticketingWeightTicketByTicketId
+        uniqueIdentifier:
+          - ticketId
+        subscription:
+          rootField: ticketingWeightTicketByTicketId
+    filterInputTypeName: TicketingWeightTicketFilterInput
+    aggregate:
+      queryRootField: ticketingWeightTicketAggregate
+      subscription:
+        rootField: ticketingWeightTicketAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: TicketingWeightTicket
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: financeInvoices
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: FinanceInvoice
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: FinanceInvoiceAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+  graphql:
+    aggregateFieldName: financeInvoicesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersLinkedTickets
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: OrdersLinkedTickets
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersLinkedTicketsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+  graphql:
+    aggregateFieldName: ordersLinkedTicketsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingAttachments
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: TicketingAttachments
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingAttachmentsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+  graphql:
+    aggregateFieldName: ticketingAttachmentsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingComplianceInfos
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: TicketingComplianceInfo
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingComplianceInfoAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+  graphql:
+    aggregateFieldName: ticketingComplianceInfosAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingMaterialLines
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: TicketingMaterialLine
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingMaterialLineAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+  graphql:
+    aggregateFieldName: ticketingMaterialLinesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: partnerSupplier
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: PartnerSupplier
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: supplierId
+      target:
+        modelField:
+          - fieldName: supplierId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: fleetVehicle
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: FleetVehicle
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: vehicleId
+      target:
+        modelField:
+          - fieldName: vehicleId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: yardYard
+  sourceType: TicketingWeightTicket
+  target:
+    model:
+      name: YardYard
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: yardId
+

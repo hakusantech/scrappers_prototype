@@ -1,0 +1,120 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersVOrderTotalsObject
+  fields:
+    - name: balanceDue
+      type: Numeric
+    - name: lineTotal
+      type: Numeric
+    - name: orderId
+      type: Uuid
+    - name: paidTotal
+      type: Numeric
+  graphql:
+    typeName: InsertOrdersVOrderTotalsObject
+    inputTypeName: InsertOrdersVOrderTotalsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_v_order_totals_object
+      fieldMapping:
+        balanceDue:
+          column:
+            name: balance_due
+        lineTotal:
+          column:
+            name: line_total
+        orderId:
+          column:
+            name: order_id
+        paidTotal:
+          column:
+            name: paid_total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersVOrderTotalsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - balanceDue
+          - lineTotal
+          - orderId
+          - paidTotal
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersVOrderTotalsResponse
+  description: Responses from the 'insert_orders_v_order_totals' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersVOrderTotals!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertOrdersVOrderTotalsResponse
+    inputTypeName: InsertOrdersVOrderTotalsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_v_order_totals_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersVOrderTotalsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertOrdersVOrderTotals
+  outputType: InsertOrdersVOrderTotalsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertOrdersVOrderTotalsObject!]!"
+    - name: postCheck
+      type: OrdersVOrderTotalsBoolExp
+      description: Insert permission predicate over the 'orders_v_order_totals' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_orders_v_order_totals
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertOrdersVOrderTotals
+    rootFieldKind: Mutation
+  description: Insert into the orders_v_order_totals table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertOrdersVOrderTotals
+  permissions:
+    - role: admin
+      allowExecution: true
+

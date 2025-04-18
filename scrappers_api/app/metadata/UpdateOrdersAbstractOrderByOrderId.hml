@@ -1,0 +1,461 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderCounterpartyId
+  description: Update the 'counterparty_id' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderCounterpartyId
+    inputTypeName: UpdateColumnOrdersAbstractOrderCounterpartyIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_counterparty_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderCounterpartyId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderCreatedAt
+  description: Update the 'created_at' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderCreatedAt
+    inputTypeName: UpdateColumnOrdersAbstractOrderCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderExpectedDate
+  description: Update the 'expected_date' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Date
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderExpectedDate
+    inputTypeName: UpdateColumnOrdersAbstractOrderExpectedDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_expected_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderExpectedDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderOrderDate
+  description: Update the 'order_date' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Date!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderOrderDate
+    inputTypeName: UpdateColumnOrdersAbstractOrderOrderDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_order_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderOrderDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderOrderId
+  description: Update the 'order_id' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderOrderId
+    inputTypeName: UpdateColumnOrdersAbstractOrderOrderIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_order_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderOrderId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderOrderType
+  description: Update the 'order_type' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderOrderType
+    inputTypeName: UpdateColumnOrdersAbstractOrderOrderTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_order_type
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderOrderType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderPaymentTerms
+  description: Update the 'payment_terms' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: PaymentTermsEnum
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderPaymentTerms
+    inputTypeName: UpdateColumnOrdersAbstractOrderPaymentTermsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_payment_terms
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderPaymentTerms
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderStatus
+  description: Update the 'status' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: OrderStatusEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderStatus
+    inputTypeName: UpdateColumnOrdersAbstractOrderStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersAbstractOrderUpdatedAt
+  description: Update the 'updated_at' column in the 'orders_abstract_order' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersAbstractOrderUpdatedAt
+    inputTypeName: UpdateColumnOrdersAbstractOrderUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_abstract_order_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersAbstractOrderUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersAbstractOrderByOrderIdUpdateColumns
+  description: Update the columns of the 'orders_abstract_order' collection
+  fields:
+    - name: counterpartyId
+      type: UpdateColumnOrdersAbstractOrderCounterpartyId
+      description: Update the 'counterparty_id' column in the 'orders_abstract_order'
+        collection.
+    - name: createdAt
+      type: UpdateColumnOrdersAbstractOrderCreatedAt
+      description: Update the 'created_at' column in the 'orders_abstract_order' collection.
+    - name: expectedDate
+      type: UpdateColumnOrdersAbstractOrderExpectedDate
+      description: Update the 'expected_date' column in the 'orders_abstract_order'
+        collection.
+    - name: orderDate
+      type: UpdateColumnOrdersAbstractOrderOrderDate
+      description: Update the 'order_date' column in the 'orders_abstract_order' collection.
+    - name: orderId
+      type: UpdateColumnOrdersAbstractOrderOrderId
+      description: Update the 'order_id' column in the 'orders_abstract_order' collection.
+    - name: orderType
+      type: UpdateColumnOrdersAbstractOrderOrderType
+      description: Update the 'order_type' column in the 'orders_abstract_order' collection.
+    - name: paymentTerms
+      type: UpdateColumnOrdersAbstractOrderPaymentTerms
+      description: Update the 'payment_terms' column in the 'orders_abstract_order'
+        collection.
+    - name: status
+      type: UpdateColumnOrdersAbstractOrderStatus
+      description: Update the 'status' column in the 'orders_abstract_order' collection.
+    - name: updatedAt
+      type: UpdateColumnOrdersAbstractOrderUpdatedAt
+      description: Update the 'updated_at' column in the 'orders_abstract_order' collection.
+  graphql:
+    typeName: UpdateOrdersAbstractOrderByOrderIdUpdateColumns
+    inputTypeName: UpdateOrdersAbstractOrderByOrderIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_abstract_order_by_order_id_update_columns
+      fieldMapping:
+        counterpartyId:
+          column:
+            name: counterparty_id
+        createdAt:
+          column:
+            name: created_at
+        expectedDate:
+          column:
+            name: expected_date
+        orderDate:
+          column:
+            name: order_date
+        orderId:
+          column:
+            name: order_id
+        orderType:
+          column:
+            name: order_type
+        paymentTerms:
+          column:
+            name: payment_terms
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersAbstractOrderByOrderIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - counterpartyId
+          - createdAt
+          - expectedDate
+          - orderDate
+          - orderId
+          - orderType
+          - paymentTerms
+          - status
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersAbstractOrderByOrderIdResponse
+  description: Responses from the 'update_orders_abstract_order_by_order_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersAbstractOrder!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateOrdersAbstractOrderByOrderIdResponse
+    inputTypeName: UpdateOrdersAbstractOrderByOrderIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_abstract_order_by_order_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersAbstractOrderByOrderIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateOrdersAbstractOrderByOrderId
+  outputType: UpdateOrdersAbstractOrderByOrderIdResponse!
+  arguments:
+    - name: keyOrderId
+      type: Uuid!
+    - name: postCheck
+      type: OrdersAbstractOrderBoolExp
+      description: Update permission post-condition predicate over the
+        'orders_abstract_order' collection
+    - name: preCheck
+      type: OrdersAbstractOrderBoolExp
+      description: Update permission pre-condition predicate over the
+        'orders_abstract_order' collection
+    - name: updateColumns
+      type: UpdateOrdersAbstractOrderByOrderIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_orders_abstract_order_by_order_id
+    argumentMapping:
+      keyOrderId: key_order_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateOrdersAbstractOrderByOrderId
+    rootFieldKind: Mutation
+  description: Update any row on the 'orders_abstract_order' collection using the
+    'order_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateOrdersAbstractOrderByOrderId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingAttachmentsByAttachmentIdResponse
+  description: Responses from the 'delete_ticketing_attachments_by_attachment_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingAttachments!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingAttachmentsByAttachmentIdResponse
+    inputTypeName: DeleteTicketingAttachmentsByAttachmentIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_attachments_by_attachment_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingAttachmentsByAttachmentIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingAttachmentsByAttachmentId
+  outputType: DeleteTicketingAttachmentsByAttachmentIdResponse!
+  arguments:
+    - name: keyAttachmentId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingAttachmentsBoolExp
+      description: Delete permission predicate over the 'ticketing_attachments' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_attachments_by_attachment_id
+    argumentMapping:
+      keyAttachmentId: key_attachment_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingAttachmentsByAttachmentId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_attachments' collection using the
+    'attachment_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingAttachmentsByAttachmentId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeletePartnerSupplierByNameResponse
+  description: Responses from the 'delete_partner_supplier_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PartnerSupplier!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeletePartnerSupplierByNameResponse
+    inputTypeName: DeletePartnerSupplierByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_partner_supplier_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeletePartnerSupplierByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePartnerSupplierByName
+  outputType: DeletePartnerSupplierByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: preCheck
+      type: PartnerSupplierBoolExp
+      description: Delete permission predicate over the 'partner_supplier' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_partner_supplier_by_name
+    argumentMapping:
+      keyName: key_name
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deletePartnerSupplierByName
+    rootFieldKind: Mutation
+  description: Delete any row on the 'partner_supplier' collection using the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePartnerSupplierByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

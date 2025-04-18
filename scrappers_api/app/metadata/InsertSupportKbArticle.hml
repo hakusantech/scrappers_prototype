@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSupportKbArticleObject
+  fields:
+    - name: content
+      type: Text!
+    - name: createdAt
+      type: Timestamptz
+    - name: kbArticleId
+      type: Uuid
+    - name: title
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertSupportKbArticleObject
+    inputTypeName: InsertSupportKbArticleObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_support_kb_article_object
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        kbArticleId:
+          column:
+            name: kb_article_id
+        title:
+          column:
+            name: title
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSupportKbArticleObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - kbArticleId
+          - title
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSupportKbArticleResponse
+  description: Responses from the 'insert_support_kb_article' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportKbArticle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertSupportKbArticleResponse
+    inputTypeName: InsertSupportKbArticleResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_support_kb_article_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSupportKbArticleResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertSupportKbArticle
+  outputType: InsertSupportKbArticleResponse!
+  arguments:
+    - name: objects
+      type: "[InsertSupportKbArticleObject!]!"
+    - name: postCheck
+      type: SupportKbArticleBoolExp
+      description: Insert permission predicate over the 'support_kb_article' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_support_kb_article
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertSupportKbArticle
+    rootFieldKind: Mutation
+  description: Insert into the support_kb_article table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertSupportKbArticle
+  permissions:
+    - role: admin
+      allowExecution: true
+

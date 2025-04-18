@@ -1,0 +1,139 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationCustomFieldDefObject
+  fields:
+    - name: context
+      type: CustomFieldContextEnum!
+    - name: createdAt
+      type: Timestamptz
+    - name: customFieldDefId
+      type: Uuid
+    - name: fieldName
+      type: Text!
+    - name: fieldType
+      type: CustomFieldTypeEnum!
+    - name: metadata
+      type: Jsonb
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertConfigurationCustomFieldDefObject
+    inputTypeName: InsertConfigurationCustomFieldDefObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_custom_field_def_object
+      fieldMapping:
+        context:
+          column:
+            name: context
+        createdAt:
+          column:
+            name: created_at
+        customFieldDefId:
+          column:
+            name: custom_field_def_id
+        fieldName:
+          column:
+            name: field_name
+        fieldType:
+          column:
+            name: field_type
+        metadata:
+          column:
+            name: metadata
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationCustomFieldDefObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - context
+          - createdAt
+          - customFieldDefId
+          - fieldName
+          - fieldType
+          - metadata
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationCustomFieldDefResponse
+  description: Responses from the 'insert_configuration_custom_field_def' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationCustomFieldDef!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertConfigurationCustomFieldDefResponse
+    inputTypeName: InsertConfigurationCustomFieldDefResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_custom_field_def_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationCustomFieldDefResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertConfigurationCustomFieldDef
+  outputType: InsertConfigurationCustomFieldDefResponse!
+  arguments:
+    - name: objects
+      type: "[InsertConfigurationCustomFieldDefObject!]!"
+    - name: postCheck
+      type: ConfigurationCustomFieldDefBoolExp
+      description: Insert permission predicate over the
+        'configuration_custom_field_def' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_configuration_custom_field_def
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertConfigurationCustomFieldDef
+    rootFieldKind: Mutation
+  description: Insert into the configuration_custom_field_def table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertConfigurationCustomFieldDef
+  permissions:
+    - role: admin
+      allowExecution: true
+

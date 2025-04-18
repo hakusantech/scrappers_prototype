@@ -1,0 +1,196 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: CounterpartyCounterparty
+  fields:
+    - name: counterpartyId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: kind
+      type: Text!
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: CounterpartyCounterparty
+    inputTypeName: CounterpartyCounterpartyInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: counterparty_counterparty
+      fieldMapping:
+        counterpartyId:
+          column:
+            name: counterparty_id
+        createdAt:
+          column:
+            name: created_at
+        kind:
+          column:
+            name: kind
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: CounterpartyCounterparty
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - counterpartyId
+          - createdAt
+          - kind
+          - name
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CounterpartyCounterpartyBoolExp
+  operand:
+    object:
+      type: CounterpartyCounterparty
+      comparableFields:
+        - fieldName: counterpartyId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: kind
+          booleanExpressionType: TextBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: ordersAbstractOrders
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CounterpartyCounterpartyBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CounterpartyCounterpartyAggExp
+  operand:
+    object:
+      aggregatedType: CounterpartyCounterparty
+      aggregatableFields:
+        - fieldName: counterpartyId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: kind
+          aggregateExpression: TextAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: CounterpartyCounterpartyAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: CounterpartyCounterpartyOrderByExp
+  operand:
+    object:
+      orderedType: CounterpartyCounterparty
+      orderableFields:
+        - fieldName: counterpartyId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: kind
+          orderByExpression: TextOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: CounterpartyCounterpartyOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: CounterpartyCounterparty
+  objectType: CounterpartyCounterparty
+  source:
+    dataConnectorName: scrappers_api
+    collection: counterparty_counterparty
+  filterExpressionType: CounterpartyCounterpartyBoolExp
+  aggregateExpression: CounterpartyCounterpartyAggExp
+  orderByExpression: CounterpartyCounterpartyOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: counterpartyCounterparty
+      subscription:
+        rootField: counterpartyCounterparty
+    selectUniques:
+      - queryRootField: counterpartyCounterpartyByName
+        uniqueIdentifier:
+          - name
+        subscription:
+          rootField: counterpartyCounterpartyByName
+      - queryRootField: counterpartyCounterpartyByCounterpartyId
+        uniqueIdentifier:
+          - counterpartyId
+        subscription:
+          rootField: counterpartyCounterpartyByCounterpartyId
+    filterInputTypeName: CounterpartyCounterpartyFilterInput
+    aggregate:
+      queryRootField: counterpartyCounterpartyAggregate
+      subscription:
+        rootField: counterpartyCounterpartyAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: CounterpartyCounterparty
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersAbstractOrders
+  sourceType: CounterpartyCounterparty
+  target:
+    model:
+      name: OrdersAbstractOrder
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersAbstractOrderAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: counterpartyId
+      target:
+        modelField:
+          - fieldName: counterpartyId
+  graphql:
+    aggregateFieldName: ordersAbstractOrdersAggregate
+

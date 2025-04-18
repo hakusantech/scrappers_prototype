@@ -1,0 +1,120 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPartnerSupplierObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: name
+      type: Text!
+    - name: supplierId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertPartnerSupplierObject
+    inputTypeName: InsertPartnerSupplierObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_partner_supplier_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        supplierId:
+          column:
+            name: supplier_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPartnerSupplierObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - supplierId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPartnerSupplierResponse
+  description: Responses from the 'insert_partner_supplier' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PartnerSupplier!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertPartnerSupplierResponse
+    inputTypeName: InsertPartnerSupplierResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_partner_supplier_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPartnerSupplierResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPartnerSupplier
+  outputType: InsertPartnerSupplierResponse!
+  arguments:
+    - name: objects
+      type: "[InsertPartnerSupplierObject!]!"
+    - name: postCheck
+      type: PartnerSupplierBoolExp
+      description: Insert permission predicate over the 'partner_supplier' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_partner_supplier
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertPartnerSupplier
+    rootFieldKind: Mutation
+  description: Insert into the partner_supplier table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPartnerSupplier
+  permissions:
+    - role: admin
+      allowExecution: true
+

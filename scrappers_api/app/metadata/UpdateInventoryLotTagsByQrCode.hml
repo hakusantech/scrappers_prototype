@@ -1,0 +1,148 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateInventoryLotTagsByQrCodeUpdateColumns
+  description: Update the columns of the 'inventory_lot_tags' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnInventoryLotTagsCreatedAt
+      description: Update the 'created_at' column in the 'inventory_lot_tags' collection.
+    - name: lotId
+      type: UpdateColumnInventoryLotTagsLotId
+      description: Update the 'lot_id' column in the 'inventory_lot_tags' collection.
+    - name: lotTagId
+      type: UpdateColumnInventoryLotTagsLotTagId
+      description: Update the 'lot_tag_id' column in the 'inventory_lot_tags' collection.
+    - name: printedAt
+      type: UpdateColumnInventoryLotTagsPrintedAt
+      description: Update the 'printed_at' column in the 'inventory_lot_tags' collection.
+    - name: qrCode
+      type: UpdateColumnInventoryLotTagsQrCode
+      description: Update the 'qr_code' column in the 'inventory_lot_tags' collection.
+    - name: updatedAt
+      type: UpdateColumnInventoryLotTagsUpdatedAt
+      description: Update the 'updated_at' column in the 'inventory_lot_tags' collection.
+  graphql:
+    typeName: UpdateInventoryLotTagsByQrCodeUpdateColumns
+    inputTypeName: UpdateInventoryLotTagsByQrCodeUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_inventory_lot_tags_by_qr_code_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        lotId:
+          column:
+            name: lot_id
+        lotTagId:
+          column:
+            name: lot_tag_id
+        printedAt:
+          column:
+            name: printed_at
+        qrCode:
+          column:
+            name: qr_code
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateInventoryLotTagsByQrCodeUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - lotId
+          - lotTagId
+          - printedAt
+          - qrCode
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateInventoryLotTagsByQrCodeResponse
+  description: Responses from the 'update_inventory_lot_tags_by_qr_code' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryLotTags!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateInventoryLotTagsByQrCodeResponse
+    inputTypeName: UpdateInventoryLotTagsByQrCodeResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_inventory_lot_tags_by_qr_code_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateInventoryLotTagsByQrCodeResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateInventoryLotTagsByQrCode
+  outputType: UpdateInventoryLotTagsByQrCodeResponse!
+  arguments:
+    - name: keyQrCode
+      type: Text!
+    - name: postCheck
+      type: InventoryLotTagsBoolExp
+      description: Update permission post-condition predicate over the
+        'inventory_lot_tags' collection
+    - name: preCheck
+      type: InventoryLotTagsBoolExp
+      description: Update permission pre-condition predicate over the
+        'inventory_lot_tags' collection
+    - name: updateColumns
+      type: UpdateInventoryLotTagsByQrCodeUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_inventory_lot_tags_by_qr_code
+    argumentMapping:
+      keyQrCode: key_qr_code
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateInventoryLotTagsByQrCode
+    rootFieldKind: Mutation
+  description: Update any row on the 'inventory_lot_tags' collection using the 'qr_code' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateInventoryLotTagsByQrCode
+  permissions:
+    - role: admin
+      allowExecution: true
+

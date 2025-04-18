@@ -1,0 +1,141 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSupportKbArticleByTitleUpdateColumns
+  description: Update the columns of the 'support_kb_article' collection
+  fields:
+    - name: content
+      type: UpdateColumnSupportKbArticleContent
+      description: Update the 'content' column in the 'support_kb_article' collection.
+    - name: createdAt
+      type: UpdateColumnSupportKbArticleCreatedAt
+      description: Update the 'created_at' column in the 'support_kb_article' collection.
+    - name: kbArticleId
+      type: UpdateColumnSupportKbArticleKbArticleId
+      description: Update the 'kb_article_id' column in the 'support_kb_article' collection.
+    - name: title
+      type: UpdateColumnSupportKbArticleTitle
+      description: Update the 'title' column in the 'support_kb_article' collection.
+    - name: updatedAt
+      type: UpdateColumnSupportKbArticleUpdatedAt
+      description: Update the 'updated_at' column in the 'support_kb_article' collection.
+  graphql:
+    typeName: UpdateSupportKbArticleByTitleUpdateColumns
+    inputTypeName: UpdateSupportKbArticleByTitleUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_support_kb_article_by_title_update_columns
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        kbArticleId:
+          column:
+            name: kb_article_id
+        title:
+          column:
+            name: title
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSupportKbArticleByTitleUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - kbArticleId
+          - title
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSupportKbArticleByTitleResponse
+  description: Responses from the 'update_support_kb_article_by_title' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportKbArticle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateSupportKbArticleByTitleResponse
+    inputTypeName: UpdateSupportKbArticleByTitleResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_support_kb_article_by_title_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSupportKbArticleByTitleResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateSupportKbArticleByTitle
+  outputType: UpdateSupportKbArticleByTitleResponse!
+  arguments:
+    - name: keyTitle
+      type: Text!
+    - name: postCheck
+      type: SupportKbArticleBoolExp
+      description: Update permission post-condition predicate over the
+        'support_kb_article' collection
+    - name: preCheck
+      type: SupportKbArticleBoolExp
+      description: Update permission pre-condition predicate over the
+        'support_kb_article' collection
+    - name: updateColumns
+      type: UpdateSupportKbArticleByTitleUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_support_kb_article_by_title
+    argumentMapping:
+      keyTitle: key_title
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateSupportKbArticleByTitle
+    rootFieldKind: Mutation
+  description: Update any row on the 'support_kb_article' collection using the 'title' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateSupportKbArticleByTitle
+  permissions:
+    - role: admin
+      allowExecution: true
+

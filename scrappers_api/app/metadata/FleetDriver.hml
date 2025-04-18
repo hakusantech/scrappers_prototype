@@ -1,0 +1,196 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FleetDriver
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: driverId
+      type: Uuid!
+    - name: licenseNo
+      type: Text!
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: FleetDriver
+    inputTypeName: FleetDriverInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: fleet_driver
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        driverId:
+          column:
+            name: driver_id
+        licenseNo:
+          column:
+            name: license_no
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FleetDriver
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - driverId
+          - licenseNo
+          - name
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FleetDriverBoolExp
+  operand:
+    object:
+      type: FleetDriver
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: driverId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: licenseNo
+          booleanExpressionType: TextBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: dispatchDispatchJobs
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FleetDriverBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FleetDriverAggExp
+  operand:
+    object:
+      aggregatedType: FleetDriver
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: driverId
+          aggregateExpression: UuidAggExp
+        - fieldName: licenseNo
+          aggregateExpression: TextAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FleetDriverAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FleetDriverOrderByExp
+  operand:
+    object:
+      orderedType: FleetDriver
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: driverId
+          orderByExpression: UuidOrderByExp
+        - fieldName: licenseNo
+          orderByExpression: TextOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: FleetDriverOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FleetDriver
+  objectType: FleetDriver
+  source:
+    dataConnectorName: scrappers_api
+    collection: fleet_driver
+  filterExpressionType: FleetDriverBoolExp
+  aggregateExpression: FleetDriverAggExp
+  orderByExpression: FleetDriverOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: fleetDriver
+      subscription:
+        rootField: fleetDriver
+    selectUniques:
+      - queryRootField: fleetDriverByLicenseNo
+        uniqueIdentifier:
+          - licenseNo
+        subscription:
+          rootField: fleetDriverByLicenseNo
+      - queryRootField: fleetDriverByDriverId
+        uniqueIdentifier:
+          - driverId
+        subscription:
+          rootField: fleetDriverByDriverId
+    filterInputTypeName: FleetDriverFilterInput
+    aggregate:
+      queryRootField: fleetDriverAggregate
+      subscription:
+        rootField: fleetDriverAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FleetDriver
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: dispatchDispatchJobs
+  sourceType: FleetDriver
+  target:
+    model:
+      name: DispatchDispatchJob
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: DispatchDispatchJobAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: driverId
+      target:
+        modelField:
+          - fieldName: driverId
+  graphql:
+    aggregateFieldName: dispatchDispatchJobsAggregate
+

@@ -1,0 +1,173 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ConfigurationTemplates
+  fields:
+    - name: content
+      type: Text!
+    - name: createdAt
+      type: Timestamptz!
+    - name: name
+      type: Text!
+    - name: templateId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: ConfigurationTemplates
+    inputTypeName: ConfigurationTemplatesInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: configuration_templates
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        templateId:
+          column:
+            name: template_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ConfigurationTemplates
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - name
+          - templateId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ConfigurationTemplatesBoolExp
+  operand:
+    object:
+      type: ConfigurationTemplates
+      comparableFields:
+        - fieldName: content
+          booleanExpressionType: TextBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: templateId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ConfigurationTemplatesBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ConfigurationTemplatesAggExp
+  operand:
+    object:
+      aggregatedType: ConfigurationTemplates
+      aggregatableFields:
+        - fieldName: content
+          aggregateExpression: TextAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: templateId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ConfigurationTemplatesAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ConfigurationTemplatesOrderByExp
+  operand:
+    object:
+      orderedType: ConfigurationTemplates
+      orderableFields:
+        - fieldName: content
+          orderByExpression: TextOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: templateId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: ConfigurationTemplatesOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ConfigurationTemplates
+  objectType: ConfigurationTemplates
+  source:
+    dataConnectorName: scrappers_api
+    collection: configuration_templates
+  filterExpressionType: ConfigurationTemplatesBoolExp
+  aggregateExpression: ConfigurationTemplatesAggExp
+  orderByExpression: ConfigurationTemplatesOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: configurationTemplates
+      subscription:
+        rootField: configurationTemplates
+    selectUniques:
+      - queryRootField: configurationTemplatesByName
+        uniqueIdentifier:
+          - name
+        subscription:
+          rootField: configurationTemplatesByName
+      - queryRootField: configurationTemplatesByTemplateId
+        uniqueIdentifier:
+          - templateId
+        subscription:
+          rootField: configurationTemplatesByTemplateId
+    filterInputTypeName: ConfigurationTemplatesFilterInput
+    aggregate:
+      queryRootField: configurationTemplatesAggregate
+      subscription:
+        rootField: configurationTemplatesAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ConfigurationTemplates
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

@@ -1,0 +1,150 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersOrderLineObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: lotRef
+      type: Uuid
+    - name: materialId
+      type: Uuid!
+    - name: orderId
+      type: Uuid!
+    - name: orderLineId
+      type: Uuid
+    - name: price
+      type: Numeric!
+    - name: quantity
+      type: Numeric!
+    - name: unit
+      type: UnitEnum!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertOrdersOrderLineObject
+    inputTypeName: InsertOrdersOrderLineObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_order_line_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        lotRef:
+          column:
+            name: lot_ref
+        materialId:
+          column:
+            name: material_id
+        orderId:
+          column:
+            name: order_id
+        orderLineId:
+          column:
+            name: order_line_id
+        price:
+          column:
+            name: price
+        quantity:
+          column:
+            name: quantity
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersOrderLineObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - lotRef
+          - materialId
+          - orderId
+          - orderLineId
+          - price
+          - quantity
+          - unit
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersOrderLineResponse
+  description: Responses from the 'insert_orders_order_line' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersOrderLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertOrdersOrderLineResponse
+    inputTypeName: InsertOrdersOrderLineResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_order_line_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersOrderLineResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertOrdersOrderLine
+  outputType: InsertOrdersOrderLineResponse!
+  arguments:
+    - name: objects
+      type: "[InsertOrdersOrderLineObject!]!"
+    - name: postCheck
+      type: OrdersOrderLineBoolExp
+      description: Insert permission predicate over the 'orders_order_line' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_orders_order_line
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertOrdersOrderLine
+    rootFieldKind: Mutation
+  description: Insert into the orders_order_line table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertOrdersOrderLine
+  permissions:
+    - role: admin
+      allowExecution: true
+

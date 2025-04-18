@@ -1,0 +1,164 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationCustomFieldDefByCustomFieldDefIdUpdateColumns
+  description: Update the columns of the 'configuration_custom_field_def' collection
+  fields:
+    - name: context
+      type: UpdateColumnConfigurationCustomFieldDefContext
+      description: Update the 'context' column in the 'configuration_custom_field_def'
+        collection.
+    - name: createdAt
+      type: UpdateColumnConfigurationCustomFieldDefCreatedAt
+      description: Update the 'created_at' column in the
+        'configuration_custom_field_def' collection.
+    - name: customFieldDefId
+      type: UpdateColumnConfigurationCustomFieldDefCustomFieldDefId
+      description: Update the 'custom_field_def_id' column in the
+        'configuration_custom_field_def' collection.
+    - name: fieldName
+      type: UpdateColumnConfigurationCustomFieldDefFieldName
+      description: Update the 'field_name' column in the
+        'configuration_custom_field_def' collection.
+    - name: fieldType
+      type: UpdateColumnConfigurationCustomFieldDefFieldType
+      description: Update the 'field_type' column in the
+        'configuration_custom_field_def' collection.
+    - name: metadata
+      type: UpdateColumnConfigurationCustomFieldDefMetadata
+      description: Update the 'metadata' column in the
+        'configuration_custom_field_def' collection.
+    - name: updatedAt
+      type: UpdateColumnConfigurationCustomFieldDefUpdatedAt
+      description: Update the 'updated_at' column in the
+        'configuration_custom_field_def' collection.
+  graphql:
+    typeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdUpdateColumns
+    inputTypeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_custom_field_def_by_custom_field_def_id_update_columns
+      fieldMapping:
+        context:
+          column:
+            name: context
+        createdAt:
+          column:
+            name: created_at
+        customFieldDefId:
+          column:
+            name: custom_field_def_id
+        fieldName:
+          column:
+            name: field_name
+        fieldType:
+          column:
+            name: field_type
+        metadata:
+          column:
+            name: metadata
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - context
+          - createdAt
+          - customFieldDefId
+          - fieldName
+          - fieldType
+          - metadata
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationCustomFieldDefByCustomFieldDefIdResponse
+  description: Responses from the
+    'update_configuration_custom_field_def_by_custom_field_def_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationCustomFieldDef!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdResponse
+    inputTypeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_custom_field_def_by_custom_field_def_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationCustomFieldDefByCustomFieldDefIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateConfigurationCustomFieldDefByCustomFieldDefId
+  outputType: UpdateConfigurationCustomFieldDefByCustomFieldDefIdResponse!
+  arguments:
+    - name: keyCustomFieldDefId
+      type: Uuid!
+    - name: postCheck
+      type: ConfigurationCustomFieldDefBoolExp
+      description: Update permission post-condition predicate over the
+        'configuration_custom_field_def' collection
+    - name: preCheck
+      type: ConfigurationCustomFieldDefBoolExp
+      description: Update permission pre-condition predicate over the
+        'configuration_custom_field_def' collection
+    - name: updateColumns
+      type: UpdateConfigurationCustomFieldDefByCustomFieldDefIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_configuration_custom_field_def_by_custom_field_def_id
+    argumentMapping:
+      keyCustomFieldDefId: key_custom_field_def_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateConfigurationCustomFieldDefByCustomFieldDefId
+    rootFieldKind: Mutation
+  description: Update any row on the 'configuration_custom_field_def' collection
+    using the 'custom_field_def_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateConfigurationCustomFieldDefByCustomFieldDefId
+  permissions:
+    - role: admin
+      allowExecution: true
+

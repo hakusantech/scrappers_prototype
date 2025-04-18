@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteInventoryInventoryLotByLotIdResponse
+  description: Responses from the 'delete_inventory_inventory_lot_by_lot_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryInventoryLot!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteInventoryInventoryLotByLotIdResponse
+    inputTypeName: DeleteInventoryInventoryLotByLotIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_inventory_inventory_lot_by_lot_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteInventoryInventoryLotByLotIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInventoryInventoryLotByLotId
+  outputType: DeleteInventoryInventoryLotByLotIdResponse!
+  arguments:
+    - name: keyLotId
+      type: Uuid!
+    - name: preCheck
+      type: InventoryInventoryLotBoolExp
+      description: Delete permission predicate over the 'inventory_inventory_lot' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_inventory_inventory_lot_by_lot_id
+    argumentMapping:
+      keyLotId: key_lot_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteInventoryInventoryLotByLotId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'inventory_inventory_lot' collection using
+    the 'lot_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInventoryInventoryLotByLotId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,144 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingMaterialLineObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: grade
+      type: Text
+    - name: materialId
+      type: Uuid!
+    - name: materialLineId
+      type: Uuid
+    - name: quantity
+      type: Numeric!
+    - name: ticketId
+      type: Uuid!
+    - name: unit
+      type: UnitEnum!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertTicketingMaterialLineObject
+    inputTypeName: InsertTicketingMaterialLineObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_material_line_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        grade:
+          column:
+            name: grade
+        materialId:
+          column:
+            name: material_id
+        materialLineId:
+          column:
+            name: material_line_id
+        quantity:
+          column:
+            name: quantity
+        ticketId:
+          column:
+            name: ticket_id
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingMaterialLineObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - grade
+          - materialId
+          - materialLineId
+          - quantity
+          - ticketId
+          - unit
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingMaterialLineResponse
+  description: Responses from the 'insert_ticketing_material_line' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingMaterialLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertTicketingMaterialLineResponse
+    inputTypeName: InsertTicketingMaterialLineResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_material_line_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingMaterialLineResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTicketingMaterialLine
+  outputType: InsertTicketingMaterialLineResponse!
+  arguments:
+    - name: objects
+      type: "[InsertTicketingMaterialLineObject!]!"
+    - name: postCheck
+      type: TicketingMaterialLineBoolExp
+      description: Insert permission predicate over the 'ticketing_material_line' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_ticketing_material_line
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertTicketingMaterialLine
+    rootFieldKind: Mutation
+  description: Insert into the ticketing_material_line table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTicketingMaterialLine
+  permissions:
+    - role: admin
+      allowExecution: true
+

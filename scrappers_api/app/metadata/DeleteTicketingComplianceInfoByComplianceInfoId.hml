@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingComplianceInfoByComplianceInfoIdResponse
+  description: Responses from the
+    'delete_ticketing_compliance_info_by_compliance_info_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingComplianceInfo!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingComplianceInfoByComplianceInfoIdResponse
+    inputTypeName: DeleteTicketingComplianceInfoByComplianceInfoIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_compliance_info_by_compliance_info_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingComplianceInfoByComplianceInfoIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingComplianceInfoByComplianceInfoId
+  outputType: DeleteTicketingComplianceInfoByComplianceInfoIdResponse!
+  arguments:
+    - name: keyComplianceInfoId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingComplianceInfoBoolExp
+      description: Delete permission predicate over the 'ticketing_compliance_info'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_compliance_info_by_compliance_info_id
+    argumentMapping:
+      keyComplianceInfoId: key_compliance_info_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingComplianceInfoByComplianceInfoId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_compliance_info' collection using
+    the 'compliance_info_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingComplianceInfoByComplianceInfoId
+  permissions:
+    - role: admin
+      allowExecution: true
+

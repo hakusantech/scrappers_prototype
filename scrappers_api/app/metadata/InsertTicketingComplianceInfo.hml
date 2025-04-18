@@ -1,0 +1,139 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingComplianceInfoObject
+  fields:
+    - name: complianceInfoId
+      type: Uuid
+    - name: createdAt
+      type: Timestamptz
+    - name: fingerprintHash
+      type: Text
+    - name: idScanUrl
+      type: Text
+    - name: identityId
+      type: Uuid!
+    - name: ticketId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertTicketingComplianceInfoObject
+    inputTypeName: InsertTicketingComplianceInfoObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_compliance_info_object
+      fieldMapping:
+        complianceInfoId:
+          column:
+            name: compliance_info_id
+        createdAt:
+          column:
+            name: created_at
+        fingerprintHash:
+          column:
+            name: fingerprint_hash
+        idScanUrl:
+          column:
+            name: id_scan_url
+        identityId:
+          column:
+            name: identity_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingComplianceInfoObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complianceInfoId
+          - createdAt
+          - fingerprintHash
+          - idScanUrl
+          - identityId
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingComplianceInfoResponse
+  description: Responses from the 'insert_ticketing_compliance_info' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingComplianceInfo!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertTicketingComplianceInfoResponse
+    inputTypeName: InsertTicketingComplianceInfoResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_compliance_info_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingComplianceInfoResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTicketingComplianceInfo
+  outputType: InsertTicketingComplianceInfoResponse!
+  arguments:
+    - name: objects
+      type: "[InsertTicketingComplianceInfoObject!]!"
+    - name: postCheck
+      type: TicketingComplianceInfoBoolExp
+      description: Insert permission predicate over the 'ticketing_compliance_info'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_ticketing_compliance_info
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertTicketingComplianceInfo
+    rootFieldKind: Mutation
+  description: Insert into the ticketing_compliance_info table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTicketingComplianceInfo
+  permissions:
+    - role: admin
+      allowExecution: true
+

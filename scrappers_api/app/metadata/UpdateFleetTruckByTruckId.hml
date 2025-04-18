@@ -1,0 +1,141 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetTruckByTruckIdUpdateColumns
+  description: Update the columns of the 'fleet_truck' collection
+  fields:
+    - name: capacityKg
+      type: UpdateColumnFleetTruckCapacityKg
+      description: Update the 'capacity_kg' column in the 'fleet_truck' collection.
+    - name: createdAt
+      type: UpdateColumnFleetTruckCreatedAt
+      description: Update the 'created_at' column in the 'fleet_truck' collection.
+    - name: plateNumber
+      type: UpdateColumnFleetTruckPlateNumber
+      description: Update the 'plate_number' column in the 'fleet_truck' collection.
+    - name: truckId
+      type: UpdateColumnFleetTruckTruckId
+      description: Update the 'truck_id' column in the 'fleet_truck' collection.
+    - name: updatedAt
+      type: UpdateColumnFleetTruckUpdatedAt
+      description: Update the 'updated_at' column in the 'fleet_truck' collection.
+  graphql:
+    typeName: UpdateFleetTruckByTruckIdUpdateColumns
+    inputTypeName: UpdateFleetTruckByTruckIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_truck_by_truck_id_update_columns
+      fieldMapping:
+        capacityKg:
+          column:
+            name: capacity_kg
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetTruckByTruckIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - capacityKg
+          - createdAt
+          - plateNumber
+          - truckId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetTruckByTruckIdResponse
+  description: Responses from the 'update_fleet_truck_by_truck_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetTruck!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFleetTruckByTruckIdResponse
+    inputTypeName: UpdateFleetTruckByTruckIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_truck_by_truck_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetTruckByTruckIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFleetTruckByTruckId
+  outputType: UpdateFleetTruckByTruckIdResponse!
+  arguments:
+    - name: keyTruckId
+      type: Uuid!
+    - name: postCheck
+      type: FleetTruckBoolExp
+      description: Update permission post-condition predicate over the 'fleet_truck'
+        collection
+    - name: preCheck
+      type: FleetTruckBoolExp
+      description: Update permission pre-condition predicate over the 'fleet_truck'
+        collection
+    - name: updateColumns
+      type: UpdateFleetTruckByTruckIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_fleet_truck_by_truck_id
+    argumentMapping:
+      keyTruckId: key_truck_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFleetTruckByTruckId
+    rootFieldKind: Mutation
+  description: Update any row on the 'fleet_truck' collection using the 'truck_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFleetTruckByTruckId
+  permissions:
+    - role: admin
+      allowExecution: true
+

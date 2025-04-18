@@ -1,0 +1,151 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: OrdersVOrderTotals
+  fields:
+    - name: balanceDue
+      type: Numeric
+    - name: lineTotal
+      type: Numeric
+    - name: orderId
+      type: Uuid
+    - name: paidTotal
+      type: Numeric
+  graphql:
+    typeName: OrdersVOrderTotals
+    inputTypeName: OrdersVOrderTotalsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: orders_v_order_totals
+      fieldMapping:
+        balanceDue:
+          column:
+            name: balance_due
+        lineTotal:
+          column:
+            name: line_total
+        orderId:
+          column:
+            name: order_id
+        paidTotal:
+          column:
+            name: paid_total
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: OrdersVOrderTotals
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - balanceDue
+          - lineTotal
+          - orderId
+          - paidTotal
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: OrdersVOrderTotalsBoolExp
+  operand:
+    object:
+      type: OrdersVOrderTotals
+      comparableFields:
+        - fieldName: balanceDue
+          booleanExpressionType: NumericBoolExp
+        - fieldName: lineTotal
+          booleanExpressionType: NumericBoolExp
+        - fieldName: orderId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: paidTotal
+          booleanExpressionType: NumericBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: OrdersVOrderTotalsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: OrdersVOrderTotalsAggExp
+  operand:
+    object:
+      aggregatedType: OrdersVOrderTotals
+      aggregatableFields:
+        - fieldName: balanceDue
+          aggregateExpression: NumericAggExp
+        - fieldName: lineTotal
+          aggregateExpression: NumericAggExp
+        - fieldName: orderId
+          aggregateExpression: UuidAggExp
+        - fieldName: paidTotal
+          aggregateExpression: NumericAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: OrdersVOrderTotalsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: OrdersVOrderTotalsOrderByExp
+  operand:
+    object:
+      orderedType: OrdersVOrderTotals
+      orderableFields:
+        - fieldName: balanceDue
+          orderByExpression: NumericOrderByExp
+        - fieldName: lineTotal
+          orderByExpression: NumericOrderByExp
+        - fieldName: orderId
+          orderByExpression: UuidOrderByExp
+        - fieldName: paidTotal
+          orderByExpression: NumericOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: OrdersVOrderTotalsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: OrdersVOrderTotals
+  objectType: OrdersVOrderTotals
+  source:
+    dataConnectorName: scrappers_api
+    collection: orders_v_order_totals
+  filterExpressionType: OrdersVOrderTotalsBoolExp
+  aggregateExpression: OrdersVOrderTotalsAggExp
+  orderByExpression: OrdersVOrderTotalsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ordersVOrderTotals
+      subscription:
+        rootField: ordersVOrderTotals
+    selectUniques: []
+    filterInputTypeName: OrdersVOrderTotalsFilterInput
+    aggregate:
+      queryRootField: ordersVOrderTotalsAggregate
+      subscription:
+        rootField: ordersVOrderTotalsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: OrdersVOrderTotals
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

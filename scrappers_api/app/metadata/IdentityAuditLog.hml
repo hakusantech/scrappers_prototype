@@ -1,0 +1,236 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: IdentityAuditLog
+  fields:
+    - name: action
+      type: Text!
+    - name: auditLogId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: details
+      type: Jsonb
+    - name: resource
+      type: AuditResourceEnum!
+    - name: resourceId
+      type: Uuid
+    - name: timestamp
+      type: Timestamptz!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: IdentityAuditLog
+    inputTypeName: IdentityAuditLogInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: identity_audit_log
+      fieldMapping:
+        action:
+          column:
+            name: action
+        auditLogId:
+          column:
+            name: audit_log_id
+        createdAt:
+          column:
+            name: created_at
+        details:
+          column:
+            name: details
+        resource:
+          column:
+            name: resource
+        resourceId:
+          column:
+            name: resource_id
+        timestamp:
+          column:
+            name: timestamp
+        updatedAt:
+          column:
+            name: updated_at
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: IdentityAuditLog
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - action
+          - auditLogId
+          - createdAt
+          - details
+          - resource
+          - resourceId
+          - timestamp
+          - updatedAt
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: IdentityAuditLogBoolExp
+  operand:
+    object:
+      type: IdentityAuditLog
+      comparableFields:
+        - fieldName: action
+          booleanExpressionType: TextBoolExp
+        - fieldName: auditLogId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: details
+          booleanExpressionType: JsonbBoolExp
+        - fieldName: resource
+          booleanExpressionType: AuditResourceEnumBoolExp
+        - fieldName: resourceId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: timestamp
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: identityUser
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: IdentityAuditLogBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: IdentityAuditLogAggExp
+  operand:
+    object:
+      aggregatedType: IdentityAuditLog
+      aggregatableFields:
+        - fieldName: action
+          aggregateExpression: TextAggExp
+        - fieldName: auditLogId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: details
+          aggregateExpression: JsonbAggExp
+        - fieldName: resource
+          aggregateExpression: AuditResourceEnumAggExp
+        - fieldName: resourceId
+          aggregateExpression: UuidAggExp
+        - fieldName: timestamp
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: IdentityAuditLogAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: IdentityAuditLogOrderByExp
+  operand:
+    object:
+      orderedType: IdentityAuditLog
+      orderableFields:
+        - fieldName: action
+          orderByExpression: TextOrderByExp
+        - fieldName: auditLogId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: details
+          orderByExpression: JsonbOrderByExp
+        - fieldName: resource
+          orderByExpression: AuditResourceEnumOrderByExp
+        - fieldName: resourceId
+          orderByExpression: UuidOrderByExp
+        - fieldName: timestamp
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: identityUser
+  graphql:
+    expressionTypeName: IdentityAuditLogOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: IdentityAuditLog
+  objectType: IdentityAuditLog
+  source:
+    dataConnectorName: scrappers_api
+    collection: identity_audit_log
+  filterExpressionType: IdentityAuditLogBoolExp
+  aggregateExpression: IdentityAuditLogAggExp
+  orderByExpression: IdentityAuditLogOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: identityAuditLog
+      subscription:
+        rootField: identityAuditLog
+    selectUniques:
+      - queryRootField: identityAuditLogByAuditLogId
+        uniqueIdentifier:
+          - auditLogId
+        subscription:
+          rootField: identityAuditLogByAuditLogId
+    filterInputTypeName: IdentityAuditLogFilterInput
+    aggregate:
+      queryRootField: identityAuditLogAggregate
+      subscription:
+        rootField: identityAuditLogAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: IdentityAuditLog
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityUser
+  sourceType: IdentityAuditLog
+  target:
+    model:
+      name: IdentityUsers
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: userId
+

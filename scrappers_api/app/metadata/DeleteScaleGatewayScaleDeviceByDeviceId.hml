@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteScaleGatewayScaleDeviceByDeviceIdResponse
+  description: Responses from the 'delete_scale_gateway_scale_device_by_device_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ScaleGatewayScaleDevice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteScaleGatewayScaleDeviceByDeviceIdResponse
+    inputTypeName: DeleteScaleGatewayScaleDeviceByDeviceIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_scale_gateway_scale_device_by_device_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteScaleGatewayScaleDeviceByDeviceIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteScaleGatewayScaleDeviceByDeviceId
+  outputType: DeleteScaleGatewayScaleDeviceByDeviceIdResponse!
+  arguments:
+    - name: keyDeviceId
+      type: Uuid!
+    - name: preCheck
+      type: ScaleGatewayScaleDeviceBoolExp
+      description: Delete permission predicate over the 'scale_gateway_scale_device'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_scale_gateway_scale_device_by_device_id
+    argumentMapping:
+      keyDeviceId: key_device_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteScaleGatewayScaleDeviceByDeviceId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'scale_gateway_scale_device' collection using
+    the 'device_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteScaleGatewayScaleDeviceByDeviceId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertYardYardObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: location
+      type: Text
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+    - name: yardId
+      type: Uuid
+  graphql:
+    typeName: InsertYardYardObject
+    inputTypeName: InsertYardYardObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_yard_yard_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        location:
+          column:
+            name: location
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertYardYardObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - location
+          - name
+          - updatedAt
+          - yardId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertYardYardResponse
+  description: Responses from the 'insert_yard_yard' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[YardYard!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertYardYardResponse
+    inputTypeName: InsertYardYardResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_yard_yard_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertYardYardResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertYardYard
+  outputType: InsertYardYardResponse!
+  arguments:
+    - name: objects
+      type: "[InsertYardYardObject!]!"
+    - name: postCheck
+      type: YardYardBoolExp
+      description: Insert permission predicate over the 'yard_yard' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_yard_yard
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertYardYard
+    rootFieldKind: Mutation
+  description: Insert into the yard_yard table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertYardYard
+  permissions:
+    - role: admin
+      allowExecution: true
+

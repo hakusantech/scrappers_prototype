@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingAttachmentsObject
+  fields:
+    - name: attachmentId
+      type: Uuid
+    - name: createdAt
+      type: Timestamptz
+    - name: ticketId
+      type: Uuid!
+    - name: type
+      type: AttachmentTypeEnum!
+    - name: updatedAt
+      type: Timestamptz
+    - name: url
+      type: Text!
+  graphql:
+    typeName: InsertTicketingAttachmentsObject
+    inputTypeName: InsertTicketingAttachmentsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_attachments_object
+      fieldMapping:
+        attachmentId:
+          column:
+            name: attachment_id
+        createdAt:
+          column:
+            name: created_at
+        ticketId:
+          column:
+            name: ticket_id
+        type:
+          column:
+            name: type
+        updatedAt:
+          column:
+            name: updated_at
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingAttachmentsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - attachmentId
+          - createdAt
+          - ticketId
+          - type
+          - updatedAt
+          - url
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingAttachmentsResponse
+  description: Responses from the 'insert_ticketing_attachments' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingAttachments!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertTicketingAttachmentsResponse
+    inputTypeName: InsertTicketingAttachmentsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_attachments_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingAttachmentsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTicketingAttachments
+  outputType: InsertTicketingAttachmentsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertTicketingAttachmentsObject!]!"
+    - name: postCheck
+      type: TicketingAttachmentsBoolExp
+      description: Insert permission predicate over the 'ticketing_attachments' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_ticketing_attachments
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertTicketingAttachments
+    rootFieldKind: Mutation
+  description: Insert into the ticketing_attachments table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTicketingAttachments
+  permissions:
+    - role: admin
+      allowExecution: true
+

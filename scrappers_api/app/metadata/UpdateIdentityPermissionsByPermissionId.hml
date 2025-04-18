@@ -1,0 +1,136 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityPermissionsByPermissionIdUpdateColumns
+  description: Update the columns of the 'identity_permissions' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnIdentityPermissionsCreatedAt
+      description: Update the 'created_at' column in the 'identity_permissions' collection.
+    - name: name
+      type: UpdateColumnIdentityPermissionsName
+      description: Update the 'name' column in the 'identity_permissions' collection.
+    - name: permissionId
+      type: UpdateColumnIdentityPermissionsPermissionId
+      description: Update the 'permission_id' column in the 'identity_permissions'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnIdentityPermissionsUpdatedAt
+      description: Update the 'updated_at' column in the 'identity_permissions' collection.
+  graphql:
+    typeName: UpdateIdentityPermissionsByPermissionIdUpdateColumns
+    inputTypeName: UpdateIdentityPermissionsByPermissionIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_permissions_by_permission_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        permissionId:
+          column:
+            name: permission_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityPermissionsByPermissionIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - permissionId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityPermissionsByPermissionIdResponse
+  description: Responses from the 'update_identity_permissions_by_permission_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityPermissions!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateIdentityPermissionsByPermissionIdResponse
+    inputTypeName: UpdateIdentityPermissionsByPermissionIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_permissions_by_permission_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityPermissionsByPermissionIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateIdentityPermissionsByPermissionId
+  outputType: UpdateIdentityPermissionsByPermissionIdResponse!
+  arguments:
+    - name: keyPermissionId
+      type: Uuid!
+    - name: postCheck
+      type: IdentityPermissionsBoolExp
+      description: Update permission post-condition predicate over the
+        'identity_permissions' collection
+    - name: preCheck
+      type: IdentityPermissionsBoolExp
+      description: Update permission pre-condition predicate over the
+        'identity_permissions' collection
+    - name: updateColumns
+      type: UpdateIdentityPermissionsByPermissionIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_identity_permissions_by_permission_id
+    argumentMapping:
+      keyPermissionId: key_permission_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateIdentityPermissionsByPermissionId
+    rootFieldKind: Mutation
+  description: Update any row on the 'identity_permissions' collection using the
+    'permission_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateIdentityPermissionsByPermissionId
+  permissions:
+    - role: admin
+      allowExecution: true
+

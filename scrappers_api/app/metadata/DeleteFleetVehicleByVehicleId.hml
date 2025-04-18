@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFleetVehicleByVehicleIdResponse
+  description: Responses from the 'delete_fleet_vehicle_by_vehicle_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetVehicle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFleetVehicleByVehicleIdResponse
+    inputTypeName: DeleteFleetVehicleByVehicleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_fleet_vehicle_by_vehicle_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFleetVehicleByVehicleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFleetVehicleByVehicleId
+  outputType: DeleteFleetVehicleByVehicleIdResponse!
+  arguments:
+    - name: keyVehicleId
+      type: Uuid!
+    - name: preCheck
+      type: FleetVehicleBoolExp
+      description: Delete permission predicate over the 'fleet_vehicle' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_fleet_vehicle_by_vehicle_id
+    argumentMapping:
+      keyVehicleId: key_vehicle_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFleetVehicleByVehicleId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'fleet_vehicle' collection using the 'vehicle_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFleetVehicleByVehicleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

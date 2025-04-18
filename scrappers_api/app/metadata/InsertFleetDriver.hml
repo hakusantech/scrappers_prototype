@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFleetDriverObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: driverId
+      type: Uuid
+    - name: licenseNo
+      type: Text!
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertFleetDriverObject
+    inputTypeName: InsertFleetDriverObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_fleet_driver_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        driverId:
+          column:
+            name: driver_id
+        licenseNo:
+          column:
+            name: license_no
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFleetDriverObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - driverId
+          - licenseNo
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFleetDriverResponse
+  description: Responses from the 'insert_fleet_driver' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetDriver!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertFleetDriverResponse
+    inputTypeName: InsertFleetDriverResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_fleet_driver_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFleetDriverResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertFleetDriver
+  outputType: InsertFleetDriverResponse!
+  arguments:
+    - name: objects
+      type: "[InsertFleetDriverObject!]!"
+    - name: postCheck
+      type: FleetDriverBoolExp
+      description: Insert permission predicate over the 'fleet_driver' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_fleet_driver
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertFleetDriver
+    rootFieldKind: Mutation
+  description: Insert into the fleet_driver table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertFleetDriver
+  permissions:
+    - role: admin
+      allowExecution: true
+

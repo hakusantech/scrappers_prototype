@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteReportingReportDefinitionByReportDefinitionIdResponse
+  description: Responses from the
+    'delete_reporting_report_definition_by_report_definition_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportDefinition!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteReportingReportDefinitionByReportDefinitionIdResponse
+    inputTypeName: DeleteReportingReportDefinitionByReportDefinitionIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_reporting_report_definition_by_report_definition_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteReportingReportDefinitionByReportDefinitionIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteReportingReportDefinitionByReportDefinitionId
+  outputType: DeleteReportingReportDefinitionByReportDefinitionIdResponse!
+  arguments:
+    - name: keyReportDefinitionId
+      type: Uuid!
+    - name: preCheck
+      type: ReportingReportDefinitionBoolExp
+      description: Delete permission predicate over the 'reporting_report_definition'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_reporting_report_definition_by_report_definition_id
+    argumentMapping:
+      keyReportDefinitionId: key_report_definition_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteReportingReportDefinitionByReportDefinitionId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'reporting_report_definition' collection
+    using the 'report_definition_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteReportingReportDefinitionByReportDefinitionId
+  permissions:
+    - role: admin
+      allowExecution: true
+

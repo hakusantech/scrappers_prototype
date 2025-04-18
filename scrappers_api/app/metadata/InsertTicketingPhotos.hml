@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingPhotosObject
+  fields:
+    - name: complianceInfoId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz
+    - name: photoId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+    - name: uploadedAt
+      type: Timestamptz
+    - name: url
+      type: Text!
+  graphql:
+    typeName: InsertTicketingPhotosObject
+    inputTypeName: InsertTicketingPhotosObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_photos_object
+      fieldMapping:
+        complianceInfoId:
+          column:
+            name: compliance_info_id
+        createdAt:
+          column:
+            name: created_at
+        photoId:
+          column:
+            name: photo_id
+        updatedAt:
+          column:
+            name: updated_at
+        uploadedAt:
+          column:
+            name: uploaded_at
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingPhotosObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complianceInfoId
+          - createdAt
+          - photoId
+          - updatedAt
+          - uploadedAt
+          - url
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertTicketingPhotosResponse
+  description: Responses from the 'insert_ticketing_photos' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingPhotos!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertTicketingPhotosResponse
+    inputTypeName: InsertTicketingPhotosResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_ticketing_photos_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertTicketingPhotosResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertTicketingPhotos
+  outputType: InsertTicketingPhotosResponse!
+  arguments:
+    - name: objects
+      type: "[InsertTicketingPhotosObject!]!"
+    - name: postCheck
+      type: TicketingPhotosBoolExp
+      description: Insert permission predicate over the 'ticketing_photos' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_ticketing_photos
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertTicketingPhotos
+    rootFieldKind: Mutation
+  description: Insert into the ticketing_photos table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertTicketingPhotos
+  permissions:
+    - role: admin
+      allowExecution: true
+

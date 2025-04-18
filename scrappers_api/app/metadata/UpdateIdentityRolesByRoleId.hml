@@ -1,0 +1,134 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityRolesByRoleIdUpdateColumns
+  description: Update the columns of the 'identity_roles' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnIdentityRolesCreatedAt
+      description: Update the 'created_at' column in the 'identity_roles' collection.
+    - name: name
+      type: UpdateColumnIdentityRolesName
+      description: Update the 'name' column in the 'identity_roles' collection.
+    - name: roleId
+      type: UpdateColumnIdentityRolesRoleId
+      description: Update the 'role_id' column in the 'identity_roles' collection.
+    - name: updatedAt
+      type: UpdateColumnIdentityRolesUpdatedAt
+      description: Update the 'updated_at' column in the 'identity_roles' collection.
+  graphql:
+    typeName: UpdateIdentityRolesByRoleIdUpdateColumns
+    inputTypeName: UpdateIdentityRolesByRoleIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_roles_by_role_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        roleId:
+          column:
+            name: role_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityRolesByRoleIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - roleId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityRolesByRoleIdResponse
+  description: Responses from the 'update_identity_roles_by_role_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityRoles!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateIdentityRolesByRoleIdResponse
+    inputTypeName: UpdateIdentityRolesByRoleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_roles_by_role_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityRolesByRoleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateIdentityRolesByRoleId
+  outputType: UpdateIdentityRolesByRoleIdResponse!
+  arguments:
+    - name: keyRoleId
+      type: Uuid!
+    - name: postCheck
+      type: IdentityRolesBoolExp
+      description: Update permission post-condition predicate over the
+        'identity_roles' collection
+    - name: preCheck
+      type: IdentityRolesBoolExp
+      description: Update permission pre-condition predicate over the 'identity_roles'
+        collection
+    - name: updateColumns
+      type: UpdateIdentityRolesByRoleIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_identity_roles_by_role_id
+    argumentMapping:
+      keyRoleId: key_role_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateIdentityRolesByRoleId
+    rootFieldKind: Mutation
+  description: Update any row on the 'identity_roles' collection using the 'role_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateIdentityRolesByRoleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

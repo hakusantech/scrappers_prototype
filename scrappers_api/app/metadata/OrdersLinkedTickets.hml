@@ -1,0 +1,220 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: OrdersLinkedTickets
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: linkedTicketId
+      type: Uuid!
+    - name: netWeight
+      type: Numeric!
+    - name: orderId
+      type: Uuid!
+    - name: ticketId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: OrdersLinkedTickets
+    inputTypeName: OrdersLinkedTicketsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: orders_linked_tickets
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        linkedTicketId:
+          column:
+            name: linked_ticket_id
+        netWeight:
+          column:
+            name: net_weight
+        orderId:
+          column:
+            name: order_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: OrdersLinkedTickets
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - linkedTicketId
+          - netWeight
+          - orderId
+          - ticketId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: OrdersLinkedTicketsBoolExp
+  operand:
+    object:
+      type: OrdersLinkedTickets
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: linkedTicketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: netWeight
+          booleanExpressionType: NumericBoolExp
+        - fieldName: orderId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: ordersAbstractOrder
+        - relationshipName: ticketingWeightTicket
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: OrdersLinkedTicketsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: OrdersLinkedTicketsAggExp
+  operand:
+    object:
+      aggregatedType: OrdersLinkedTickets
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: linkedTicketId
+          aggregateExpression: UuidAggExp
+        - fieldName: netWeight
+          aggregateExpression: NumericAggExp
+        - fieldName: orderId
+          aggregateExpression: UuidAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: OrdersLinkedTicketsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: OrdersLinkedTicketsOrderByExp
+  operand:
+    object:
+      orderedType: OrdersLinkedTickets
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: linkedTicketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: netWeight
+          orderByExpression: NumericOrderByExp
+        - fieldName: orderId
+          orderByExpression: UuidOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: ordersAbstractOrder
+        - relationshipName: ticketingWeightTicket
+  graphql:
+    expressionTypeName: OrdersLinkedTicketsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: OrdersLinkedTickets
+  objectType: OrdersLinkedTickets
+  source:
+    dataConnectorName: scrappers_api
+    collection: orders_linked_tickets
+  filterExpressionType: OrdersLinkedTicketsBoolExp
+  aggregateExpression: OrdersLinkedTicketsAggExp
+  orderByExpression: OrdersLinkedTicketsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ordersLinkedTickets
+      subscription:
+        rootField: ordersLinkedTickets
+    selectUniques:
+      - queryRootField: ordersLinkedTicketsByLinkedTicketId
+        uniqueIdentifier:
+          - linkedTicketId
+        subscription:
+          rootField: ordersLinkedTicketsByLinkedTicketId
+    filterInputTypeName: OrdersLinkedTicketsFilterInput
+    aggregate:
+      queryRootField: ordersLinkedTicketsAggregate
+      subscription:
+        rootField: ordersLinkedTicketsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: OrdersLinkedTickets
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersAbstractOrder
+  sourceType: OrdersLinkedTickets
+  target:
+    model:
+      name: OrdersAbstractOrder
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTicket
+  sourceType: OrdersLinkedTickets
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+

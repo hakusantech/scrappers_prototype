@@ -1,0 +1,138 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSupportSupportTicketObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: description
+      type: Text!
+    - name: status
+      type: SupportTicketStatusEnum
+    - name: subject
+      type: Text!
+    - name: supportTicketId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertSupportSupportTicketObject
+    inputTypeName: InsertSupportSupportTicketObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_support_support_ticket_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        description:
+          column:
+            name: description
+        status:
+          column:
+            name: status
+        subject:
+          column:
+            name: subject
+        supportTicketId:
+          column:
+            name: support_ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSupportSupportTicketObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - description
+          - status
+          - subject
+          - supportTicketId
+          - updatedAt
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSupportSupportTicketResponse
+  description: Responses from the 'insert_support_support_ticket' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportSupportTicket!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertSupportSupportTicketResponse
+    inputTypeName: InsertSupportSupportTicketResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_support_support_ticket_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSupportSupportTicketResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertSupportSupportTicket
+  outputType: InsertSupportSupportTicketResponse!
+  arguments:
+    - name: objects
+      type: "[InsertSupportSupportTicketObject!]!"
+    - name: postCheck
+      type: SupportSupportTicketBoolExp
+      description: Insert permission predicate over the 'support_support_ticket' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_support_support_ticket
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertSupportSupportTicket
+    rootFieldKind: Mutation
+  description: Insert into the support_support_ticket table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertSupportSupportTicket
+  permissions:
+    - role: admin
+      allowExecution: true
+

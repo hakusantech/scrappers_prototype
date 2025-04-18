@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteOrdersLinkedTicketsByLinkedTicketIdResponse
+  description: Responses from the
+    'delete_orders_linked_tickets_by_linked_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersLinkedTickets!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteOrdersLinkedTicketsByLinkedTicketIdResponse
+    inputTypeName: DeleteOrdersLinkedTicketsByLinkedTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_orders_linked_tickets_by_linked_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteOrdersLinkedTicketsByLinkedTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteOrdersLinkedTicketsByLinkedTicketId
+  outputType: DeleteOrdersLinkedTicketsByLinkedTicketIdResponse!
+  arguments:
+    - name: keyLinkedTicketId
+      type: Uuid!
+    - name: preCheck
+      type: OrdersLinkedTicketsBoolExp
+      description: Delete permission predicate over the 'orders_linked_tickets' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_orders_linked_tickets_by_linked_ticket_id
+    argumentMapping:
+      keyLinkedTicketId: key_linked_ticket_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteOrdersLinkedTicketsByLinkedTicketId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'orders_linked_tickets' collection using the
+    'linked_ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteOrdersLinkedTicketsByLinkedTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

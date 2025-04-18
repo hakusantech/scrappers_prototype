@@ -1,0 +1,184 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PartnerSupplier
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: name
+      type: Text!
+    - name: supplierId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: PartnerSupplier
+    inputTypeName: PartnerSupplierInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: partner_supplier
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        supplierId:
+          column:
+            name: supplier_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PartnerSupplier
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - supplierId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PartnerSupplierBoolExp
+  operand:
+    object:
+      type: PartnerSupplier
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: supplierId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: ticketingWeightTickets
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PartnerSupplierBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PartnerSupplierAggExp
+  operand:
+    object:
+      aggregatedType: PartnerSupplier
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: supplierId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: PartnerSupplierAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PartnerSupplierOrderByExp
+  operand:
+    object:
+      orderedType: PartnerSupplier
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: supplierId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: PartnerSupplierOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: PartnerSupplier
+  objectType: PartnerSupplier
+  source:
+    dataConnectorName: scrappers_api
+    collection: partner_supplier
+  filterExpressionType: PartnerSupplierBoolExp
+  aggregateExpression: PartnerSupplierAggExp
+  orderByExpression: PartnerSupplierOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: partnerSupplier
+      subscription:
+        rootField: partnerSupplier
+    selectUniques:
+      - queryRootField: partnerSupplierByName
+        uniqueIdentifier:
+          - name
+        subscription:
+          rootField: partnerSupplierByName
+      - queryRootField: partnerSupplierBySupplierId
+        uniqueIdentifier:
+          - supplierId
+        subscription:
+          rootField: partnerSupplierBySupplierId
+    filterInputTypeName: PartnerSupplierFilterInput
+    aggregate:
+      queryRootField: partnerSupplierAggregate
+      subscription:
+        rootField: partnerSupplierAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PartnerSupplier
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTickets
+  sourceType: PartnerSupplier
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingWeightTicketAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: supplierId
+      target:
+        modelField:
+          - fieldName: supplierId
+  graphql:
+    aggregateFieldName: ticketingWeightTicketsAggregate
+

@@ -1,0 +1,381 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListCreatedAt
+  description: Update the 'created_at' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListCreatedAt
+    inputTypeName: UpdateColumnPricingPriceListCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListEffectiveFrom
+  description: Update the 'effective_from' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Date!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListEffectiveFrom
+    inputTypeName: UpdateColumnPricingPriceListEffectiveFromInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_effective_from
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListEffectiveFrom
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListEffectiveTo
+  description: Update the 'effective_to' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Date
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListEffectiveTo
+    inputTypeName: UpdateColumnPricingPriceListEffectiveToInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_effective_to
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListEffectiveTo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListPriceListId
+  description: Update the 'price_list_id' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListPriceListId
+    inputTypeName: UpdateColumnPricingPriceListPriceListIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_price_list_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListPriceListId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListScope
+  description: Update the 'scope' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListScope
+    inputTypeName: UpdateColumnPricingPriceListScopeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_scope
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListScope
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListStatus
+  description: Update the 'status' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: PriceListStatusEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListStatus
+    inputTypeName: UpdateColumnPricingPriceListStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnPricingPriceListUpdatedAt
+  description: Update the 'updated_at' column in the 'pricing_price_list' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnPricingPriceListUpdatedAt
+    inputTypeName: UpdateColumnPricingPriceListUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_pricing_price_list_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnPricingPriceListUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePricingPriceListByPriceListIdUpdateColumns
+  description: Update the columns of the 'pricing_price_list' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnPricingPriceListCreatedAt
+      description: Update the 'created_at' column in the 'pricing_price_list' collection.
+    - name: effectiveFrom
+      type: UpdateColumnPricingPriceListEffectiveFrom
+      description: Update the 'effective_from' column in the 'pricing_price_list'
+        collection.
+    - name: effectiveTo
+      type: UpdateColumnPricingPriceListEffectiveTo
+      description: Update the 'effective_to' column in the 'pricing_price_list' collection.
+    - name: priceListId
+      type: UpdateColumnPricingPriceListPriceListId
+      description: Update the 'price_list_id' column in the 'pricing_price_list' collection.
+    - name: scope
+      type: UpdateColumnPricingPriceListScope
+      description: Update the 'scope' column in the 'pricing_price_list' collection.
+    - name: status
+      type: UpdateColumnPricingPriceListStatus
+      description: Update the 'status' column in the 'pricing_price_list' collection.
+    - name: updatedAt
+      type: UpdateColumnPricingPriceListUpdatedAt
+      description: Update the 'updated_at' column in the 'pricing_price_list' collection.
+  graphql:
+    typeName: UpdatePricingPriceListByPriceListIdUpdateColumns
+    inputTypeName: UpdatePricingPriceListByPriceListIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_pricing_price_list_by_price_list_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        effectiveFrom:
+          column:
+            name: effective_from
+        effectiveTo:
+          column:
+            name: effective_to
+        priceListId:
+          column:
+            name: price_list_id
+        scope:
+          column:
+            name: scope
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePricingPriceListByPriceListIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - effectiveFrom
+          - effectiveTo
+          - priceListId
+          - scope
+          - status
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePricingPriceListByPriceListIdResponse
+  description: Responses from the 'update_pricing_price_list_by_price_list_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceList!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdatePricingPriceListByPriceListIdResponse
+    inputTypeName: UpdatePricingPriceListByPriceListIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_pricing_price_list_by_price_list_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePricingPriceListByPriceListIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePricingPriceListByPriceListId
+  outputType: UpdatePricingPriceListByPriceListIdResponse!
+  arguments:
+    - name: keyPriceListId
+      type: Uuid!
+    - name: postCheck
+      type: PricingPriceListBoolExp
+      description: Update permission post-condition predicate over the
+        'pricing_price_list' collection
+    - name: preCheck
+      type: PricingPriceListBoolExp
+      description: Update permission pre-condition predicate over the
+        'pricing_price_list' collection
+    - name: updateColumns
+      type: UpdatePricingPriceListByPriceListIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_pricing_price_list_by_price_list_id
+    argumentMapping:
+      keyPriceListId: key_price_list_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updatePricingPriceListByPriceListId
+    rootFieldKind: Mutation
+  description: Update any row on the 'pricing_price_list' collection using the
+    'price_list_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePricingPriceListByPriceListId
+  permissions:
+    - role: admin
+      allowExecution: true
+

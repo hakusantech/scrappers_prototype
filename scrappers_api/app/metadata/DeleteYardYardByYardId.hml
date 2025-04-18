@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteYardYardByYardIdResponse
+  description: Responses from the 'delete_yard_yard_by_yard_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[YardYard!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteYardYardByYardIdResponse
+    inputTypeName: DeleteYardYardByYardIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_yard_yard_by_yard_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteYardYardByYardIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteYardYardByYardId
+  outputType: DeleteYardYardByYardIdResponse!
+  arguments:
+    - name: keyYardId
+      type: Uuid!
+    - name: preCheck
+      type: YardYardBoolExp
+      description: Delete permission predicate over the 'yard_yard' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_yard_yard_by_yard_id
+    argumentMapping:
+      keyYardId: key_yard_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteYardYardByYardId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'yard_yard' collection using the 'yard_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteYardYardByYardId
+  permissions:
+    - role: admin
+      allowExecution: true
+

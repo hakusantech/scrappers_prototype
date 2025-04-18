@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteReportingReportRunByReportRunIdResponse
+  description: Responses from the 'delete_reporting_report_run_by_report_run_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportRun!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteReportingReportRunByReportRunIdResponse
+    inputTypeName: DeleteReportingReportRunByReportRunIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_reporting_report_run_by_report_run_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteReportingReportRunByReportRunIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteReportingReportRunByReportRunId
+  outputType: DeleteReportingReportRunByReportRunIdResponse!
+  arguments:
+    - name: keyReportRunId
+      type: Uuid!
+    - name: preCheck
+      type: ReportingReportRunBoolExp
+      description: Delete permission predicate over the 'reporting_report_run' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_reporting_report_run_by_report_run_id
+    argumentMapping:
+      keyReportRunId: key_report_run_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteReportingReportRunByReportRunId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'reporting_report_run' collection using the
+    'report_run_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteReportingReportRunByReportRunId
+  permissions:
+    - role: admin
+      allowExecution: true
+

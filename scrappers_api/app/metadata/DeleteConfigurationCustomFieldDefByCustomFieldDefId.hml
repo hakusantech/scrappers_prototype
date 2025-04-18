@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteConfigurationCustomFieldDefByCustomFieldDefIdResponse
+  description: Responses from the
+    'delete_configuration_custom_field_def_by_custom_field_def_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationCustomFieldDef!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteConfigurationCustomFieldDefByCustomFieldDefIdResponse
+    inputTypeName: DeleteConfigurationCustomFieldDefByCustomFieldDefIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_configuration_custom_field_def_by_custom_field_def_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteConfigurationCustomFieldDefByCustomFieldDefIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteConfigurationCustomFieldDefByCustomFieldDefId
+  outputType: DeleteConfigurationCustomFieldDefByCustomFieldDefIdResponse!
+  arguments:
+    - name: keyCustomFieldDefId
+      type: Uuid!
+    - name: preCheck
+      type: ConfigurationCustomFieldDefBoolExp
+      description: Delete permission predicate over the
+        'configuration_custom_field_def' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_configuration_custom_field_def_by_custom_field_def_id
+    argumentMapping:
+      keyCustomFieldDefId: key_custom_field_def_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteConfigurationCustomFieldDefByCustomFieldDefId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'configuration_custom_field_def' collection
+    using the 'custom_field_def_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteConfigurationCustomFieldDefByCustomFieldDefId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,585 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketCreatedAt
+  description: Update the 'created_at' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketCreatedAt
+    inputTypeName: UpdateColumnTicketingWeightTicketCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketFinalizedAt
+  description: Update the 'finalized_at' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Timestamptz
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketFinalizedAt
+    inputTypeName: UpdateColumnTicketingWeightTicketFinalizedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_finalized_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketFinalizedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketPriceApplied
+  description: Update the 'price_applied' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Numeric
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketPriceApplied
+    inputTypeName: UpdateColumnTicketingWeightTicketPriceAppliedInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_price_applied
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketPriceApplied
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketStatus
+  description: Update the 'status' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: TicketStatusEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketStatus
+    inputTypeName: UpdateColumnTicketingWeightTicketStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketSupplierId
+  description: Update the 'supplier_id' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketSupplierId
+    inputTypeName: UpdateColumnTicketingWeightTicketSupplierIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_supplier_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketSupplierId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketTareWeight
+  description: Update the 'tare_weight' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketTareWeight
+    inputTypeName: UpdateColumnTicketingWeightTicketTareWeightInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_tare_weight
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketTareWeight
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketTicketId
+  description: Update the 'ticket_id' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketTicketId
+    inputTypeName: UpdateColumnTicketingWeightTicketTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketTicketType
+  description: Update the 'ticket_type' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: TicketTypeEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketTicketType
+    inputTypeName: UpdateColumnTicketingWeightTicketTicketTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_ticket_type
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketTicketType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketTotalWeight
+  description: Update the 'total_weight' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketTotalWeight
+    inputTypeName: UpdateColumnTicketingWeightTicketTotalWeightInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_total_weight
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketTotalWeight
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketUpdatedAt
+  description: Update the 'updated_at' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketUpdatedAt
+    inputTypeName: UpdateColumnTicketingWeightTicketUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketVehicleId
+  description: Update the 'vehicle_id' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketVehicleId
+    inputTypeName: UpdateColumnTicketingWeightTicketVehicleIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_vehicle_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketVehicleId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingWeightTicketYardId
+  description: Update the 'yard_id' column in the 'ticketing_weight_ticket' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingWeightTicketYardId
+    inputTypeName: UpdateColumnTicketingWeightTicketYardIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_weight_ticket_yard_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingWeightTicketYardId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingWeightTicketByTicketIdUpdateColumns
+  description: Update the columns of the 'ticketing_weight_ticket' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnTicketingWeightTicketCreatedAt
+      description: Update the 'created_at' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: finalizedAt
+      type: UpdateColumnTicketingWeightTicketFinalizedAt
+      description: Update the 'finalized_at' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: priceApplied
+      type: UpdateColumnTicketingWeightTicketPriceApplied
+      description: Update the 'price_applied' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: status
+      type: UpdateColumnTicketingWeightTicketStatus
+      description: Update the 'status' column in the 'ticketing_weight_ticket' collection.
+    - name: supplierId
+      type: UpdateColumnTicketingWeightTicketSupplierId
+      description: Update the 'supplier_id' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: tareWeight
+      type: UpdateColumnTicketingWeightTicketTareWeight
+      description: Update the 'tare_weight' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: ticketId
+      type: UpdateColumnTicketingWeightTicketTicketId
+      description: Update the 'ticket_id' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: ticketType
+      type: UpdateColumnTicketingWeightTicketTicketType
+      description: Update the 'ticket_type' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: totalWeight
+      type: UpdateColumnTicketingWeightTicketTotalWeight
+      description: Update the 'total_weight' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnTicketingWeightTicketUpdatedAt
+      description: Update the 'updated_at' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: vehicleId
+      type: UpdateColumnTicketingWeightTicketVehicleId
+      description: Update the 'vehicle_id' column in the 'ticketing_weight_ticket'
+        collection.
+    - name: yardId
+      type: UpdateColumnTicketingWeightTicketYardId
+      description: Update the 'yard_id' column in the 'ticketing_weight_ticket' collection.
+  graphql:
+    typeName: UpdateTicketingWeightTicketByTicketIdUpdateColumns
+    inputTypeName: UpdateTicketingWeightTicketByTicketIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_weight_ticket_by_ticket_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        finalizedAt:
+          column:
+            name: finalized_at
+        priceApplied:
+          column:
+            name: price_applied
+        status:
+          column:
+            name: status
+        supplierId:
+          column:
+            name: supplier_id
+        tareWeight:
+          column:
+            name: tare_weight
+        ticketId:
+          column:
+            name: ticket_id
+        ticketType:
+          column:
+            name: ticket_type
+        totalWeight:
+          column:
+            name: total_weight
+        updatedAt:
+          column:
+            name: updated_at
+        vehicleId:
+          column:
+            name: vehicle_id
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingWeightTicketByTicketIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - finalizedAt
+          - priceApplied
+          - status
+          - supplierId
+          - tareWeight
+          - ticketId
+          - ticketType
+          - totalWeight
+          - updatedAt
+          - vehicleId
+          - yardId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingWeightTicketByTicketIdResponse
+  description: Responses from the 'update_ticketing_weight_ticket_by_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingWeightTicket!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateTicketingWeightTicketByTicketIdResponse
+    inputTypeName: UpdateTicketingWeightTicketByTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_weight_ticket_by_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingWeightTicketByTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTicketingWeightTicketByTicketId
+  outputType: UpdateTicketingWeightTicketByTicketIdResponse!
+  arguments:
+    - name: keyTicketId
+      type: Uuid!
+    - name: postCheck
+      type: TicketingWeightTicketBoolExp
+      description: Update permission post-condition predicate over the
+        'ticketing_weight_ticket' collection
+    - name: preCheck
+      type: TicketingWeightTicketBoolExp
+      description: Update permission pre-condition predicate over the
+        'ticketing_weight_ticket' collection
+    - name: updateColumns
+      type: UpdateTicketingWeightTicketByTicketIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_ticketing_weight_ticket_by_ticket_id
+    argumentMapping:
+      keyTicketId: key_ticket_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateTicketingWeightTicketByTicketId
+    rootFieldKind: Mutation
+  description: Update any row on the 'ticketing_weight_ticket' collection using
+    the 'ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTicketingWeightTicketByTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,360 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InventoryInventoryLot
+  fields:
+    - name: avgCost
+      type: Numeric!
+    - name: createdAt
+      type: Timestamptz!
+    - name: grade
+      type: Text
+    - name: lotId
+      type: Uuid!
+    - name: materialId
+      type: Uuid!
+    - name: quantity
+      type: Numeric!
+    - name: state
+      type: LotStateEnum!
+    - name: unit
+      type: UnitEnum!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: yardId
+      type: Uuid!
+  graphql:
+    typeName: InventoryInventoryLot
+    inputTypeName: InventoryInventoryLotInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: inventory_inventory_lot
+      fieldMapping:
+        avgCost:
+          column:
+            name: avg_cost
+        createdAt:
+          column:
+            name: created_at
+        grade:
+          column:
+            name: grade
+        lotId:
+          column:
+            name: lot_id
+        materialId:
+          column:
+            name: material_id
+        quantity:
+          column:
+            name: quantity
+        state:
+          column:
+            name: state
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InventoryInventoryLot
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - avgCost
+          - createdAt
+          - grade
+          - lotId
+          - materialId
+          - quantity
+          - state
+          - unit
+          - updatedAt
+          - yardId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: InventoryInventoryLotBoolExp
+  operand:
+    object:
+      type: InventoryInventoryLot
+      comparableFields:
+        - fieldName: avgCost
+          booleanExpressionType: NumericBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: grade
+          booleanExpressionType: TextBoolExp
+        - fieldName: lotId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: materialId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: quantity
+          booleanExpressionType: NumericBoolExp
+        - fieldName: state
+          booleanExpressionType: LotStateEnumBoolExp
+        - fieldName: unit
+          booleanExpressionType: UnitEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: yardId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: dispatchDispatchJobs
+        - relationshipName: masterMaterial
+        - relationshipName: yardYard
+        - relationshipName: inventoryLotTags
+        - relationshipName: inventoryTransferHistories
+        - relationshipName: ordersOrderLines
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: InventoryInventoryLotBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: InventoryInventoryLotAggExp
+  operand:
+    object:
+      aggregatedType: InventoryInventoryLot
+      aggregatableFields:
+        - fieldName: avgCost
+          aggregateExpression: NumericAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: grade
+          aggregateExpression: TextAggExp
+        - fieldName: lotId
+          aggregateExpression: UuidAggExp
+        - fieldName: materialId
+          aggregateExpression: UuidAggExp
+        - fieldName: quantity
+          aggregateExpression: NumericAggExp
+        - fieldName: state
+          aggregateExpression: LotStateEnumAggExp
+        - fieldName: unit
+          aggregateExpression: UnitEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: yardId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: InventoryInventoryLotAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: InventoryInventoryLotOrderByExp
+  operand:
+    object:
+      orderedType: InventoryInventoryLot
+      orderableFields:
+        - fieldName: avgCost
+          orderByExpression: NumericOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: grade
+          orderByExpression: TextOrderByExp
+        - fieldName: lotId
+          orderByExpression: UuidOrderByExp
+        - fieldName: materialId
+          orderByExpression: UuidOrderByExp
+        - fieldName: quantity
+          orderByExpression: NumericOrderByExp
+        - fieldName: state
+          orderByExpression: LotStateEnumOrderByExp
+        - fieldName: unit
+          orderByExpression: UnitEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: yardId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: masterMaterial
+        - relationshipName: yardYard
+  graphql:
+    expressionTypeName: InventoryInventoryLotOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: InventoryInventoryLot
+  objectType: InventoryInventoryLot
+  source:
+    dataConnectorName: scrappers_api
+    collection: inventory_inventory_lot
+  filterExpressionType: InventoryInventoryLotBoolExp
+  aggregateExpression: InventoryInventoryLotAggExp
+  orderByExpression: InventoryInventoryLotOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: inventoryInventoryLot
+      subscription:
+        rootField: inventoryInventoryLot
+    selectUniques:
+      - queryRootField: inventoryInventoryLotByLotId
+        uniqueIdentifier:
+          - lotId
+        subscription:
+          rootField: inventoryInventoryLotByLotId
+    filterInputTypeName: InventoryInventoryLotFilterInput
+    aggregate:
+      queryRootField: inventoryInventoryLotAggregate
+      subscription:
+        rootField: inventoryInventoryLotAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InventoryInventoryLot
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: dispatchDispatchJobs
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: DispatchDispatchJob
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: DispatchDispatchJobAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+  graphql:
+    aggregateFieldName: dispatchDispatchJobsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: masterMaterial
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: MasterMaterial
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: yardYard
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: YardYard
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: yardId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryLotTags
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: InventoryLotTags
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryLotTagsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+  graphql:
+    aggregateFieldName: inventoryLotTagsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryTransferHistories
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: InventoryTransferHistory
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryTransferHistoryAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+  graphql:
+    aggregateFieldName: inventoryTransferHistoriesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersOrderLines
+  sourceType: InventoryInventoryLot
+  target:
+    model:
+      name: OrdersOrderLine
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersOrderLineAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotRef
+  graphql:
+    aggregateFieldName: ordersOrderLinesAggregate
+

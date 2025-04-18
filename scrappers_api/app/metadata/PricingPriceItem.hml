@@ -1,0 +1,263 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PricingPriceItem
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: currency
+      type: CurrencyEnum!
+    - name: materialId
+      type: Uuid!
+    - name: maxQty
+      type: Numeric
+    - name: minQty
+      type: Numeric!
+    - name: priceItemId
+      type: Uuid!
+    - name: priceListId
+      type: Uuid!
+    - name: unitPrice
+      type: Numeric!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: PricingPriceItem
+    inputTypeName: PricingPriceItemInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: pricing_price_item
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        materialId:
+          column:
+            name: material_id
+        maxQty:
+          column:
+            name: max_qty
+        minQty:
+          column:
+            name: min_qty
+        priceItemId:
+          column:
+            name: price_item_id
+        priceListId:
+          column:
+            name: price_list_id
+        unitPrice:
+          column:
+            name: unit_price
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PricingPriceItem
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - currency
+          - materialId
+          - maxQty
+          - minQty
+          - priceItemId
+          - priceListId
+          - unitPrice
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PricingPriceItemBoolExp
+  operand:
+    object:
+      type: PricingPriceItem
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: currency
+          booleanExpressionType: CurrencyEnumBoolExp
+        - fieldName: materialId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: maxQty
+          booleanExpressionType: NumericBoolExp
+        - fieldName: minQty
+          booleanExpressionType: NumericBoolExp
+        - fieldName: priceItemId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: priceListId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: unitPrice
+          booleanExpressionType: NumericBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: masterMaterial
+        - relationshipName: pricingPriceList
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PricingPriceItemBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PricingPriceItemAggExp
+  operand:
+    object:
+      aggregatedType: PricingPriceItem
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: currency
+          aggregateExpression: CurrencyEnumAggExp
+        - fieldName: materialId
+          aggregateExpression: UuidAggExp
+        - fieldName: maxQty
+          aggregateExpression: NumericAggExp
+        - fieldName: minQty
+          aggregateExpression: NumericAggExp
+        - fieldName: priceItemId
+          aggregateExpression: UuidAggExp
+        - fieldName: priceListId
+          aggregateExpression: UuidAggExp
+        - fieldName: unitPrice
+          aggregateExpression: NumericAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: PricingPriceItemAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PricingPriceItemOrderByExp
+  operand:
+    object:
+      orderedType: PricingPriceItem
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: currency
+          orderByExpression: CurrencyEnumOrderByExp
+        - fieldName: materialId
+          orderByExpression: UuidOrderByExp
+        - fieldName: maxQty
+          orderByExpression: NumericOrderByExp
+        - fieldName: minQty
+          orderByExpression: NumericOrderByExp
+        - fieldName: priceItemId
+          orderByExpression: UuidOrderByExp
+        - fieldName: priceListId
+          orderByExpression: UuidOrderByExp
+        - fieldName: unitPrice
+          orderByExpression: NumericOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: masterMaterial
+        - relationshipName: pricingPriceList
+  graphql:
+    expressionTypeName: PricingPriceItemOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: PricingPriceItem
+  objectType: PricingPriceItem
+  source:
+    dataConnectorName: scrappers_api
+    collection: pricing_price_item
+  filterExpressionType: PricingPriceItemBoolExp
+  aggregateExpression: PricingPriceItemAggExp
+  orderByExpression: PricingPriceItemOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: pricingPriceItem
+      subscription:
+        rootField: pricingPriceItem
+    selectUniques:
+      - queryRootField: pricingPriceItemByPriceItemId
+        uniqueIdentifier:
+          - priceItemId
+        subscription:
+          rootField: pricingPriceItemByPriceItemId
+      - queryRootField: pricingPriceItemByPriceItemPriceListIdMaterialIdMinQtyKey
+        uniqueIdentifier:
+          - materialId
+          - minQty
+          - priceListId
+        subscription:
+          rootField: pricingPriceItemByPriceItemPriceListIdMaterialIdMinQtyKey
+    filterInputTypeName: PricingPriceItemFilterInput
+    aggregate:
+      queryRootField: pricingPriceItemAggregate
+      subscription:
+        rootField: pricingPriceItemAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PricingPriceItem
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: masterMaterial
+  sourceType: PricingPriceItem
+  target:
+    model:
+      name: MasterMaterial
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingPriceList
+  sourceType: PricingPriceItem
+  target:
+    model:
+      name: PricingPriceList
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: priceListId
+      target:
+        modelField:
+          - fieldName: priceListId
+

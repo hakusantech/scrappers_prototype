@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeletePartnerSupplierBySupplierIdResponse
+  description: Responses from the 'delete_partner_supplier_by_supplier_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PartnerSupplier!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeletePartnerSupplierBySupplierIdResponse
+    inputTypeName: DeletePartnerSupplierBySupplierIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_partner_supplier_by_supplier_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeletePartnerSupplierBySupplierIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePartnerSupplierBySupplierId
+  outputType: DeletePartnerSupplierBySupplierIdResponse!
+  arguments:
+    - name: keySupplierId
+      type: Uuid!
+    - name: preCheck
+      type: PartnerSupplierBoolExp
+      description: Delete permission predicate over the 'partner_supplier' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_partner_supplier_by_supplier_id
+    argumentMapping:
+      keySupplierId: key_supplier_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deletePartnerSupplierBySupplierId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'partner_supplier' collection using the
+    'supplier_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePartnerSupplierBySupplierId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,264 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DispatchDispatchJob
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: dispatchJobId
+      type: Uuid!
+    - name: driverId
+      type: Uuid!
+    - name: lotId
+      type: Uuid!
+    - name: scheduledTime
+      type: Timestamptz!
+    - name: status
+      type: DispatchStatusEnum!
+    - name: truckId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: DispatchDispatchJob
+    inputTypeName: DispatchDispatchJobInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: dispatch_dispatch_job
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        dispatchJobId:
+          column:
+            name: dispatch_job_id
+        driverId:
+          column:
+            name: driver_id
+        lotId:
+          column:
+            name: lot_id
+        scheduledTime:
+          column:
+            name: scheduled_time
+        status:
+          column:
+            name: status
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DispatchDispatchJob
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - dispatchJobId
+          - driverId
+          - lotId
+          - scheduledTime
+          - status
+          - truckId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: DispatchDispatchJobBoolExp
+  operand:
+    object:
+      type: DispatchDispatchJob
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: dispatchJobId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: driverId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: lotId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: scheduledTime
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: status
+          booleanExpressionType: DispatchStatusEnumBoolExp
+        - fieldName: truckId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: fleetDriver
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: fleetTruck
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: DispatchDispatchJobBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: DispatchDispatchJobAggExp
+  operand:
+    object:
+      aggregatedType: DispatchDispatchJob
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: dispatchJobId
+          aggregateExpression: UuidAggExp
+        - fieldName: driverId
+          aggregateExpression: UuidAggExp
+        - fieldName: lotId
+          aggregateExpression: UuidAggExp
+        - fieldName: scheduledTime
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: status
+          aggregateExpression: DispatchStatusEnumAggExp
+        - fieldName: truckId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: DispatchDispatchJobAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: DispatchDispatchJobOrderByExp
+  operand:
+    object:
+      orderedType: DispatchDispatchJob
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: dispatchJobId
+          orderByExpression: UuidOrderByExp
+        - fieldName: driverId
+          orderByExpression: UuidOrderByExp
+        - fieldName: lotId
+          orderByExpression: UuidOrderByExp
+        - fieldName: scheduledTime
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: status
+          orderByExpression: DispatchStatusEnumOrderByExp
+        - fieldName: truckId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: fleetDriver
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: fleetTruck
+  graphql:
+    expressionTypeName: DispatchDispatchJobOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: DispatchDispatchJob
+  objectType: DispatchDispatchJob
+  source:
+    dataConnectorName: scrappers_api
+    collection: dispatch_dispatch_job
+  filterExpressionType: DispatchDispatchJobBoolExp
+  aggregateExpression: DispatchDispatchJobAggExp
+  orderByExpression: DispatchDispatchJobOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: dispatchDispatchJob
+      subscription:
+        rootField: dispatchDispatchJob
+    selectUniques:
+      - queryRootField: dispatchDispatchJobByDispatchJobId
+        uniqueIdentifier:
+          - dispatchJobId
+        subscription:
+          rootField: dispatchDispatchJobByDispatchJobId
+    filterInputTypeName: DispatchDispatchJobFilterInput
+    aggregate:
+      queryRootField: dispatchDispatchJobAggregate
+      subscription:
+        rootField: dispatchDispatchJobAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: DispatchDispatchJob
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: fleetDriver
+  sourceType: DispatchDispatchJob
+  target:
+    model:
+      name: FleetDriver
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: driverId
+      target:
+        modelField:
+          - fieldName: driverId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLot
+  sourceType: DispatchDispatchJob
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: fleetTruck
+  sourceType: DispatchDispatchJob
+  target:
+    model:
+      name: FleetTruck
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: truckId
+      target:
+        modelField:
+          - fieldName: truckId
+

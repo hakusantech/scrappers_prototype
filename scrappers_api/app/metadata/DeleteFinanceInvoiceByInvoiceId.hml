@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFinanceInvoiceByInvoiceIdResponse
+  description: Responses from the 'delete_finance_invoice_by_invoice_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceInvoice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFinanceInvoiceByInvoiceIdResponse
+    inputTypeName: DeleteFinanceInvoiceByInvoiceIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_finance_invoice_by_invoice_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFinanceInvoiceByInvoiceIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFinanceInvoiceByInvoiceId
+  outputType: DeleteFinanceInvoiceByInvoiceIdResponse!
+  arguments:
+    - name: keyInvoiceId
+      type: Uuid!
+    - name: preCheck
+      type: FinanceInvoiceBoolExp
+      description: Delete permission predicate over the 'finance_invoice' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_finance_invoice_by_invoice_id
+    argumentMapping:
+      keyInvoiceId: key_invoice_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFinanceInvoiceByInvoiceId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'finance_invoice' collection using the 'invoice_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFinanceInvoiceByInvoiceId
+  permissions:
+    - role: admin
+      allowExecution: true
+

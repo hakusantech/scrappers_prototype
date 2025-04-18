@@ -1,0 +1,145 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateCounterpartyCounterpartyByNameUpdateColumns
+  description: Update the columns of the 'counterparty_counterparty' collection
+  fields:
+    - name: counterpartyId
+      type: UpdateColumnCounterpartyCounterpartyCounterpartyId
+      description: Update the 'counterparty_id' column in the
+        'counterparty_counterparty' collection.
+    - name: createdAt
+      type: UpdateColumnCounterpartyCounterpartyCreatedAt
+      description: Update the 'created_at' column in the 'counterparty_counterparty'
+        collection.
+    - name: kind
+      type: UpdateColumnCounterpartyCounterpartyKind
+      description: Update the 'kind' column in the 'counterparty_counterparty' collection.
+    - name: name
+      type: UpdateColumnCounterpartyCounterpartyName
+      description: Update the 'name' column in the 'counterparty_counterparty' collection.
+    - name: updatedAt
+      type: UpdateColumnCounterpartyCounterpartyUpdatedAt
+      description: Update the 'updated_at' column in the 'counterparty_counterparty'
+        collection.
+  graphql:
+    typeName: UpdateCounterpartyCounterpartyByNameUpdateColumns
+    inputTypeName: UpdateCounterpartyCounterpartyByNameUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_counterparty_counterparty_by_name_update_columns
+      fieldMapping:
+        counterpartyId:
+          column:
+            name: counterparty_id
+        createdAt:
+          column:
+            name: created_at
+        kind:
+          column:
+            name: kind
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateCounterpartyCounterpartyByNameUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - counterpartyId
+          - createdAt
+          - kind
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateCounterpartyCounterpartyByNameResponse
+  description: Responses from the 'update_counterparty_counterparty_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[CounterpartyCounterparty!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateCounterpartyCounterpartyByNameResponse
+    inputTypeName: UpdateCounterpartyCounterpartyByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_counterparty_counterparty_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateCounterpartyCounterpartyByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateCounterpartyCounterpartyByName
+  outputType: UpdateCounterpartyCounterpartyByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: postCheck
+      type: CounterpartyCounterpartyBoolExp
+      description: Update permission post-condition predicate over the
+        'counterparty_counterparty' collection
+    - name: preCheck
+      type: CounterpartyCounterpartyBoolExp
+      description: Update permission pre-condition predicate over the
+        'counterparty_counterparty' collection
+    - name: updateColumns
+      type: UpdateCounterpartyCounterpartyByNameUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_counterparty_counterparty_by_name
+    argumentMapping:
+      keyName: key_name
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateCounterpartyCounterpartyByName
+    rootFieldKind: Mutation
+  description: Update any row on the 'counterparty_counterparty' collection using
+    the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateCounterpartyCounterpartyByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

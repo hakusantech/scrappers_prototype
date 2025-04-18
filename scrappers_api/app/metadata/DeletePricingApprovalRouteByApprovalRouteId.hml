@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeletePricingApprovalRouteByApprovalRouteIdResponse
+  description: Responses from the
+    'delete_pricing_approval_route_by_approval_route_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingApprovalRoute!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeletePricingApprovalRouteByApprovalRouteIdResponse
+    inputTypeName: DeletePricingApprovalRouteByApprovalRouteIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_pricing_approval_route_by_approval_route_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeletePricingApprovalRouteByApprovalRouteIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePricingApprovalRouteByApprovalRouteId
+  outputType: DeletePricingApprovalRouteByApprovalRouteIdResponse!
+  arguments:
+    - name: keyApprovalRouteId
+      type: Uuid!
+    - name: preCheck
+      type: PricingApprovalRouteBoolExp
+      description: Delete permission predicate over the 'pricing_approval_route' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_pricing_approval_route_by_approval_route_id
+    argumentMapping:
+      keyApprovalRouteId: key_approval_route_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deletePricingApprovalRouteByApprovalRouteId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'pricing_approval_route' collection using the
+    'approval_route_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePricingApprovalRouteByApprovalRouteId
+  permissions:
+    - role: admin
+      allowExecution: true
+

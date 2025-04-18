@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertInventoryLotTagsObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: lotId
+      type: Uuid!
+    - name: lotTagId
+      type: Uuid
+    - name: printedAt
+      type: Timestamptz
+    - name: qrCode
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertInventoryLotTagsObject
+    inputTypeName: InsertInventoryLotTagsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_inventory_lot_tags_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        lotId:
+          column:
+            name: lot_id
+        lotTagId:
+          column:
+            name: lot_tag_id
+        printedAt:
+          column:
+            name: printed_at
+        qrCode:
+          column:
+            name: qr_code
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertInventoryLotTagsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - lotId
+          - lotTagId
+          - printedAt
+          - qrCode
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertInventoryLotTagsResponse
+  description: Responses from the 'insert_inventory_lot_tags' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryLotTags!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertInventoryLotTagsResponse
+    inputTypeName: InsertInventoryLotTagsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_inventory_lot_tags_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertInventoryLotTagsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInventoryLotTags
+  outputType: InsertInventoryLotTagsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertInventoryLotTagsObject!]!"
+    - name: postCheck
+      type: InventoryLotTagsBoolExp
+      description: Insert permission predicate over the 'inventory_lot_tags' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_inventory_lot_tags
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertInventoryLotTags
+    rootFieldKind: Mutation
+  description: Insert into the inventory_lot_tags table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInventoryLotTags
+  permissions:
+    - role: admin
+      allowExecution: true
+

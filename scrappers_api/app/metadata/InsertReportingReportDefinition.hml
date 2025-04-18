@@ -1,0 +1,139 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReportingReportDefinitionObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: description
+      type: Text
+    - name: name
+      type: Text!
+    - name: query
+      type: Jsonb!
+    - name: reportDefinitionId
+      type: Uuid
+    - name: schedule
+      type: ScheduleEnum
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertReportingReportDefinitionObject
+    inputTypeName: InsertReportingReportDefinitionObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_reporting_report_definition_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        description:
+          column:
+            name: description
+        name:
+          column:
+            name: name
+        query:
+          column:
+            name: query
+        reportDefinitionId:
+          column:
+            name: report_definition_id
+        schedule:
+          column:
+            name: schedule
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReportingReportDefinitionObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - description
+          - name
+          - query
+          - reportDefinitionId
+          - schedule
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReportingReportDefinitionResponse
+  description: Responses from the 'insert_reporting_report_definition' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportDefinition!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertReportingReportDefinitionResponse
+    inputTypeName: InsertReportingReportDefinitionResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_reporting_report_definition_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReportingReportDefinitionResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertReportingReportDefinition
+  outputType: InsertReportingReportDefinitionResponse!
+  arguments:
+    - name: objects
+      type: "[InsertReportingReportDefinitionObject!]!"
+    - name: postCheck
+      type: ReportingReportDefinitionBoolExp
+      description: Insert permission predicate over the 'reporting_report_definition'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_reporting_report_definition
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertReportingReportDefinition
+    rootFieldKind: Mutation
+  description: Insert into the reporting_report_definition table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertReportingReportDefinition
+  permissions:
+    - role: admin
+      allowExecution: true
+

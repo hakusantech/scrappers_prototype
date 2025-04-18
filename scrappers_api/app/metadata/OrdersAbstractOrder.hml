@@ -1,0 +1,305 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: OrdersAbstractOrder
+  fields:
+    - name: counterpartyId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: expectedDate
+      type: Date
+    - name: orderDate
+      type: Date!
+    - name: orderId
+      type: Uuid!
+    - name: orderType
+      type: Text!
+    - name: paymentTerms
+      type: PaymentTermsEnum
+    - name: status
+      type: OrderStatusEnum!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: OrdersAbstractOrder
+    inputTypeName: OrdersAbstractOrderInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: orders_abstract_order
+      fieldMapping:
+        counterpartyId:
+          column:
+            name: counterparty_id
+        createdAt:
+          column:
+            name: created_at
+        expectedDate:
+          column:
+            name: expected_date
+        orderDate:
+          column:
+            name: order_date
+        orderId:
+          column:
+            name: order_id
+        orderType:
+          column:
+            name: order_type
+        paymentTerms:
+          column:
+            name: payment_terms
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: OrdersAbstractOrder
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - counterpartyId
+          - createdAt
+          - expectedDate
+          - orderDate
+          - orderId
+          - orderType
+          - paymentTerms
+          - status
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: OrdersAbstractOrderBoolExp
+  operand:
+    object:
+      type: OrdersAbstractOrder
+      comparableFields:
+        - fieldName: counterpartyId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: expectedDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: orderDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: orderId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: orderType
+          booleanExpressionType: TextBoolExp
+        - fieldName: paymentTerms
+          booleanExpressionType: PaymentTermsEnumBoolExp
+        - fieldName: status
+          booleanExpressionType: OrderStatusEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: financeInvoices
+        - relationshipName: counterpartyCounterparty
+        - relationshipName: ordersLinkedTickets
+        - relationshipName: ordersOrderLines
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: OrdersAbstractOrderBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: OrdersAbstractOrderAggExp
+  operand:
+    object:
+      aggregatedType: OrdersAbstractOrder
+      aggregatableFields:
+        - fieldName: counterpartyId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: expectedDate
+          aggregateExpression: DateAggExp
+        - fieldName: orderDate
+          aggregateExpression: DateAggExp
+        - fieldName: orderId
+          aggregateExpression: UuidAggExp
+        - fieldName: orderType
+          aggregateExpression: TextAggExp
+        - fieldName: paymentTerms
+          aggregateExpression: PaymentTermsEnumAggExp
+        - fieldName: status
+          aggregateExpression: OrderStatusEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: OrdersAbstractOrderAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: OrdersAbstractOrderOrderByExp
+  operand:
+    object:
+      orderedType: OrdersAbstractOrder
+      orderableFields:
+        - fieldName: counterpartyId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: expectedDate
+          orderByExpression: DateOrderByExp
+        - fieldName: orderDate
+          orderByExpression: DateOrderByExp
+        - fieldName: orderId
+          orderByExpression: UuidOrderByExp
+        - fieldName: orderType
+          orderByExpression: TextOrderByExp
+        - fieldName: paymentTerms
+          orderByExpression: PaymentTermsEnumOrderByExp
+        - fieldName: status
+          orderByExpression: OrderStatusEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: counterpartyCounterparty
+  graphql:
+    expressionTypeName: OrdersAbstractOrderOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: OrdersAbstractOrder
+  objectType: OrdersAbstractOrder
+  source:
+    dataConnectorName: scrappers_api
+    collection: orders_abstract_order
+  filterExpressionType: OrdersAbstractOrderBoolExp
+  aggregateExpression: OrdersAbstractOrderAggExp
+  orderByExpression: OrdersAbstractOrderOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ordersAbstractOrder
+      subscription:
+        rootField: ordersAbstractOrder
+    selectUniques:
+      - queryRootField: ordersAbstractOrderByOrderId
+        uniqueIdentifier:
+          - orderId
+        subscription:
+          rootField: ordersAbstractOrderByOrderId
+    filterInputTypeName: OrdersAbstractOrderFilterInput
+    aggregate:
+      queryRootField: ordersAbstractOrderAggregate
+      subscription:
+        rootField: ordersAbstractOrderAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: OrdersAbstractOrder
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: financeInvoices
+  sourceType: OrdersAbstractOrder
+  target:
+    model:
+      name: FinanceInvoice
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: FinanceInvoiceAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+  graphql:
+    aggregateFieldName: financeInvoicesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: counterpartyCounterparty
+  sourceType: OrdersAbstractOrder
+  target:
+    model:
+      name: CounterpartyCounterparty
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: counterpartyId
+      target:
+        modelField:
+          - fieldName: counterpartyId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersLinkedTickets
+  sourceType: OrdersAbstractOrder
+  target:
+    model:
+      name: OrdersLinkedTickets
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersLinkedTicketsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+  graphql:
+    aggregateFieldName: ordersLinkedTicketsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersOrderLines
+  sourceType: OrdersAbstractOrder
+  target:
+    model:
+      name: OrdersOrderLine
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersOrderLineAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+  graphql:
+    aggregateFieldName: ordersOrderLinesAggregate
+

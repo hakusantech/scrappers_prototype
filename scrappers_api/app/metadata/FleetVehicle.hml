@@ -1,0 +1,184 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FleetVehicle
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: plateNumber
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: vehicleId
+      type: Uuid!
+  graphql:
+    typeName: FleetVehicle
+    inputTypeName: FleetVehicleInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: fleet_vehicle
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        updatedAt:
+          column:
+            name: updated_at
+        vehicleId:
+          column:
+            name: vehicle_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FleetVehicle
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - plateNumber
+          - updatedAt
+          - vehicleId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FleetVehicleBoolExp
+  operand:
+    object:
+      type: FleetVehicle
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: plateNumber
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: vehicleId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: ticketingWeightTickets
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FleetVehicleBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FleetVehicleAggExp
+  operand:
+    object:
+      aggregatedType: FleetVehicle
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: plateNumber
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: vehicleId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FleetVehicleAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FleetVehicleOrderByExp
+  operand:
+    object:
+      orderedType: FleetVehicle
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: plateNumber
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: vehicleId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: FleetVehicleOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FleetVehicle
+  objectType: FleetVehicle
+  source:
+    dataConnectorName: scrappers_api
+    collection: fleet_vehicle
+  filterExpressionType: FleetVehicleBoolExp
+  aggregateExpression: FleetVehicleAggExp
+  orderByExpression: FleetVehicleOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: fleetVehicle
+      subscription:
+        rootField: fleetVehicle
+    selectUniques:
+      - queryRootField: fleetVehicleByVehicleId
+        uniqueIdentifier:
+          - vehicleId
+        subscription:
+          rootField: fleetVehicleByVehicleId
+      - queryRootField: fleetVehicleByPlateNumber
+        uniqueIdentifier:
+          - plateNumber
+        subscription:
+          rootField: fleetVehicleByPlateNumber
+    filterInputTypeName: FleetVehicleFilterInput
+    aggregate:
+      queryRootField: fleetVehicleAggregate
+      subscription:
+        rootField: fleetVehicleAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FleetVehicle
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTickets
+  sourceType: FleetVehicle
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingWeightTicketAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: vehicleId
+      target:
+        modelField:
+          - fieldName: vehicleId
+  graphql:
+    aggregateFieldName: ticketingWeightTicketsAggregate
+

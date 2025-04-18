@@ -1,0 +1,135 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePartnerSupplierBySupplierIdUpdateColumns
+  description: Update the columns of the 'partner_supplier' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnPartnerSupplierCreatedAt
+      description: Update the 'created_at' column in the 'partner_supplier' collection.
+    - name: name
+      type: UpdateColumnPartnerSupplierName
+      description: Update the 'name' column in the 'partner_supplier' collection.
+    - name: supplierId
+      type: UpdateColumnPartnerSupplierSupplierId
+      description: Update the 'supplier_id' column in the 'partner_supplier' collection.
+    - name: updatedAt
+      type: UpdateColumnPartnerSupplierUpdatedAt
+      description: Update the 'updated_at' column in the 'partner_supplier' collection.
+  graphql:
+    typeName: UpdatePartnerSupplierBySupplierIdUpdateColumns
+    inputTypeName: UpdatePartnerSupplierBySupplierIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_partner_supplier_by_supplier_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        supplierId:
+          column:
+            name: supplier_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePartnerSupplierBySupplierIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - supplierId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePartnerSupplierBySupplierIdResponse
+  description: Responses from the 'update_partner_supplier_by_supplier_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PartnerSupplier!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdatePartnerSupplierBySupplierIdResponse
+    inputTypeName: UpdatePartnerSupplierBySupplierIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_partner_supplier_by_supplier_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePartnerSupplierBySupplierIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePartnerSupplierBySupplierId
+  outputType: UpdatePartnerSupplierBySupplierIdResponse!
+  arguments:
+    - name: keySupplierId
+      type: Uuid!
+    - name: postCheck
+      type: PartnerSupplierBoolExp
+      description: Update permission post-condition predicate over the
+        'partner_supplier' collection
+    - name: preCheck
+      type: PartnerSupplierBoolExp
+      description: Update permission pre-condition predicate over the
+        'partner_supplier' collection
+    - name: updateColumns
+      type: UpdatePartnerSupplierBySupplierIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_partner_supplier_by_supplier_id
+    argumentMapping:
+      keySupplierId: key_supplier_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updatePartnerSupplierBySupplierId
+    rootFieldKind: Mutation
+  description: Update any row on the 'partner_supplier' collection using the
+    'supplier_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePartnerSupplierBySupplierId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,212 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: SupportSupportTicket
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: description
+      type: Text!
+    - name: status
+      type: SupportTicketStatusEnum!
+    - name: subject
+      type: Text!
+    - name: supportTicketId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: SupportSupportTicket
+    inputTypeName: SupportSupportTicketInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: support_support_ticket
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        description:
+          column:
+            name: description
+        status:
+          column:
+            name: status
+        subject:
+          column:
+            name: subject
+        supportTicketId:
+          column:
+            name: support_ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: SupportSupportTicket
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - description
+          - status
+          - subject
+          - supportTicketId
+          - updatedAt
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: SupportSupportTicketBoolExp
+  operand:
+    object:
+      type: SupportSupportTicket
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: description
+          booleanExpressionType: TextBoolExp
+        - fieldName: status
+          booleanExpressionType: SupportTicketStatusEnumBoolExp
+        - fieldName: subject
+          booleanExpressionType: TextBoolExp
+        - fieldName: supportTicketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: identityUser
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: SupportSupportTicketBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: SupportSupportTicketAggExp
+  operand:
+    object:
+      aggregatedType: SupportSupportTicket
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: description
+          aggregateExpression: TextAggExp
+        - fieldName: status
+          aggregateExpression: SupportTicketStatusEnumAggExp
+        - fieldName: subject
+          aggregateExpression: TextAggExp
+        - fieldName: supportTicketId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: SupportSupportTicketAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: SupportSupportTicketOrderByExp
+  operand:
+    object:
+      orderedType: SupportSupportTicket
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: description
+          orderByExpression: TextOrderByExp
+        - fieldName: status
+          orderByExpression: SupportTicketStatusEnumOrderByExp
+        - fieldName: subject
+          orderByExpression: TextOrderByExp
+        - fieldName: supportTicketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: identityUser
+  graphql:
+    expressionTypeName: SupportSupportTicketOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: SupportSupportTicket
+  objectType: SupportSupportTicket
+  source:
+    dataConnectorName: scrappers_api
+    collection: support_support_ticket
+  filterExpressionType: SupportSupportTicketBoolExp
+  aggregateExpression: SupportSupportTicketAggExp
+  orderByExpression: SupportSupportTicketOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: supportSupportTicket
+      subscription:
+        rootField: supportSupportTicket
+    selectUniques:
+      - queryRootField: supportSupportTicketBySupportTicketId
+        uniqueIdentifier:
+          - supportTicketId
+        subscription:
+          rootField: supportSupportTicketBySupportTicketId
+    filterInputTypeName: SupportSupportTicketFilterInput
+    aggregate:
+      queryRootField: supportSupportTicketAggregate
+      subscription:
+        rootField: supportSupportTicketAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: SupportSupportTicket
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityUser
+  sourceType: SupportSupportTicket
+  target:
+    model:
+      name: IdentityUsers
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: userId
+

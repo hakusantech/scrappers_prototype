@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteSupportKbArticleByKbArticleIdResponse
+  description: Responses from the 'delete_support_kb_article_by_kb_article_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportKbArticle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteSupportKbArticleByKbArticleIdResponse
+    inputTypeName: DeleteSupportKbArticleByKbArticleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_support_kb_article_by_kb_article_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteSupportKbArticleByKbArticleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteSupportKbArticleByKbArticleId
+  outputType: DeleteSupportKbArticleByKbArticleIdResponse!
+  arguments:
+    - name: keyKbArticleId
+      type: Uuid!
+    - name: preCheck
+      type: SupportKbArticleBoolExp
+      description: Delete permission predicate over the 'support_kb_article' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_support_kb_article_by_kb_article_id
+    argumentMapping:
+      keyKbArticleId: key_kb_article_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteSupportKbArticleByKbArticleId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'support_kb_article' collection using the
+    'kb_article_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteSupportKbArticleByKbArticleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

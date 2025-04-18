@@ -1,0 +1,133 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertScaleGatewayScaleReadingObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: deviceId
+      type: Uuid!
+    - name: readingId
+      type: Uuid
+    - name: recordedAt
+      type: Timestamptz!
+    - name: updatedAt
+      type: Timestamptz
+    - name: weight
+      type: Numeric!
+  graphql:
+    typeName: InsertScaleGatewayScaleReadingObject
+    inputTypeName: InsertScaleGatewayScaleReadingObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_scale_gateway_scale_reading_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        deviceId:
+          column:
+            name: device_id
+        readingId:
+          column:
+            name: reading_id
+        recordedAt:
+          column:
+            name: recorded_at
+        updatedAt:
+          column:
+            name: updated_at
+        weight:
+          column:
+            name: weight
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertScaleGatewayScaleReadingObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - deviceId
+          - readingId
+          - recordedAt
+          - updatedAt
+          - weight
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertScaleGatewayScaleReadingResponse
+  description: Responses from the 'insert_scale_gateway_scale_reading' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ScaleGatewayScaleReading!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertScaleGatewayScaleReadingResponse
+    inputTypeName: InsertScaleGatewayScaleReadingResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_scale_gateway_scale_reading_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertScaleGatewayScaleReadingResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertScaleGatewayScaleReading
+  outputType: InsertScaleGatewayScaleReadingResponse!
+  arguments:
+    - name: objects
+      type: "[InsertScaleGatewayScaleReadingObject!]!"
+    - name: postCheck
+      type: ScaleGatewayScaleReadingBoolExp
+      description: Insert permission predicate over the 'scale_gateway_scale_reading'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_scale_gateway_scale_reading
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertScaleGatewayScaleReading
+    rootFieldKind: Mutation
+  description: Insert into the scale_gateway_scale_reading table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertScaleGatewayScaleReading
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingMaterialLineByMaterialLineIdResponse
+  description: Responses from the
+    'delete_ticketing_material_line_by_material_line_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingMaterialLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingMaterialLineByMaterialLineIdResponse
+    inputTypeName: DeleteTicketingMaterialLineByMaterialLineIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_material_line_by_material_line_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingMaterialLineByMaterialLineIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingMaterialLineByMaterialLineId
+  outputType: DeleteTicketingMaterialLineByMaterialLineIdResponse!
+  arguments:
+    - name: keyMaterialLineId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingMaterialLineBoolExp
+      description: Delete permission predicate over the 'ticketing_material_line' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_material_line_by_material_line_id
+    argumentMapping:
+      keyMaterialLineId: key_material_line_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingMaterialLineByMaterialLineId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_material_line' collection using
+    the 'material_line_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingMaterialLineByMaterialLineId
+  permissions:
+    - role: admin
+      allowExecution: true
+

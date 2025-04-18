@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingComplianceInfoByTicketIdResponse
+  description: Responses from the 'delete_ticketing_compliance_info_by_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingComplianceInfo!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingComplianceInfoByTicketIdResponse
+    inputTypeName: DeleteTicketingComplianceInfoByTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_compliance_info_by_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingComplianceInfoByTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingComplianceInfoByTicketId
+  outputType: DeleteTicketingComplianceInfoByTicketIdResponse!
+  arguments:
+    - name: keyTicketId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingComplianceInfoBoolExp
+      description: Delete permission predicate over the 'ticketing_compliance_info'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_compliance_info_by_ticket_id
+    argumentMapping:
+      keyTicketId: key_ticket_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingComplianceInfoByTicketId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_compliance_info' collection using
+    the 'ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingComplianceInfoByTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

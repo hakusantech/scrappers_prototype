@@ -1,0 +1,133 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertScaleGatewayScaleDeviceObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: deviceId
+      type: Uuid
+    - name: location
+      type: Text
+    - name: model
+      type: Text!
+    - name: serialNumber
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertScaleGatewayScaleDeviceObject
+    inputTypeName: InsertScaleGatewayScaleDeviceObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_scale_gateway_scale_device_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        deviceId:
+          column:
+            name: device_id
+        location:
+          column:
+            name: location
+        model:
+          column:
+            name: model
+        serialNumber:
+          column:
+            name: serial_number
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertScaleGatewayScaleDeviceObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - deviceId
+          - location
+          - model
+          - serialNumber
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertScaleGatewayScaleDeviceResponse
+  description: Responses from the 'insert_scale_gateway_scale_device' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ScaleGatewayScaleDevice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertScaleGatewayScaleDeviceResponse
+    inputTypeName: InsertScaleGatewayScaleDeviceResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_scale_gateway_scale_device_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertScaleGatewayScaleDeviceResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertScaleGatewayScaleDevice
+  outputType: InsertScaleGatewayScaleDeviceResponse!
+  arguments:
+    - name: objects
+      type: "[InsertScaleGatewayScaleDeviceObject!]!"
+    - name: postCheck
+      type: ScaleGatewayScaleDeviceBoolExp
+      description: Insert permission predicate over the 'scale_gateway_scale_device'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_scale_gateway_scale_device
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertScaleGatewayScaleDevice
+    rootFieldKind: Mutation
+  description: Insert into the scale_gateway_scale_device table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertScaleGatewayScaleDevice
+  permissions:
+    - role: admin
+      allowExecution: true
+

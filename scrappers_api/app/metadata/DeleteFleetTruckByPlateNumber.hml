@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFleetTruckByPlateNumberResponse
+  description: Responses from the 'delete_fleet_truck_by_plate_number' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetTruck!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFleetTruckByPlateNumberResponse
+    inputTypeName: DeleteFleetTruckByPlateNumberResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_fleet_truck_by_plate_number_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFleetTruckByPlateNumberResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFleetTruckByPlateNumber
+  outputType: DeleteFleetTruckByPlateNumberResponse!
+  arguments:
+    - name: keyPlateNumber
+      type: Text!
+    - name: preCheck
+      type: FleetTruckBoolExp
+      description: Delete permission predicate over the 'fleet_truck' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_fleet_truck_by_plate_number
+    argumentMapping:
+      keyPlateNumber: key_plate_number
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFleetTruckByPlateNumber
+    rootFieldKind: Mutation
+  description: Delete any row on the 'fleet_truck' collection using the 'plate_number' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFleetTruckByPlateNumber
+  permissions:
+    - role: admin
+      allowExecution: true
+

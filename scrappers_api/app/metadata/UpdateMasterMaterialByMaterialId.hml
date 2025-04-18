@@ -1,0 +1,149 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateMasterMaterialByMaterialIdUpdateColumns
+  description: Update the columns of the 'master_material' collection
+  fields:
+    - name: code
+      type: UpdateColumnMasterMaterialCode
+      description: Update the 'code' column in the 'master_material' collection.
+    - name: createdAt
+      type: UpdateColumnMasterMaterialCreatedAt
+      description: Update the 'created_at' column in the 'master_material' collection.
+    - name: defaultUnit
+      type: UpdateColumnMasterMaterialDefaultUnit
+      description: Update the 'default_unit' column in the 'master_material' collection.
+    - name: materialId
+      type: UpdateColumnMasterMaterialMaterialId
+      description: Update the 'material_id' column in the 'master_material' collection.
+    - name: name
+      type: UpdateColumnMasterMaterialName
+      description: Update the 'name' column in the 'master_material' collection.
+    - name: updatedAt
+      type: UpdateColumnMasterMaterialUpdatedAt
+      description: Update the 'updated_at' column in the 'master_material' collection.
+  graphql:
+    typeName: UpdateMasterMaterialByMaterialIdUpdateColumns
+    inputTypeName: UpdateMasterMaterialByMaterialIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_master_material_by_material_id_update_columns
+      fieldMapping:
+        code:
+          column:
+            name: code
+        createdAt:
+          column:
+            name: created_at
+        defaultUnit:
+          column:
+            name: default_unit
+        materialId:
+          column:
+            name: material_id
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateMasterMaterialByMaterialIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - createdAt
+          - defaultUnit
+          - materialId
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateMasterMaterialByMaterialIdResponse
+  description: Responses from the 'update_master_material_by_material_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MasterMaterial!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateMasterMaterialByMaterialIdResponse
+    inputTypeName: UpdateMasterMaterialByMaterialIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_master_material_by_material_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateMasterMaterialByMaterialIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateMasterMaterialByMaterialId
+  outputType: UpdateMasterMaterialByMaterialIdResponse!
+  arguments:
+    - name: keyMaterialId
+      type: Uuid!
+    - name: postCheck
+      type: MasterMaterialBoolExp
+      description: Update permission post-condition predicate over the
+        'master_material' collection
+    - name: preCheck
+      type: MasterMaterialBoolExp
+      description: Update permission pre-condition predicate over the
+        'master_material' collection
+    - name: updateColumns
+      type: UpdateMasterMaterialByMaterialIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_master_material_by_material_id
+    argumentMapping:
+      keyMaterialId: key_material_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateMasterMaterialByMaterialId
+    rootFieldKind: Mutation
+  description: Update any row on the 'master_material' collection using the
+    'material_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateMasterMaterialByMaterialId
+  permissions:
+    - role: admin
+      allowExecution: true
+

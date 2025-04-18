@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteSupportSupportTicketBySupportTicketIdResponse
+  description: Responses from the
+    'delete_support_support_ticket_by_support_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportSupportTicket!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteSupportSupportTicketBySupportTicketIdResponse
+    inputTypeName: DeleteSupportSupportTicketBySupportTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_support_support_ticket_by_support_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteSupportSupportTicketBySupportTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteSupportSupportTicketBySupportTicketId
+  outputType: DeleteSupportSupportTicketBySupportTicketIdResponse!
+  arguments:
+    - name: keySupportTicketId
+      type: Uuid!
+    - name: preCheck
+      type: SupportSupportTicketBoolExp
+      description: Delete permission predicate over the 'support_support_ticket' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_support_support_ticket_by_support_ticket_id
+    argumentMapping:
+      keySupportTicketId: key_support_ticket_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteSupportSupportTicketBySupportTicketId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'support_support_ticket' collection using the
+    'support_ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteSupportSupportTicketBySupportTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

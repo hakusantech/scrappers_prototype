@@ -1,0 +1,500 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotAvgCost
+  description: Update the 'avg_cost' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotAvgCost
+    inputTypeName: UpdateColumnInventoryInventoryLotAvgCostInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_avg_cost
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotAvgCost
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotCreatedAt
+  description: Update the 'created_at' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotCreatedAt
+    inputTypeName: UpdateColumnInventoryInventoryLotCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotGrade
+  description: Update the 'grade' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotGrade
+    inputTypeName: UpdateColumnInventoryInventoryLotGradeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_grade
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotGrade
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotLotId
+  description: Update the 'lot_id' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotLotId
+    inputTypeName: UpdateColumnInventoryInventoryLotLotIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_lot_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotLotId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotMaterialId
+  description: Update the 'material_id' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotMaterialId
+    inputTypeName: UpdateColumnInventoryInventoryLotMaterialIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_material_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotMaterialId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotQuantity
+  description: Update the 'quantity' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotQuantity
+    inputTypeName: UpdateColumnInventoryInventoryLotQuantityInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_quantity
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotQuantity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotState
+  description: Update the 'state' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: LotStateEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotState
+    inputTypeName: UpdateColumnInventoryInventoryLotStateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_state
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotState
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotUnit
+  description: Update the 'unit' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: UnitEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotUnit
+    inputTypeName: UpdateColumnInventoryInventoryLotUnitInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_unit
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotUnit
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotUpdatedAt
+  description: Update the 'updated_at' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotUpdatedAt
+    inputTypeName: UpdateColumnInventoryInventoryLotUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnInventoryInventoryLotYardId
+  description: Update the 'yard_id' column in the 'inventory_inventory_lot' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnInventoryInventoryLotYardId
+    inputTypeName: UpdateColumnInventoryInventoryLotYardIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_inventory_inventory_lot_yard_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnInventoryInventoryLotYardId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateInventoryInventoryLotByLotIdUpdateColumns
+  description: Update the columns of the 'inventory_inventory_lot' collection
+  fields:
+    - name: avgCost
+      type: UpdateColumnInventoryInventoryLotAvgCost
+      description: Update the 'avg_cost' column in the 'inventory_inventory_lot' collection.
+    - name: createdAt
+      type: UpdateColumnInventoryInventoryLotCreatedAt
+      description: Update the 'created_at' column in the 'inventory_inventory_lot'
+        collection.
+    - name: grade
+      type: UpdateColumnInventoryInventoryLotGrade
+      description: Update the 'grade' column in the 'inventory_inventory_lot' collection.
+    - name: lotId
+      type: UpdateColumnInventoryInventoryLotLotId
+      description: Update the 'lot_id' column in the 'inventory_inventory_lot' collection.
+    - name: materialId
+      type: UpdateColumnInventoryInventoryLotMaterialId
+      description: Update the 'material_id' column in the 'inventory_inventory_lot'
+        collection.
+    - name: quantity
+      type: UpdateColumnInventoryInventoryLotQuantity
+      description: Update the 'quantity' column in the 'inventory_inventory_lot' collection.
+    - name: state
+      type: UpdateColumnInventoryInventoryLotState
+      description: Update the 'state' column in the 'inventory_inventory_lot' collection.
+    - name: unit
+      type: UpdateColumnInventoryInventoryLotUnit
+      description: Update the 'unit' column in the 'inventory_inventory_lot' collection.
+    - name: updatedAt
+      type: UpdateColumnInventoryInventoryLotUpdatedAt
+      description: Update the 'updated_at' column in the 'inventory_inventory_lot'
+        collection.
+    - name: yardId
+      type: UpdateColumnInventoryInventoryLotYardId
+      description: Update the 'yard_id' column in the 'inventory_inventory_lot' collection.
+  graphql:
+    typeName: UpdateInventoryInventoryLotByLotIdUpdateColumns
+    inputTypeName: UpdateInventoryInventoryLotByLotIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_inventory_inventory_lot_by_lot_id_update_columns
+      fieldMapping:
+        avgCost:
+          column:
+            name: avg_cost
+        createdAt:
+          column:
+            name: created_at
+        grade:
+          column:
+            name: grade
+        lotId:
+          column:
+            name: lot_id
+        materialId:
+          column:
+            name: material_id
+        quantity:
+          column:
+            name: quantity
+        state:
+          column:
+            name: state
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateInventoryInventoryLotByLotIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - avgCost
+          - createdAt
+          - grade
+          - lotId
+          - materialId
+          - quantity
+          - state
+          - unit
+          - updatedAt
+          - yardId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateInventoryInventoryLotByLotIdResponse
+  description: Responses from the 'update_inventory_inventory_lot_by_lot_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryInventoryLot!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateInventoryInventoryLotByLotIdResponse
+    inputTypeName: UpdateInventoryInventoryLotByLotIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_inventory_inventory_lot_by_lot_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateInventoryInventoryLotByLotIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateInventoryInventoryLotByLotId
+  outputType: UpdateInventoryInventoryLotByLotIdResponse!
+  arguments:
+    - name: keyLotId
+      type: Uuid!
+    - name: postCheck
+      type: InventoryInventoryLotBoolExp
+      description: Update permission post-condition predicate over the
+        'inventory_inventory_lot' collection
+    - name: preCheck
+      type: InventoryInventoryLotBoolExp
+      description: Update permission pre-condition predicate over the
+        'inventory_inventory_lot' collection
+    - name: updateColumns
+      type: UpdateInventoryInventoryLotByLotIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_inventory_inventory_lot_by_lot_id
+    argumentMapping:
+      keyLotId: key_lot_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateInventoryInventoryLotByLotId
+    rootFieldKind: Mutation
+  description: Update any row on the 'inventory_inventory_lot' collection using
+    the 'lot_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateInventoryInventoryLotByLotId
+  permissions:
+    - role: admin
+      allowExecution: true
+

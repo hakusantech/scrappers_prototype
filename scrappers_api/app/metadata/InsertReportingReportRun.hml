@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReportingReportRunObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: executedAt
+      type: Timestamptz!
+    - name: reportDefinitionId
+      type: Uuid!
+    - name: reportRunId
+      type: Uuid
+    - name: resultLocation
+      type: Text
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertReportingReportRunObject
+    inputTypeName: InsertReportingReportRunObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_reporting_report_run_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        executedAt:
+          column:
+            name: executed_at
+        reportDefinitionId:
+          column:
+            name: report_definition_id
+        reportRunId:
+          column:
+            name: report_run_id
+        resultLocation:
+          column:
+            name: result_location
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReportingReportRunObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - executedAt
+          - reportDefinitionId
+          - reportRunId
+          - resultLocation
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReportingReportRunResponse
+  description: Responses from the 'insert_reporting_report_run' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportRun!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertReportingReportRunResponse
+    inputTypeName: InsertReportingReportRunResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_reporting_report_run_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReportingReportRunResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertReportingReportRun
+  outputType: InsertReportingReportRunResponse!
+  arguments:
+    - name: objects
+      type: "[InsertReportingReportRunObject!]!"
+    - name: postCheck
+      type: ReportingReportRunBoolExp
+      description: Insert permission predicate over the 'reporting_report_run' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_reporting_report_run
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertReportingReportRun
+    rootFieldKind: Mutation
+  description: Insert into the reporting_report_run table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertReportingReportRun
+  permissions:
+    - role: admin
+      allowExecution: true
+

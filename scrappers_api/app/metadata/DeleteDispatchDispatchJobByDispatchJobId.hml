@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteDispatchDispatchJobByDispatchJobIdResponse
+  description: Responses from the
+    'delete_dispatch_dispatch_job_by_dispatch_job_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[DispatchDispatchJob!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteDispatchDispatchJobByDispatchJobIdResponse
+    inputTypeName: DeleteDispatchDispatchJobByDispatchJobIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_dispatch_dispatch_job_by_dispatch_job_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteDispatchDispatchJobByDispatchJobIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteDispatchDispatchJobByDispatchJobId
+  outputType: DeleteDispatchDispatchJobByDispatchJobIdResponse!
+  arguments:
+    - name: keyDispatchJobId
+      type: Uuid!
+    - name: preCheck
+      type: DispatchDispatchJobBoolExp
+      description: Delete permission predicate over the 'dispatch_dispatch_job' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_dispatch_dispatch_job_by_dispatch_job_id
+    argumentMapping:
+      keyDispatchJobId: key_dispatch_job_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteDispatchDispatchJobByDispatchJobId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'dispatch_dispatch_job' collection using the
+    'dispatch_job_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteDispatchDispatchJobByDispatchJobId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteOrdersAbstractOrderByOrderIdResponse
+  description: Responses from the 'delete_orders_abstract_order_by_order_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersAbstractOrder!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteOrdersAbstractOrderByOrderIdResponse
+    inputTypeName: DeleteOrdersAbstractOrderByOrderIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_orders_abstract_order_by_order_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteOrdersAbstractOrderByOrderIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteOrdersAbstractOrderByOrderId
+  outputType: DeleteOrdersAbstractOrderByOrderIdResponse!
+  arguments:
+    - name: keyOrderId
+      type: Uuid!
+    - name: preCheck
+      type: OrdersAbstractOrderBoolExp
+      description: Delete permission predicate over the 'orders_abstract_order' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_orders_abstract_order_by_order_id
+    argumentMapping:
+      keyOrderId: key_order_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteOrdersAbstractOrderByOrderId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'orders_abstract_order' collection using the
+    'order_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteOrdersAbstractOrderByOrderId
+  permissions:
+    - role: admin
+      allowExecution: true
+

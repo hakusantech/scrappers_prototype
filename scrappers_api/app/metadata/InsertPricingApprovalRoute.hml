@@ -1,0 +1,138 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingApprovalRouteObject
+  fields:
+    - name: approvalRouteId
+      type: Uuid
+    - name: approvedAt
+      type: Timestamptz
+    - name: approvedBy
+      type: Uuid
+    - name: createdAt
+      type: Timestamptz
+    - name: priceListId
+      type: Uuid!
+    - name: requiredRole
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertPricingApprovalRouteObject
+    inputTypeName: InsertPricingApprovalRouteObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_approval_route_object
+      fieldMapping:
+        approvalRouteId:
+          column:
+            name: approval_route_id
+        approvedAt:
+          column:
+            name: approved_at
+        approvedBy:
+          column:
+            name: approved_by
+        createdAt:
+          column:
+            name: created_at
+        priceListId:
+          column:
+            name: price_list_id
+        requiredRole:
+          column:
+            name: required_role
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingApprovalRouteObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - approvalRouteId
+          - approvedAt
+          - approvedBy
+          - createdAt
+          - priceListId
+          - requiredRole
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingApprovalRouteResponse
+  description: Responses from the 'insert_pricing_approval_route' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingApprovalRoute!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertPricingApprovalRouteResponse
+    inputTypeName: InsertPricingApprovalRouteResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_approval_route_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingApprovalRouteResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPricingApprovalRoute
+  outputType: InsertPricingApprovalRouteResponse!
+  arguments:
+    - name: objects
+      type: "[InsertPricingApprovalRouteObject!]!"
+    - name: postCheck
+      type: PricingApprovalRouteBoolExp
+      description: Insert permission predicate over the 'pricing_approval_route' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_pricing_approval_route
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertPricingApprovalRoute
+    rootFieldKind: Mutation
+  description: Insert into the pricing_approval_route table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPricingApprovalRoute
+  permissions:
+    - role: admin
+      allowExecution: true
+

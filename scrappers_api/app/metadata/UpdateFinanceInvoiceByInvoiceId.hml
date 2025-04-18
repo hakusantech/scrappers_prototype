@@ -1,0 +1,496 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceAmount
+  description: Update the 'amount' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceAmount
+    inputTypeName: UpdateColumnFinanceInvoiceAmountInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_amount
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceAmount
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceCreatedAt
+  description: Update the 'created_at' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceCreatedAt
+    inputTypeName: UpdateColumnFinanceInvoiceCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceCurrency
+  description: Update the 'currency' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: CurrencyEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceCurrency
+    inputTypeName: UpdateColumnFinanceInvoiceCurrencyInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_currency
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceCurrency
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceDueDate
+  description: Update the 'due_date' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Date!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceDueDate
+    inputTypeName: UpdateColumnFinanceInvoiceDueDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_due_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceDueDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceInvoiceId
+  description: Update the 'invoice_id' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceInvoiceId
+    inputTypeName: UpdateColumnFinanceInvoiceInvoiceIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_invoice_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceInvoiceId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceIssuedAt
+  description: Update the 'issued_at' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceIssuedAt
+    inputTypeName: UpdateColumnFinanceInvoiceIssuedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_issued_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceIssuedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceOrderId
+  description: Update the 'order_id' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceOrderId
+    inputTypeName: UpdateColumnFinanceInvoiceOrderIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_order_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceOrderId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceStatus
+  description: Update the 'status' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: InvoiceStatusEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceStatus
+    inputTypeName: UpdateColumnFinanceInvoiceStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceTicketId
+  description: Update the 'ticket_id' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceTicketId
+    inputTypeName: UpdateColumnFinanceInvoiceTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceInvoiceUpdatedAt
+  description: Update the 'updated_at' column in the 'finance_invoice' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceInvoiceUpdatedAt
+    inputTypeName: UpdateColumnFinanceInvoiceUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_invoice_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceInvoiceUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFinanceInvoiceByInvoiceIdUpdateColumns
+  description: Update the columns of the 'finance_invoice' collection
+  fields:
+    - name: amount
+      type: UpdateColumnFinanceInvoiceAmount
+      description: Update the 'amount' column in the 'finance_invoice' collection.
+    - name: createdAt
+      type: UpdateColumnFinanceInvoiceCreatedAt
+      description: Update the 'created_at' column in the 'finance_invoice' collection.
+    - name: currency
+      type: UpdateColumnFinanceInvoiceCurrency
+      description: Update the 'currency' column in the 'finance_invoice' collection.
+    - name: dueDate
+      type: UpdateColumnFinanceInvoiceDueDate
+      description: Update the 'due_date' column in the 'finance_invoice' collection.
+    - name: invoiceId
+      type: UpdateColumnFinanceInvoiceInvoiceId
+      description: Update the 'invoice_id' column in the 'finance_invoice' collection.
+    - name: issuedAt
+      type: UpdateColumnFinanceInvoiceIssuedAt
+      description: Update the 'issued_at' column in the 'finance_invoice' collection.
+    - name: orderId
+      type: UpdateColumnFinanceInvoiceOrderId
+      description: Update the 'order_id' column in the 'finance_invoice' collection.
+    - name: status
+      type: UpdateColumnFinanceInvoiceStatus
+      description: Update the 'status' column in the 'finance_invoice' collection.
+    - name: ticketId
+      type: UpdateColumnFinanceInvoiceTicketId
+      description: Update the 'ticket_id' column in the 'finance_invoice' collection.
+    - name: updatedAt
+      type: UpdateColumnFinanceInvoiceUpdatedAt
+      description: Update the 'updated_at' column in the 'finance_invoice' collection.
+  graphql:
+    typeName: UpdateFinanceInvoiceByInvoiceIdUpdateColumns
+    inputTypeName: UpdateFinanceInvoiceByInvoiceIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_finance_invoice_by_invoice_id_update_columns
+      fieldMapping:
+        amount:
+          column:
+            name: amount
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        dueDate:
+          column:
+            name: due_date
+        invoiceId:
+          column:
+            name: invoice_id
+        issuedAt:
+          column:
+            name: issued_at
+        orderId:
+          column:
+            name: order_id
+        status:
+          column:
+            name: status
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFinanceInvoiceByInvoiceIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - createdAt
+          - currency
+          - dueDate
+          - invoiceId
+          - issuedAt
+          - orderId
+          - status
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFinanceInvoiceByInvoiceIdResponse
+  description: Responses from the 'update_finance_invoice_by_invoice_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceInvoice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFinanceInvoiceByInvoiceIdResponse
+    inputTypeName: UpdateFinanceInvoiceByInvoiceIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_finance_invoice_by_invoice_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFinanceInvoiceByInvoiceIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFinanceInvoiceByInvoiceId
+  outputType: UpdateFinanceInvoiceByInvoiceIdResponse!
+  arguments:
+    - name: keyInvoiceId
+      type: Uuid!
+    - name: postCheck
+      type: FinanceInvoiceBoolExp
+      description: Update permission post-condition predicate over the
+        'finance_invoice' collection
+    - name: preCheck
+      type: FinanceInvoiceBoolExp
+      description: Update permission pre-condition predicate over the
+        'finance_invoice' collection
+    - name: updateColumns
+      type: UpdateFinanceInvoiceByInvoiceIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_finance_invoice_by_invoice_id
+    argumentMapping:
+      keyInvoiceId: key_invoice_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFinanceInvoiceByInvoiceId
+    rootFieldKind: Mutation
+  description: Update any row on the 'finance_invoice' collection using the 'invoice_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFinanceInvoiceByInvoiceId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,227 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ComplianceIdentityRecord
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: documentNumber
+      type: Text
+    - name: documentType
+      type: DocumentTypeEnum
+    - name: expiryDate
+      type: Date
+    - name: identityId
+      type: Uuid!
+    - name: individualName
+      type: Text
+    - name: issuedDate
+      type: Date
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: ComplianceIdentityRecord
+    inputTypeName: ComplianceIdentityRecordInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: compliance_identity_record
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        documentNumber:
+          column:
+            name: document_number
+        documentType:
+          column:
+            name: document_type
+        expiryDate:
+          column:
+            name: expiry_date
+        identityId:
+          column:
+            name: identity_id
+        individualName:
+          column:
+            name: individual_name
+        issuedDate:
+          column:
+            name: issued_date
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ComplianceIdentityRecord
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - documentNumber
+          - documentType
+          - expiryDate
+          - identityId
+          - individualName
+          - issuedDate
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ComplianceIdentityRecordBoolExp
+  operand:
+    object:
+      type: ComplianceIdentityRecord
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: documentNumber
+          booleanExpressionType: TextBoolExp
+        - fieldName: documentType
+          booleanExpressionType: DocumentTypeEnumBoolExp
+        - fieldName: expiryDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: identityId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: individualName
+          booleanExpressionType: TextBoolExp
+        - fieldName: issuedDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: ticketingComplianceInfos
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ComplianceIdentityRecordBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ComplianceIdentityRecordAggExp
+  operand:
+    object:
+      aggregatedType: ComplianceIdentityRecord
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: documentNumber
+          aggregateExpression: TextAggExp
+        - fieldName: documentType
+          aggregateExpression: DocumentTypeEnumAggExp
+        - fieldName: expiryDate
+          aggregateExpression: DateAggExp
+        - fieldName: identityId
+          aggregateExpression: UuidAggExp
+        - fieldName: individualName
+          aggregateExpression: TextAggExp
+        - fieldName: issuedDate
+          aggregateExpression: DateAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ComplianceIdentityRecordAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ComplianceIdentityRecordOrderByExp
+  operand:
+    object:
+      orderedType: ComplianceIdentityRecord
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: documentNumber
+          orderByExpression: TextOrderByExp
+        - fieldName: documentType
+          orderByExpression: DocumentTypeEnumOrderByExp
+        - fieldName: expiryDate
+          orderByExpression: DateOrderByExp
+        - fieldName: identityId
+          orderByExpression: UuidOrderByExp
+        - fieldName: individualName
+          orderByExpression: TextOrderByExp
+        - fieldName: issuedDate
+          orderByExpression: DateOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: ComplianceIdentityRecordOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ComplianceIdentityRecord
+  objectType: ComplianceIdentityRecord
+  source:
+    dataConnectorName: scrappers_api
+    collection: compliance_identity_record
+  filterExpressionType: ComplianceIdentityRecordBoolExp
+  aggregateExpression: ComplianceIdentityRecordAggExp
+  orderByExpression: ComplianceIdentityRecordOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: complianceIdentityRecord
+      subscription:
+        rootField: complianceIdentityRecord
+    selectUniques:
+      - queryRootField: complianceIdentityRecordByIdentityId
+        uniqueIdentifier:
+          - identityId
+        subscription:
+          rootField: complianceIdentityRecordByIdentityId
+    filterInputTypeName: ComplianceIdentityRecordFilterInput
+    aggregate:
+      queryRootField: complianceIdentityRecordAggregate
+      subscription:
+        rootField: complianceIdentityRecordAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ComplianceIdentityRecord
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingComplianceInfos
+  sourceType: ComplianceIdentityRecord
+  target:
+    model:
+      name: TicketingComplianceInfo
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingComplianceInfoAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: identityId
+      target:
+        modelField:
+          - fieldName: identityId
+  graphql:
+    aggregateFieldName: ticketingComplianceInfosAggregate
+

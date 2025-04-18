@@ -1,0 +1,198 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ConfigurationCustomFieldDef
+  fields:
+    - name: context
+      type: CustomFieldContextEnum!
+    - name: createdAt
+      type: Timestamptz!
+    - name: customFieldDefId
+      type: Uuid!
+    - name: fieldName
+      type: Text!
+    - name: fieldType
+      type: CustomFieldTypeEnum!
+    - name: metadata
+      type: Jsonb
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: ConfigurationCustomFieldDef
+    inputTypeName: ConfigurationCustomFieldDefInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: configuration_custom_field_def
+      fieldMapping:
+        context:
+          column:
+            name: context
+        createdAt:
+          column:
+            name: created_at
+        customFieldDefId:
+          column:
+            name: custom_field_def_id
+        fieldName:
+          column:
+            name: field_name
+        fieldType:
+          column:
+            name: field_type
+        metadata:
+          column:
+            name: metadata
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ConfigurationCustomFieldDef
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - context
+          - createdAt
+          - customFieldDefId
+          - fieldName
+          - fieldType
+          - metadata
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ConfigurationCustomFieldDefBoolExp
+  operand:
+    object:
+      type: ConfigurationCustomFieldDef
+      comparableFields:
+        - fieldName: context
+          booleanExpressionType: CustomFieldContextEnumBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: customFieldDefId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: fieldName
+          booleanExpressionType: TextBoolExp
+        - fieldName: fieldType
+          booleanExpressionType: CustomFieldTypeEnumBoolExp
+        - fieldName: metadata
+          booleanExpressionType: JsonbBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ConfigurationCustomFieldDefBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ConfigurationCustomFieldDefAggExp
+  operand:
+    object:
+      aggregatedType: ConfigurationCustomFieldDef
+      aggregatableFields:
+        - fieldName: context
+          aggregateExpression: CustomFieldContextEnumAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: customFieldDefId
+          aggregateExpression: UuidAggExp
+        - fieldName: fieldName
+          aggregateExpression: TextAggExp
+        - fieldName: fieldType
+          aggregateExpression: CustomFieldTypeEnumAggExp
+        - fieldName: metadata
+          aggregateExpression: JsonbAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ConfigurationCustomFieldDefAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ConfigurationCustomFieldDefOrderByExp
+  operand:
+    object:
+      orderedType: ConfigurationCustomFieldDef
+      orderableFields:
+        - fieldName: context
+          orderByExpression: CustomFieldContextEnumOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: customFieldDefId
+          orderByExpression: UuidOrderByExp
+        - fieldName: fieldName
+          orderByExpression: TextOrderByExp
+        - fieldName: fieldType
+          orderByExpression: CustomFieldTypeEnumOrderByExp
+        - fieldName: metadata
+          orderByExpression: JsonbOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: ConfigurationCustomFieldDefOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ConfigurationCustomFieldDef
+  objectType: ConfigurationCustomFieldDef
+  source:
+    dataConnectorName: scrappers_api
+    collection: configuration_custom_field_def
+  filterExpressionType: ConfigurationCustomFieldDefBoolExp
+  aggregateExpression: ConfigurationCustomFieldDefAggExp
+  orderByExpression: ConfigurationCustomFieldDefOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: configurationCustomFieldDef
+      subscription:
+        rootField: configurationCustomFieldDef
+    selectUniques:
+      - queryRootField: configurationCustomFieldDefByCustomFieldDefContextFieldNameKey
+        uniqueIdentifier:
+          - context
+          - fieldName
+        subscription:
+          rootField: configurationCustomFieldDefByCustomFieldDefContextFieldNameKey
+      - queryRootField: configurationCustomFieldDefByCustomFieldDefId
+        uniqueIdentifier:
+          - customFieldDefId
+        subscription:
+          rootField: configurationCustomFieldDefByCustomFieldDefId
+    filterInputTypeName: ConfigurationCustomFieldDefFilterInput
+    aggregate:
+      queryRootField: configurationCustomFieldDefAggregate
+      subscription:
+        rootField: configurationCustomFieldDefAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ConfigurationCustomFieldDef
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

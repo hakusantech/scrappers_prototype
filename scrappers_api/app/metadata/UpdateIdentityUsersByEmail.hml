@@ -1,0 +1,340 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersCreatedAt
+  description: Update the 'created_at' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersCreatedAt
+    inputTypeName: UpdateColumnIdentityUsersCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersEmail
+  description: Update the 'email' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersEmail
+    inputTypeName: UpdateColumnIdentityUsersEmailInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_email
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersEmail
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersPasswordHash
+  description: Update the 'password_hash' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersPasswordHash
+    inputTypeName: UpdateColumnIdentityUsersPasswordHashInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_password_hash
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersPasswordHash
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersUpdatedAt
+  description: Update the 'updated_at' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersUpdatedAt
+    inputTypeName: UpdateColumnIdentityUsersUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersUserId
+  description: Update the 'user_id' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersUserId
+    inputTypeName: UpdateColumnIdentityUsersUserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_user_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersUserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnIdentityUsersUsername
+  description: Update the 'username' column in the 'identity_users' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnIdentityUsersUsername
+    inputTypeName: UpdateColumnIdentityUsersUsernameInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_identity_users_username
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnIdentityUsersUsername
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityUsersByEmailUpdateColumns
+  description: Update the columns of the 'identity_users' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnIdentityUsersCreatedAt
+      description: Update the 'created_at' column in the 'identity_users' collection.
+    - name: email
+      type: UpdateColumnIdentityUsersEmail
+      description: Update the 'email' column in the 'identity_users' collection.
+    - name: passwordHash
+      type: UpdateColumnIdentityUsersPasswordHash
+      description: Update the 'password_hash' column in the 'identity_users' collection.
+    - name: updatedAt
+      type: UpdateColumnIdentityUsersUpdatedAt
+      description: Update the 'updated_at' column in the 'identity_users' collection.
+    - name: userId
+      type: UpdateColumnIdentityUsersUserId
+      description: Update the 'user_id' column in the 'identity_users' collection.
+    - name: username
+      type: UpdateColumnIdentityUsersUsername
+      description: Update the 'username' column in the 'identity_users' collection.
+  graphql:
+    typeName: UpdateIdentityUsersByEmailUpdateColumns
+    inputTypeName: UpdateIdentityUsersByEmailUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_users_by_email_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        email:
+          column:
+            name: email
+        passwordHash:
+          column:
+            name: password_hash
+        updatedAt:
+          column:
+            name: updated_at
+        userId:
+          column:
+            name: user_id
+        username:
+          column:
+            name: username
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityUsersByEmailUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - email
+          - passwordHash
+          - updatedAt
+          - userId
+          - username
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateIdentityUsersByEmailResponse
+  description: Responses from the 'update_identity_users_by_email' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityUsers!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateIdentityUsersByEmailResponse
+    inputTypeName: UpdateIdentityUsersByEmailResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_identity_users_by_email_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateIdentityUsersByEmailResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateIdentityUsersByEmail
+  outputType: UpdateIdentityUsersByEmailResponse!
+  arguments:
+    - name: keyEmail
+      type: Text!
+    - name: postCheck
+      type: IdentityUsersBoolExp
+      description: Update permission post-condition predicate over the
+        'identity_users' collection
+    - name: preCheck
+      type: IdentityUsersBoolExp
+      description: Update permission pre-condition predicate over the 'identity_users'
+        collection
+    - name: updateColumns
+      type: UpdateIdentityUsersByEmailUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_identity_users_by_email
+    argumentMapping:
+      keyEmail: key_email
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateIdentityUsersByEmail
+    rootFieldKind: Mutation
+  description: Update any row on the 'identity_users' collection using the 'email' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateIdentityUsersByEmail
+  permissions:
+    - role: admin
+      allowExecution: true
+

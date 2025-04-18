@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertMasterMaterialObject
+  fields:
+    - name: code
+      type: Text!
+    - name: createdAt
+      type: Timestamptz
+    - name: defaultUnit
+      type: UnitEnum!
+    - name: materialId
+      type: Uuid
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertMasterMaterialObject
+    inputTypeName: InsertMasterMaterialObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_master_material_object
+      fieldMapping:
+        code:
+          column:
+            name: code
+        createdAt:
+          column:
+            name: created_at
+        defaultUnit:
+          column:
+            name: default_unit
+        materialId:
+          column:
+            name: material_id
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertMasterMaterialObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - createdAt
+          - defaultUnit
+          - materialId
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertMasterMaterialResponse
+  description: Responses from the 'insert_master_material' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MasterMaterial!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertMasterMaterialResponse
+    inputTypeName: InsertMasterMaterialResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_master_material_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertMasterMaterialResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertMasterMaterial
+  outputType: InsertMasterMaterialResponse!
+  arguments:
+    - name: objects
+      type: "[InsertMasterMaterialObject!]!"
+    - name: postCheck
+      type: MasterMaterialBoolExp
+      description: Insert permission predicate over the 'master_material' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_master_material
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertMasterMaterial
+    rootFieldKind: Mutation
+  description: Insert into the master_material table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertMasterMaterial
+  permissions:
+    - role: admin
+      allowExecution: true
+

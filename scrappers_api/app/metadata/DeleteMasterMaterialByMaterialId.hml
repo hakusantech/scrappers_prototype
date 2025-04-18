@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteMasterMaterialByMaterialIdResponse
+  description: Responses from the 'delete_master_material_by_material_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MasterMaterial!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteMasterMaterialByMaterialIdResponse
+    inputTypeName: DeleteMasterMaterialByMaterialIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_master_material_by_material_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteMasterMaterialByMaterialIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteMasterMaterialByMaterialId
+  outputType: DeleteMasterMaterialByMaterialIdResponse!
+  arguments:
+    - name: keyMaterialId
+      type: Uuid!
+    - name: preCheck
+      type: MasterMaterialBoolExp
+      description: Delete permission predicate over the 'master_material' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_master_material_by_material_id
+    argumentMapping:
+      keyMaterialId: key_material_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteMasterMaterialByMaterialId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'master_material' collection using the
+    'material_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteMasterMaterialByMaterialId
+  permissions:
+    - role: admin
+      allowExecution: true
+

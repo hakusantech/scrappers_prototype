@@ -1,0 +1,200 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ReportingReportRun
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: executedAt
+      type: Timestamptz!
+    - name: reportDefinitionId
+      type: Uuid!
+    - name: reportRunId
+      type: Uuid!
+    - name: resultLocation
+      type: Text
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: ReportingReportRun
+    inputTypeName: ReportingReportRunInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: reporting_report_run
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        executedAt:
+          column:
+            name: executed_at
+        reportDefinitionId:
+          column:
+            name: report_definition_id
+        reportRunId:
+          column:
+            name: report_run_id
+        resultLocation:
+          column:
+            name: result_location
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ReportingReportRun
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - executedAt
+          - reportDefinitionId
+          - reportRunId
+          - resultLocation
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ReportingReportRunBoolExp
+  operand:
+    object:
+      type: ReportingReportRun
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: executedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: reportDefinitionId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: reportRunId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: resultLocation
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: reportingReportDefinition
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ReportingReportRunBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ReportingReportRunAggExp
+  operand:
+    object:
+      aggregatedType: ReportingReportRun
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: executedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: reportDefinitionId
+          aggregateExpression: UuidAggExp
+        - fieldName: reportRunId
+          aggregateExpression: UuidAggExp
+        - fieldName: resultLocation
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ReportingReportRunAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ReportingReportRunOrderByExp
+  operand:
+    object:
+      orderedType: ReportingReportRun
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: executedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: reportDefinitionId
+          orderByExpression: UuidOrderByExp
+        - fieldName: reportRunId
+          orderByExpression: UuidOrderByExp
+        - fieldName: resultLocation
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: reportingReportDefinition
+  graphql:
+    expressionTypeName: ReportingReportRunOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ReportingReportRun
+  objectType: ReportingReportRun
+  source:
+    dataConnectorName: scrappers_api
+    collection: reporting_report_run
+  filterExpressionType: ReportingReportRunBoolExp
+  aggregateExpression: ReportingReportRunAggExp
+  orderByExpression: ReportingReportRunOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: reportingReportRun
+      subscription:
+        rootField: reportingReportRun
+    selectUniques:
+      - queryRootField: reportingReportRunByReportRunId
+        uniqueIdentifier:
+          - reportRunId
+        subscription:
+          rootField: reportingReportRunByReportRunId
+    filterInputTypeName: ReportingReportRunFilterInput
+    aggregate:
+      queryRootField: reportingReportRunAggregate
+      subscription:
+        rootField: reportingReportRunAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ReportingReportRun
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: reportingReportDefinition
+  sourceType: ReportingReportRun
+  target:
+    model:
+      name: ReportingReportDefinition
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: reportDefinitionId
+      target:
+        modelField:
+          - fieldName: reportDefinitionId
+

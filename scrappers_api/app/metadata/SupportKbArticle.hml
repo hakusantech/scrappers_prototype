@@ -1,0 +1,173 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: SupportKbArticle
+  fields:
+    - name: content
+      type: Text!
+    - name: createdAt
+      type: Timestamptz!
+    - name: kbArticleId
+      type: Uuid!
+    - name: title
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: SupportKbArticle
+    inputTypeName: SupportKbArticleInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: support_kb_article
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        kbArticleId:
+          column:
+            name: kb_article_id
+        title:
+          column:
+            name: title
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: SupportKbArticle
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - kbArticleId
+          - title
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: SupportKbArticleBoolExp
+  operand:
+    object:
+      type: SupportKbArticle
+      comparableFields:
+        - fieldName: content
+          booleanExpressionType: TextBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: kbArticleId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: title
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: SupportKbArticleBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: SupportKbArticleAggExp
+  operand:
+    object:
+      aggregatedType: SupportKbArticle
+      aggregatableFields:
+        - fieldName: content
+          aggregateExpression: TextAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: kbArticleId
+          aggregateExpression: UuidAggExp
+        - fieldName: title
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: SupportKbArticleAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: SupportKbArticleOrderByExp
+  operand:
+    object:
+      orderedType: SupportKbArticle
+      orderableFields:
+        - fieldName: content
+          orderByExpression: TextOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: kbArticleId
+          orderByExpression: UuidOrderByExp
+        - fieldName: title
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: SupportKbArticleOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: SupportKbArticle
+  objectType: SupportKbArticle
+  source:
+    dataConnectorName: scrappers_api
+    collection: support_kb_article
+  filterExpressionType: SupportKbArticleBoolExp
+  aggregateExpression: SupportKbArticleAggExp
+  orderByExpression: SupportKbArticleOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: supportKbArticle
+      subscription:
+        rootField: supportKbArticle
+    selectUniques:
+      - queryRootField: supportKbArticleByKbArticleId
+        uniqueIdentifier:
+          - kbArticleId
+        subscription:
+          rootField: supportKbArticleByKbArticleId
+      - queryRootField: supportKbArticleByTitle
+        uniqueIdentifier:
+          - title
+        subscription:
+          rootField: supportKbArticleByTitle
+    filterInputTypeName: SupportKbArticleFilterInput
+    aggregate:
+      queryRootField: supportKbArticleAggregate
+      subscription:
+        rootField: supportKbArticleAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: SupportKbArticle
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

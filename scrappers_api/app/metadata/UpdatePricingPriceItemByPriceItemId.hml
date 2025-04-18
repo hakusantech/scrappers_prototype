@@ -1,0 +1,170 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePricingPriceItemByPriceItemIdUpdateColumns
+  description: Update the columns of the 'pricing_price_item' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnPricingPriceItemCreatedAt
+      description: Update the 'created_at' column in the 'pricing_price_item' collection.
+    - name: currency
+      type: UpdateColumnPricingPriceItemCurrency
+      description: Update the 'currency' column in the 'pricing_price_item' collection.
+    - name: materialId
+      type: UpdateColumnPricingPriceItemMaterialId
+      description: Update the 'material_id' column in the 'pricing_price_item' collection.
+    - name: maxQty
+      type: UpdateColumnPricingPriceItemMaxQty
+      description: Update the 'max_qty' column in the 'pricing_price_item' collection.
+    - name: minQty
+      type: UpdateColumnPricingPriceItemMinQty
+      description: Update the 'min_qty' column in the 'pricing_price_item' collection.
+    - name: priceItemId
+      type: UpdateColumnPricingPriceItemPriceItemId
+      description: Update the 'price_item_id' column in the 'pricing_price_item' collection.
+    - name: priceListId
+      type: UpdateColumnPricingPriceItemPriceListId
+      description: Update the 'price_list_id' column in the 'pricing_price_item' collection.
+    - name: unitPrice
+      type: UpdateColumnPricingPriceItemUnitPrice
+      description: Update the 'unit_price' column in the 'pricing_price_item' collection.
+    - name: updatedAt
+      type: UpdateColumnPricingPriceItemUpdatedAt
+      description: Update the 'updated_at' column in the 'pricing_price_item' collection.
+  graphql:
+    typeName: UpdatePricingPriceItemByPriceItemIdUpdateColumns
+    inputTypeName: UpdatePricingPriceItemByPriceItemIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_pricing_price_item_by_price_item_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        materialId:
+          column:
+            name: material_id
+        maxQty:
+          column:
+            name: max_qty
+        minQty:
+          column:
+            name: min_qty
+        priceItemId:
+          column:
+            name: price_item_id
+        priceListId:
+          column:
+            name: price_list_id
+        unitPrice:
+          column:
+            name: unit_price
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePricingPriceItemByPriceItemIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - currency
+          - materialId
+          - maxQty
+          - minQty
+          - priceItemId
+          - priceListId
+          - unitPrice
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdatePricingPriceItemByPriceItemIdResponse
+  description: Responses from the 'update_pricing_price_item_by_price_item_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceItem!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdatePricingPriceItemByPriceItemIdResponse
+    inputTypeName: UpdatePricingPriceItemByPriceItemIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_pricing_price_item_by_price_item_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdatePricingPriceItemByPriceItemIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdatePricingPriceItemByPriceItemId
+  outputType: UpdatePricingPriceItemByPriceItemIdResponse!
+  arguments:
+    - name: keyPriceItemId
+      type: Uuid!
+    - name: postCheck
+      type: PricingPriceItemBoolExp
+      description: Update permission post-condition predicate over the
+        'pricing_price_item' collection
+    - name: preCheck
+      type: PricingPriceItemBoolExp
+      description: Update permission pre-condition predicate over the
+        'pricing_price_item' collection
+    - name: updateColumns
+      type: UpdatePricingPriceItemByPriceItemIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_pricing_price_item_by_price_item_id
+    argumentMapping:
+      keyPriceItemId: key_price_item_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updatePricingPriceItemByPriceItemId
+    rootFieldKind: Mutation
+  description: Update any row on the 'pricing_price_item' collection using the
+    'price_item_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdatePricingPriceItemByPriceItemId
+  permissions:
+    - role: admin
+      allowExecution: true
+

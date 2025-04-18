@@ -1,0 +1,145 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertComplianceIdentityRecordObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: documentNumber
+      type: Text
+    - name: documentType
+      type: DocumentTypeEnum
+    - name: expiryDate
+      type: Date
+    - name: identityId
+      type: Uuid
+    - name: individualName
+      type: Text
+    - name: issuedDate
+      type: Date
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertComplianceIdentityRecordObject
+    inputTypeName: InsertComplianceIdentityRecordObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_compliance_identity_record_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        documentNumber:
+          column:
+            name: document_number
+        documentType:
+          column:
+            name: document_type
+        expiryDate:
+          column:
+            name: expiry_date
+        identityId:
+          column:
+            name: identity_id
+        individualName:
+          column:
+            name: individual_name
+        issuedDate:
+          column:
+            name: issued_date
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertComplianceIdentityRecordObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - documentNumber
+          - documentType
+          - expiryDate
+          - identityId
+          - individualName
+          - issuedDate
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertComplianceIdentityRecordResponse
+  description: Responses from the 'insert_compliance_identity_record' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ComplianceIdentityRecord!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertComplianceIdentityRecordResponse
+    inputTypeName: InsertComplianceIdentityRecordResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_compliance_identity_record_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertComplianceIdentityRecordResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertComplianceIdentityRecord
+  outputType: InsertComplianceIdentityRecordResponse!
+  arguments:
+    - name: objects
+      type: "[InsertComplianceIdentityRecordObject!]!"
+    - name: postCheck
+      type: ComplianceIdentityRecordBoolExp
+      description: Insert permission predicate over the 'compliance_identity_record'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_compliance_identity_record
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertComplianceIdentityRecord
+    rootFieldKind: Mutation
+  description: Insert into the compliance_identity_record table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertComplianceIdentityRecord
+  permissions:
+    - role: admin
+      allowExecution: true
+

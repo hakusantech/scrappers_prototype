@@ -1,0 +1,345 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunCreatedAt
+  description: Update the 'created_at' column in the 'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunCreatedAt
+    inputTypeName: UpdateColumnReportingReportRunCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunExecutedAt
+  description: Update the 'executed_at' column in the 'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunExecutedAt
+    inputTypeName: UpdateColumnReportingReportRunExecutedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_executed_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunExecutedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunReportDefinitionId
+  description: Update the 'report_definition_id' column in the
+    'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunReportDefinitionId
+    inputTypeName: UpdateColumnReportingReportRunReportDefinitionIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_report_definition_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunReportDefinitionId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunReportRunId
+  description: Update the 'report_run_id' column in the 'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunReportRunId
+    inputTypeName: UpdateColumnReportingReportRunReportRunIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_report_run_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunReportRunId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunResultLocation
+  description: Update the 'result_location' column in the 'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunResultLocation
+    inputTypeName: UpdateColumnReportingReportRunResultLocationInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_result_location
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunResultLocation
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReportingReportRunUpdatedAt
+  description: Update the 'updated_at' column in the 'reporting_report_run' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReportingReportRunUpdatedAt
+    inputTypeName: UpdateColumnReportingReportRunUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_reporting_report_run_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReportingReportRunUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReportingReportRunByReportRunIdUpdateColumns
+  description: Update the columns of the 'reporting_report_run' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnReportingReportRunCreatedAt
+      description: Update the 'created_at' column in the 'reporting_report_run' collection.
+    - name: executedAt
+      type: UpdateColumnReportingReportRunExecutedAt
+      description: Update the 'executed_at' column in the 'reporting_report_run' collection.
+    - name: reportDefinitionId
+      type: UpdateColumnReportingReportRunReportDefinitionId
+      description: Update the 'report_definition_id' column in the
+        'reporting_report_run' collection.
+    - name: reportRunId
+      type: UpdateColumnReportingReportRunReportRunId
+      description: Update the 'report_run_id' column in the 'reporting_report_run'
+        collection.
+    - name: resultLocation
+      type: UpdateColumnReportingReportRunResultLocation
+      description: Update the 'result_location' column in the 'reporting_report_run'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnReportingReportRunUpdatedAt
+      description: Update the 'updated_at' column in the 'reporting_report_run' collection.
+  graphql:
+    typeName: UpdateReportingReportRunByReportRunIdUpdateColumns
+    inputTypeName: UpdateReportingReportRunByReportRunIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_reporting_report_run_by_report_run_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        executedAt:
+          column:
+            name: executed_at
+        reportDefinitionId:
+          column:
+            name: report_definition_id
+        reportRunId:
+          column:
+            name: report_run_id
+        resultLocation:
+          column:
+            name: result_location
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReportingReportRunByReportRunIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - executedAt
+          - reportDefinitionId
+          - reportRunId
+          - resultLocation
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReportingReportRunByReportRunIdResponse
+  description: Responses from the 'update_reporting_report_run_by_report_run_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportRun!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateReportingReportRunByReportRunIdResponse
+    inputTypeName: UpdateReportingReportRunByReportRunIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_reporting_report_run_by_report_run_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReportingReportRunByReportRunIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateReportingReportRunByReportRunId
+  outputType: UpdateReportingReportRunByReportRunIdResponse!
+  arguments:
+    - name: keyReportRunId
+      type: Uuid!
+    - name: postCheck
+      type: ReportingReportRunBoolExp
+      description: Update permission post-condition predicate over the
+        'reporting_report_run' collection
+    - name: preCheck
+      type: ReportingReportRunBoolExp
+      description: Update permission pre-condition predicate over the
+        'reporting_report_run' collection
+    - name: updateColumns
+      type: UpdateReportingReportRunByReportRunIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_reporting_report_run_by_report_run_id
+    argumentMapping:
+      keyReportRunId: key_report_run_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateReportingReportRunByReportRunId
+    rootFieldKind: Mutation
+  description: Update any row on the 'reporting_report_run' collection using the
+    'report_run_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateReportingReportRunByReportRunId
+  permissions:
+    - role: admin
+      allowExecution: true
+

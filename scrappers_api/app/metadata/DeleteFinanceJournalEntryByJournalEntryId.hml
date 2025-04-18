@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFinanceJournalEntryByJournalEntryIdResponse
+  description: Responses from the
+    'delete_finance_journal_entry_by_journal_entry_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceJournalEntry!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFinanceJournalEntryByJournalEntryIdResponse
+    inputTypeName: DeleteFinanceJournalEntryByJournalEntryIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_finance_journal_entry_by_journal_entry_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFinanceJournalEntryByJournalEntryIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFinanceJournalEntryByJournalEntryId
+  outputType: DeleteFinanceJournalEntryByJournalEntryIdResponse!
+  arguments:
+    - name: keyJournalEntryId
+      type: Uuid!
+    - name: preCheck
+      type: FinanceJournalEntryBoolExp
+      description: Delete permission predicate over the 'finance_journal_entry' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_finance_journal_entry_by_journal_entry_id
+    argumentMapping:
+      keyJournalEntryId: key_journal_entry_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFinanceJournalEntryByJournalEntryId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'finance_journal_entry' collection using the
+    'journal_entry_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFinanceJournalEntryByJournalEntryId
+  permissions:
+    - role: admin
+      allowExecution: true
+

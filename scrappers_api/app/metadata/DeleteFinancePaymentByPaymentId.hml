@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFinancePaymentByPaymentIdResponse
+  description: Responses from the 'delete_finance_payment_by_payment_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinancePayment!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFinancePaymentByPaymentIdResponse
+    inputTypeName: DeleteFinancePaymentByPaymentIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_finance_payment_by_payment_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFinancePaymentByPaymentIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFinancePaymentByPaymentId
+  outputType: DeleteFinancePaymentByPaymentIdResponse!
+  arguments:
+    - name: keyPaymentId
+      type: Uuid!
+    - name: preCheck
+      type: FinancePaymentBoolExp
+      description: Delete permission predicate over the 'finance_payment' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_finance_payment_by_payment_id
+    argumentMapping:
+      keyPaymentId: key_payment_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFinancePaymentByPaymentId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'finance_payment' collection using the 'payment_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFinancePaymentByPaymentId
+  permissions:
+    - role: admin
+      allowExecution: true
+

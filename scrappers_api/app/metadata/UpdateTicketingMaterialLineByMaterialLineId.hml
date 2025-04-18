@@ -1,0 +1,426 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineCreatedAt
+  description: Update the 'created_at' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineCreatedAt
+    inputTypeName: UpdateColumnTicketingMaterialLineCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineGrade
+  description: Update the 'grade' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineGrade
+    inputTypeName: UpdateColumnTicketingMaterialLineGradeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_grade
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineGrade
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineMaterialId
+  description: Update the 'material_id' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineMaterialId
+    inputTypeName: UpdateColumnTicketingMaterialLineMaterialIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_material_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineMaterialId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineMaterialLineId
+  description: Update the 'material_line_id' column in the
+    'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineMaterialLineId
+    inputTypeName: UpdateColumnTicketingMaterialLineMaterialLineIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_material_line_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineMaterialLineId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineQuantity
+  description: Update the 'quantity' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineQuantity
+    inputTypeName: UpdateColumnTicketingMaterialLineQuantityInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_quantity
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineQuantity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineTicketId
+  description: Update the 'ticket_id' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineTicketId
+    inputTypeName: UpdateColumnTicketingMaterialLineTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineUnit
+  description: Update the 'unit' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: UnitEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineUnit
+    inputTypeName: UpdateColumnTicketingMaterialLineUnitInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_unit
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineUnit
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnTicketingMaterialLineUpdatedAt
+  description: Update the 'updated_at' column in the 'ticketing_material_line' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnTicketingMaterialLineUpdatedAt
+    inputTypeName: UpdateColumnTicketingMaterialLineUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_ticketing_material_line_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnTicketingMaterialLineUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingMaterialLineByMaterialLineIdUpdateColumns
+  description: Update the columns of the 'ticketing_material_line' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnTicketingMaterialLineCreatedAt
+      description: Update the 'created_at' column in the 'ticketing_material_line'
+        collection.
+    - name: grade
+      type: UpdateColumnTicketingMaterialLineGrade
+      description: Update the 'grade' column in the 'ticketing_material_line' collection.
+    - name: materialId
+      type: UpdateColumnTicketingMaterialLineMaterialId
+      description: Update the 'material_id' column in the 'ticketing_material_line'
+        collection.
+    - name: materialLineId
+      type: UpdateColumnTicketingMaterialLineMaterialLineId
+      description: Update the 'material_line_id' column in the
+        'ticketing_material_line' collection.
+    - name: quantity
+      type: UpdateColumnTicketingMaterialLineQuantity
+      description: Update the 'quantity' column in the 'ticketing_material_line' collection.
+    - name: ticketId
+      type: UpdateColumnTicketingMaterialLineTicketId
+      description: Update the 'ticket_id' column in the 'ticketing_material_line'
+        collection.
+    - name: unit
+      type: UpdateColumnTicketingMaterialLineUnit
+      description: Update the 'unit' column in the 'ticketing_material_line' collection.
+    - name: updatedAt
+      type: UpdateColumnTicketingMaterialLineUpdatedAt
+      description: Update the 'updated_at' column in the 'ticketing_material_line'
+        collection.
+  graphql:
+    typeName: UpdateTicketingMaterialLineByMaterialLineIdUpdateColumns
+    inputTypeName: UpdateTicketingMaterialLineByMaterialLineIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_material_line_by_material_line_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        grade:
+          column:
+            name: grade
+        materialId:
+          column:
+            name: material_id
+        materialLineId:
+          column:
+            name: material_line_id
+        quantity:
+          column:
+            name: quantity
+        ticketId:
+          column:
+            name: ticket_id
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingMaterialLineByMaterialLineIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - grade
+          - materialId
+          - materialLineId
+          - quantity
+          - ticketId
+          - unit
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingMaterialLineByMaterialLineIdResponse
+  description: Responses from the
+    'update_ticketing_material_line_by_material_line_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingMaterialLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateTicketingMaterialLineByMaterialLineIdResponse
+    inputTypeName: UpdateTicketingMaterialLineByMaterialLineIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_material_line_by_material_line_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingMaterialLineByMaterialLineIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTicketingMaterialLineByMaterialLineId
+  outputType: UpdateTicketingMaterialLineByMaterialLineIdResponse!
+  arguments:
+    - name: keyMaterialLineId
+      type: Uuid!
+    - name: postCheck
+      type: TicketingMaterialLineBoolExp
+      description: Update permission post-condition predicate over the
+        'ticketing_material_line' collection
+    - name: preCheck
+      type: TicketingMaterialLineBoolExp
+      description: Update permission pre-condition predicate over the
+        'ticketing_material_line' collection
+    - name: updateColumns
+      type: UpdateTicketingMaterialLineByMaterialLineIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_ticketing_material_line_by_material_line_id
+    argumentMapping:
+      keyMaterialLineId: key_material_line_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateTicketingMaterialLineByMaterialLineId
+    rootFieldKind: Mutation
+  description: Update any row on the 'ticketing_material_line' collection using
+    the 'material_line_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTicketingMaterialLineByMaterialLineId
+  permissions:
+    - role: admin
+      allowExecution: true
+

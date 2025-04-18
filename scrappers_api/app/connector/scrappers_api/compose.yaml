@@ -1,0 +1,14 @@
+services:
+  app_scrappers_api:
+    build:
+      context: .
+      dockerfile: .hasura-connector/Dockerfile.scrappers_api
+    environment:
+      CONNECTION_URI: $APP_SCRAPPERS_API_CONNECTION_URI
+      HASURA_SERVICE_TOKEN_SECRET: $APP_SCRAPPERS_API_HASURA_SERVICE_TOKEN_SECRET
+      OTEL_EXPORTER_OTLP_ENDPOINT: $APP_SCRAPPERS_API_OTEL_EXPORTER_OTLP_ENDPOINT
+      OTEL_SERVICE_NAME: $APP_SCRAPPERS_API_OTEL_SERVICE_NAME
+    extra_hosts:
+      - local.hasura.dev:host-gateway
+    ports:
+      - 4686:8080

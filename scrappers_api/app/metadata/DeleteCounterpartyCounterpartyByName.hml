@@ -1,0 +1,74 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteCounterpartyCounterpartyByNameResponse
+  description: Responses from the 'delete_counterparty_counterparty_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[CounterpartyCounterparty!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteCounterpartyCounterpartyByNameResponse
+    inputTypeName: DeleteCounterpartyCounterpartyByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_counterparty_counterparty_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteCounterpartyCounterpartyByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteCounterpartyCounterpartyByName
+  outputType: DeleteCounterpartyCounterpartyByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: preCheck
+      type: CounterpartyCounterpartyBoolExp
+      description: Delete permission predicate over the 'counterparty_counterparty'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_counterparty_counterparty_by_name
+    argumentMapping:
+      keyName: key_name
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteCounterpartyCounterpartyByName
+    rootFieldKind: Mutation
+  description: Delete any row on the 'counterparty_counterparty' collection using
+    the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteCounterpartyCounterpartyByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

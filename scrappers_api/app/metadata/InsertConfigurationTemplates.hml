@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationTemplatesObject
+  fields:
+    - name: content
+      type: Text!
+    - name: createdAt
+      type: Timestamptz
+    - name: name
+      type: Text!
+    - name: templateId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertConfigurationTemplatesObject
+    inputTypeName: InsertConfigurationTemplatesObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_templates_object
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        templateId:
+          column:
+            name: template_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationTemplatesObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - name
+          - templateId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationTemplatesResponse
+  description: Responses from the 'insert_configuration_templates' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationTemplates!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertConfigurationTemplatesResponse
+    inputTypeName: InsertConfigurationTemplatesResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_templates_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationTemplatesResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertConfigurationTemplates
+  outputType: InsertConfigurationTemplatesResponse!
+  arguments:
+    - name: objects
+      type: "[InsertConfigurationTemplatesObject!]!"
+    - name: postCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Insert permission predicate over the 'configuration_templates' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_configuration_templates
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertConfigurationTemplates
+    rootFieldKind: Mutation
+  description: Insert into the configuration_templates table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertConfigurationTemplates
+  permissions:
+    - role: admin
+      allowExecution: true
+

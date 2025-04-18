@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteComplianceIdentityRecordByIdentityIdResponse
+  description: Responses from the
+    'delete_compliance_identity_record_by_identity_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ComplianceIdentityRecord!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteComplianceIdentityRecordByIdentityIdResponse
+    inputTypeName: DeleteComplianceIdentityRecordByIdentityIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_compliance_identity_record_by_identity_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteComplianceIdentityRecordByIdentityIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteComplianceIdentityRecordByIdentityId
+  outputType: DeleteComplianceIdentityRecordByIdentityIdResponse!
+  arguments:
+    - name: keyIdentityId
+      type: Uuid!
+    - name: preCheck
+      type: ComplianceIdentityRecordBoolExp
+      description: Delete permission predicate over the 'compliance_identity_record'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_compliance_identity_record_by_identity_id
+    argumentMapping:
+      keyIdentityId: key_identity_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteComplianceIdentityRecordByIdentityId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'compliance_identity_record' collection using
+    the 'identity_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteComplianceIdentityRecordByIdentityId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,196 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FleetTruck
+  fields:
+    - name: capacityKg
+      type: Numeric
+    - name: createdAt
+      type: Timestamptz!
+    - name: plateNumber
+      type: Text!
+    - name: truckId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: FleetTruck
+    inputTypeName: FleetTruckInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: fleet_truck
+      fieldMapping:
+        capacityKg:
+          column:
+            name: capacity_kg
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FleetTruck
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - capacityKg
+          - createdAt
+          - plateNumber
+          - truckId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FleetTruckBoolExp
+  operand:
+    object:
+      type: FleetTruck
+      comparableFields:
+        - fieldName: capacityKg
+          booleanExpressionType: NumericBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: plateNumber
+          booleanExpressionType: TextBoolExp
+        - fieldName: truckId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: dispatchDispatchJobs
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FleetTruckBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FleetTruckAggExp
+  operand:
+    object:
+      aggregatedType: FleetTruck
+      aggregatableFields:
+        - fieldName: capacityKg
+          aggregateExpression: NumericAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: plateNumber
+          aggregateExpression: TextAggExp
+        - fieldName: truckId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FleetTruckAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FleetTruckOrderByExp
+  operand:
+    object:
+      orderedType: FleetTruck
+      orderableFields:
+        - fieldName: capacityKg
+          orderByExpression: NumericOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: plateNumber
+          orderByExpression: TextOrderByExp
+        - fieldName: truckId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: FleetTruckOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FleetTruck
+  objectType: FleetTruck
+  source:
+    dataConnectorName: scrappers_api
+    collection: fleet_truck
+  filterExpressionType: FleetTruckBoolExp
+  aggregateExpression: FleetTruckAggExp
+  orderByExpression: FleetTruckOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: fleetTruck
+      subscription:
+        rootField: fleetTruck
+    selectUniques:
+      - queryRootField: fleetTruckByTruckId
+        uniqueIdentifier:
+          - truckId
+        subscription:
+          rootField: fleetTruckByTruckId
+      - queryRootField: fleetTruckByPlateNumber
+        uniqueIdentifier:
+          - plateNumber
+        subscription:
+          rootField: fleetTruckByPlateNumber
+    filterInputTypeName: FleetTruckFilterInput
+    aggregate:
+      queryRootField: fleetTruckAggregate
+      subscription:
+        rootField: fleetTruckAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FleetTruck
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: dispatchDispatchJobs
+  sourceType: FleetTruck
+  target:
+    model:
+      name: DispatchDispatchJob
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: DispatchDispatchJobAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: truckId
+      target:
+        modelField:
+          - fieldName: truckId
+  graphql:
+    aggregateFieldName: dispatchDispatchJobsAggregate
+

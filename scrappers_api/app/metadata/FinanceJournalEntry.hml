@@ -1,0 +1,180 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FinanceJournalEntry
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: data
+      type: Jsonb!
+    - name: description
+      type: Text
+    - name: entryDate
+      type: Date!
+    - name: journalEntryId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: FinanceJournalEntry
+    inputTypeName: FinanceJournalEntryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: finance_journal_entry
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        data:
+          column:
+            name: data
+        description:
+          column:
+            name: description
+        entryDate:
+          column:
+            name: entry_date
+        journalEntryId:
+          column:
+            name: journal_entry_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FinanceJournalEntry
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - data
+          - description
+          - entryDate
+          - journalEntryId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FinanceJournalEntryBoolExp
+  operand:
+    object:
+      type: FinanceJournalEntry
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: data
+          booleanExpressionType: JsonbBoolExp
+        - fieldName: description
+          booleanExpressionType: TextBoolExp
+        - fieldName: entryDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: journalEntryId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FinanceJournalEntryBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FinanceJournalEntryAggExp
+  operand:
+    object:
+      aggregatedType: FinanceJournalEntry
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: data
+          aggregateExpression: JsonbAggExp
+        - fieldName: description
+          aggregateExpression: TextAggExp
+        - fieldName: entryDate
+          aggregateExpression: DateAggExp
+        - fieldName: journalEntryId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FinanceJournalEntryAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FinanceJournalEntryOrderByExp
+  operand:
+    object:
+      orderedType: FinanceJournalEntry
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: data
+          orderByExpression: JsonbOrderByExp
+        - fieldName: description
+          orderByExpression: TextOrderByExp
+        - fieldName: entryDate
+          orderByExpression: DateOrderByExp
+        - fieldName: journalEntryId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: FinanceJournalEntryOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FinanceJournalEntry
+  objectType: FinanceJournalEntry
+  source:
+    dataConnectorName: scrappers_api
+    collection: finance_journal_entry
+  filterExpressionType: FinanceJournalEntryBoolExp
+  aggregateExpression: FinanceJournalEntryAggExp
+  orderByExpression: FinanceJournalEntryOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: financeJournalEntry
+      subscription:
+        rootField: financeJournalEntry
+    selectUniques:
+      - queryRootField: financeJournalEntryByJournalEntryId
+        uniqueIdentifier:
+          - journalEntryId
+        subscription:
+          rootField: financeJournalEntryByJournalEntryId
+    filterInputTypeName: FinanceJournalEntryFilterInput
+    aggregate:
+      queryRootField: financeJournalEntryAggregate
+      subscription:
+        rootField: financeJournalEntryAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FinanceJournalEntry
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

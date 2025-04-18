@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteInventoryLotTagsByLotTagIdResponse
+  description: Responses from the 'delete_inventory_lot_tags_by_lot_tag_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryLotTags!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteInventoryLotTagsByLotTagIdResponse
+    inputTypeName: DeleteInventoryLotTagsByLotTagIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_inventory_lot_tags_by_lot_tag_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteInventoryLotTagsByLotTagIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInventoryLotTagsByLotTagId
+  outputType: DeleteInventoryLotTagsByLotTagIdResponse!
+  arguments:
+    - name: keyLotTagId
+      type: Uuid!
+    - name: preCheck
+      type: InventoryLotTagsBoolExp
+      description: Delete permission predicate over the 'inventory_lot_tags' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_inventory_lot_tags_by_lot_tag_id
+    argumentMapping:
+      keyLotTagId: key_lot_tag_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteInventoryLotTagsByLotTagId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'inventory_lot_tags' collection using the
+    'lot_tag_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInventoryLotTagsByLotTagId
+  permissions:
+    - role: admin
+      allowExecution: true
+

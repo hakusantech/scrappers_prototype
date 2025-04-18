@@ -1,0 +1,288 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: OrdersOrderLine
+  fields:
+    - name: amount
+      type: Numeric
+    - name: createdAt
+      type: Timestamptz!
+    - name: lotRef
+      type: Uuid
+    - name: materialId
+      type: Uuid!
+    - name: orderId
+      type: Uuid!
+    - name: orderLineId
+      type: Uuid!
+    - name: price
+      type: Numeric!
+    - name: quantity
+      type: Numeric!
+    - name: unit
+      type: UnitEnum!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: OrdersOrderLine
+    inputTypeName: OrdersOrderLineInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: orders_order_line
+      fieldMapping:
+        amount:
+          column:
+            name: amount
+        createdAt:
+          column:
+            name: created_at
+        lotRef:
+          column:
+            name: lot_ref
+        materialId:
+          column:
+            name: material_id
+        orderId:
+          column:
+            name: order_id
+        orderLineId:
+          column:
+            name: order_line_id
+        price:
+          column:
+            name: price
+        quantity:
+          column:
+            name: quantity
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: OrdersOrderLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - createdAt
+          - lotRef
+          - materialId
+          - orderId
+          - orderLineId
+          - price
+          - quantity
+          - unit
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: OrdersOrderLineBoolExp
+  operand:
+    object:
+      type: OrdersOrderLine
+      comparableFields:
+        - fieldName: amount
+          booleanExpressionType: NumericBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: lotRef
+          booleanExpressionType: UuidBoolExp
+        - fieldName: materialId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: orderId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: orderLineId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: price
+          booleanExpressionType: NumericBoolExp
+        - fieldName: quantity
+          booleanExpressionType: NumericBoolExp
+        - fieldName: unit
+          booleanExpressionType: UnitEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: masterMaterial
+        - relationshipName: ordersAbstractOrder
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: OrdersOrderLineBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: OrdersOrderLineAggExp
+  operand:
+    object:
+      aggregatedType: OrdersOrderLine
+      aggregatableFields:
+        - fieldName: amount
+          aggregateExpression: NumericAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: lotRef
+          aggregateExpression: UuidAggExp
+        - fieldName: materialId
+          aggregateExpression: UuidAggExp
+        - fieldName: orderId
+          aggregateExpression: UuidAggExp
+        - fieldName: orderLineId
+          aggregateExpression: UuidAggExp
+        - fieldName: price
+          aggregateExpression: NumericAggExp
+        - fieldName: quantity
+          aggregateExpression: NumericAggExp
+        - fieldName: unit
+          aggregateExpression: UnitEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: OrdersOrderLineAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: OrdersOrderLineOrderByExp
+  operand:
+    object:
+      orderedType: OrdersOrderLine
+      orderableFields:
+        - fieldName: amount
+          orderByExpression: NumericOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: lotRef
+          orderByExpression: UuidOrderByExp
+        - fieldName: materialId
+          orderByExpression: UuidOrderByExp
+        - fieldName: orderId
+          orderByExpression: UuidOrderByExp
+        - fieldName: orderLineId
+          orderByExpression: UuidOrderByExp
+        - fieldName: price
+          orderByExpression: NumericOrderByExp
+        - fieldName: quantity
+          orderByExpression: NumericOrderByExp
+        - fieldName: unit
+          orderByExpression: UnitEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: inventoryInventoryLot
+        - relationshipName: masterMaterial
+        - relationshipName: ordersAbstractOrder
+  graphql:
+    expressionTypeName: OrdersOrderLineOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: OrdersOrderLine
+  objectType: OrdersOrderLine
+  source:
+    dataConnectorName: scrappers_api
+    collection: orders_order_line
+  filterExpressionType: OrdersOrderLineBoolExp
+  aggregateExpression: OrdersOrderLineAggExp
+  orderByExpression: OrdersOrderLineOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ordersOrderLine
+      subscription:
+        rootField: ordersOrderLine
+    selectUniques:
+      - queryRootField: ordersOrderLineByOrderLineId
+        uniqueIdentifier:
+          - orderLineId
+        subscription:
+          rootField: ordersOrderLineByOrderLineId
+    filterInputTypeName: OrdersOrderLineFilterInput
+    aggregate:
+      queryRootField: ordersOrderLineAggregate
+      subscription:
+        rootField: ordersOrderLineAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: OrdersOrderLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLot
+  sourceType: OrdersOrderLine
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotRef
+      target:
+        modelField:
+          - fieldName: lotId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: masterMaterial
+  sourceType: OrdersOrderLine
+  target:
+    model:
+      name: MasterMaterial
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersAbstractOrder
+  sourceType: OrdersOrderLine
+  target:
+    model:
+      name: OrdersAbstractOrder
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+

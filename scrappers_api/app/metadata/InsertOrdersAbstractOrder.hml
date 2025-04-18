@@ -1,0 +1,150 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersAbstractOrderObject
+  fields:
+    - name: counterpartyId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz
+    - name: expectedDate
+      type: Date
+    - name: orderDate
+      type: Date!
+    - name: orderId
+      type: Uuid
+    - name: orderType
+      type: Text!
+    - name: paymentTerms
+      type: PaymentTermsEnum
+    - name: status
+      type: OrderStatusEnum!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertOrdersAbstractOrderObject
+    inputTypeName: InsertOrdersAbstractOrderObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_abstract_order_object
+      fieldMapping:
+        counterpartyId:
+          column:
+            name: counterparty_id
+        createdAt:
+          column:
+            name: created_at
+        expectedDate:
+          column:
+            name: expected_date
+        orderDate:
+          column:
+            name: order_date
+        orderId:
+          column:
+            name: order_id
+        orderType:
+          column:
+            name: order_type
+        paymentTerms:
+          column:
+            name: payment_terms
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersAbstractOrderObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - counterpartyId
+          - createdAt
+          - expectedDate
+          - orderDate
+          - orderId
+          - orderType
+          - paymentTerms
+          - status
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersAbstractOrderResponse
+  description: Responses from the 'insert_orders_abstract_order' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersAbstractOrder!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertOrdersAbstractOrderResponse
+    inputTypeName: InsertOrdersAbstractOrderResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_abstract_order_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersAbstractOrderResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertOrdersAbstractOrder
+  outputType: InsertOrdersAbstractOrderResponse!
+  arguments:
+    - name: objects
+      type: "[InsertOrdersAbstractOrderObject!]!"
+    - name: postCheck
+      type: OrdersAbstractOrderBoolExp
+      description: Insert permission predicate over the 'orders_abstract_order' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_orders_abstract_order
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertOrdersAbstractOrder
+    rootFieldKind: Mutation
+  description: Insert into the orders_abstract_order table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertOrdersAbstractOrder
+  permissions:
+    - role: admin
+      allowExecution: true
+

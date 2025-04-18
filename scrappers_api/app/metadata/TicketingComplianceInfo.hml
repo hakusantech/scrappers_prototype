@@ -1,0 +1,260 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TicketingComplianceInfo
+  fields:
+    - name: complianceInfoId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: fingerprintHash
+      type: Text
+    - name: idScanUrl
+      type: Text
+    - name: identityId
+      type: Uuid!
+    - name: ticketId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: TicketingComplianceInfo
+    inputTypeName: TicketingComplianceInfoInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: ticketing_compliance_info
+      fieldMapping:
+        complianceInfoId:
+          column:
+            name: compliance_info_id
+        createdAt:
+          column:
+            name: created_at
+        fingerprintHash:
+          column:
+            name: fingerprint_hash
+        idScanUrl:
+          column:
+            name: id_scan_url
+        identityId:
+          column:
+            name: identity_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TicketingComplianceInfo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complianceInfoId
+          - createdAt
+          - fingerprintHash
+          - idScanUrl
+          - identityId
+          - ticketId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketingComplianceInfoBoolExp
+  operand:
+    object:
+      type: TicketingComplianceInfo
+      comparableFields:
+        - fieldName: complianceInfoId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: fingerprintHash
+          booleanExpressionType: TextBoolExp
+        - fieldName: idScanUrl
+          booleanExpressionType: TextBoolExp
+        - fieldName: identityId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: complianceIdentityRecord
+        - relationshipName: ticketingWeightTicket
+        - relationshipName: ticketingPhotos
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketingComplianceInfoBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketingComplianceInfoAggExp
+  operand:
+    object:
+      aggregatedType: TicketingComplianceInfo
+      aggregatableFields:
+        - fieldName: complianceInfoId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: fingerprintHash
+          aggregateExpression: TextAggExp
+        - fieldName: idScanUrl
+          aggregateExpression: TextAggExp
+        - fieldName: identityId
+          aggregateExpression: UuidAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: TicketingComplianceInfoAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketingComplianceInfoOrderByExp
+  operand:
+    object:
+      orderedType: TicketingComplianceInfo
+      orderableFields:
+        - fieldName: complianceInfoId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: fingerprintHash
+          orderByExpression: TextOrderByExp
+        - fieldName: idScanUrl
+          orderByExpression: TextOrderByExp
+        - fieldName: identityId
+          orderByExpression: UuidOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: complianceIdentityRecord
+        - relationshipName: ticketingWeightTicket
+  graphql:
+    expressionTypeName: TicketingComplianceInfoOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: TicketingComplianceInfo
+  objectType: TicketingComplianceInfo
+  source:
+    dataConnectorName: scrappers_api
+    collection: ticketing_compliance_info
+  filterExpressionType: TicketingComplianceInfoBoolExp
+  aggregateExpression: TicketingComplianceInfoAggExp
+  orderByExpression: TicketingComplianceInfoOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ticketingComplianceInfo
+      subscription:
+        rootField: ticketingComplianceInfo
+    selectUniques:
+      - queryRootField: ticketingComplianceInfoByComplianceInfoId
+        uniqueIdentifier:
+          - complianceInfoId
+        subscription:
+          rootField: ticketingComplianceInfoByComplianceInfoId
+      - queryRootField: ticketingComplianceInfoByTicketId
+        uniqueIdentifier:
+          - ticketId
+        subscription:
+          rootField: ticketingComplianceInfoByTicketId
+    filterInputTypeName: TicketingComplianceInfoFilterInput
+    aggregate:
+      queryRootField: ticketingComplianceInfoAggregate
+      subscription:
+        rootField: ticketingComplianceInfoAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: TicketingComplianceInfo
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: complianceIdentityRecord
+  sourceType: TicketingComplianceInfo
+  target:
+    model:
+      name: ComplianceIdentityRecord
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: identityId
+      target:
+        modelField:
+          - fieldName: identityId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTicket
+  sourceType: TicketingComplianceInfo
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingPhotos
+  sourceType: TicketingComplianceInfo
+  target:
+    model:
+      name: TicketingPhotos
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingPhotosAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: complianceInfoId
+      target:
+        modelField:
+          - fieldName: complianceInfoId
+  graphql:
+    aggregateFieldName: ticketingPhotosAggregate
+

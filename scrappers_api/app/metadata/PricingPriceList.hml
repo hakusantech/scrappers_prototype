@@ -1,0 +1,238 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PricingPriceList
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: effectiveFrom
+      type: Date!
+    - name: effectiveTo
+      type: Date
+    - name: priceListId
+      type: Uuid!
+    - name: scope
+      type: Text!
+    - name: status
+      type: PriceListStatusEnum!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: PricingPriceList
+    inputTypeName: PricingPriceListInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: pricing_price_list
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        effectiveFrom:
+          column:
+            name: effective_from
+        effectiveTo:
+          column:
+            name: effective_to
+        priceListId:
+          column:
+            name: price_list_id
+        scope:
+          column:
+            name: scope
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PricingPriceList
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - effectiveFrom
+          - effectiveTo
+          - priceListId
+          - scope
+          - status
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PricingPriceListBoolExp
+  operand:
+    object:
+      type: PricingPriceList
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: effectiveFrom
+          booleanExpressionType: DateBoolExp
+        - fieldName: effectiveTo
+          booleanExpressionType: DateBoolExp
+        - fieldName: priceListId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: scope
+          booleanExpressionType: TextBoolExp
+        - fieldName: status
+          booleanExpressionType: PriceListStatusEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: pricingApprovalRoutes
+        - relationshipName: pricingPriceItems
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PricingPriceListBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PricingPriceListAggExp
+  operand:
+    object:
+      aggregatedType: PricingPriceList
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: effectiveFrom
+          aggregateExpression: DateAggExp
+        - fieldName: effectiveTo
+          aggregateExpression: DateAggExp
+        - fieldName: priceListId
+          aggregateExpression: UuidAggExp
+        - fieldName: scope
+          aggregateExpression: TextAggExp
+        - fieldName: status
+          aggregateExpression: PriceListStatusEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: PricingPriceListAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PricingPriceListOrderByExp
+  operand:
+    object:
+      orderedType: PricingPriceList
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: effectiveFrom
+          orderByExpression: DateOrderByExp
+        - fieldName: effectiveTo
+          orderByExpression: DateOrderByExp
+        - fieldName: priceListId
+          orderByExpression: UuidOrderByExp
+        - fieldName: scope
+          orderByExpression: TextOrderByExp
+        - fieldName: status
+          orderByExpression: PriceListStatusEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: PricingPriceListOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: PricingPriceList
+  objectType: PricingPriceList
+  source:
+    dataConnectorName: scrappers_api
+    collection: pricing_price_list
+  filterExpressionType: PricingPriceListBoolExp
+  aggregateExpression: PricingPriceListAggExp
+  orderByExpression: PricingPriceListOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: pricingPriceList
+      subscription:
+        rootField: pricingPriceList
+    selectUniques:
+      - queryRootField: pricingPriceListByPriceListId
+        uniqueIdentifier:
+          - priceListId
+        subscription:
+          rootField: pricingPriceListByPriceListId
+    filterInputTypeName: PricingPriceListFilterInput
+    aggregate:
+      queryRootField: pricingPriceListAggregate
+      subscription:
+        rootField: pricingPriceListAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: PricingPriceList
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingApprovalRoutes
+  sourceType: PricingPriceList
+  target:
+    model:
+      name: PricingApprovalRoute
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: PricingApprovalRouteAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: priceListId
+      target:
+        modelField:
+          - fieldName: priceListId
+  graphql:
+    aggregateFieldName: pricingApprovalRoutesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingPriceItems
+  sourceType: PricingPriceList
+  target:
+    model:
+      name: PricingPriceItem
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: PricingPriceItemAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: priceListId
+      target:
+        modelField:
+          - fieldName: priceListId
+  graphql:
+    aggregateFieldName: pricingPriceItemsAggregate
+

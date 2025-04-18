@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFleetDriverByDriverIdResponse
+  description: Responses from the 'delete_fleet_driver_by_driver_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetDriver!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFleetDriverByDriverIdResponse
+    inputTypeName: DeleteFleetDriverByDriverIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_fleet_driver_by_driver_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFleetDriverByDriverIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFleetDriverByDriverId
+  outputType: DeleteFleetDriverByDriverIdResponse!
+  arguments:
+    - name: keyDriverId
+      type: Uuid!
+    - name: preCheck
+      type: FleetDriverBoolExp
+      description: Delete permission predicate over the 'fleet_driver' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_fleet_driver_by_driver_id
+    argumentMapping:
+      keyDriverId: key_driver_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFleetDriverByDriverId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'fleet_driver' collection using the 'driver_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFleetDriverByDriverId
+  permissions:
+    - role: admin
+      allowExecution: true
+

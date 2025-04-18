@@ -1,0 +1,140 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateYardYardByYardIdUpdateColumns
+  description: Update the columns of the 'yard_yard' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnYardYardCreatedAt
+      description: Update the 'created_at' column in the 'yard_yard' collection.
+    - name: location
+      type: UpdateColumnYardYardLocation
+      description: Update the 'location' column in the 'yard_yard' collection.
+    - name: name
+      type: UpdateColumnYardYardName
+      description: Update the 'name' column in the 'yard_yard' collection.
+    - name: updatedAt
+      type: UpdateColumnYardYardUpdatedAt
+      description: Update the 'updated_at' column in the 'yard_yard' collection.
+    - name: yardId
+      type: UpdateColumnYardYardYardId
+      description: Update the 'yard_id' column in the 'yard_yard' collection.
+  graphql:
+    typeName: UpdateYardYardByYardIdUpdateColumns
+    inputTypeName: UpdateYardYardByYardIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_yard_yard_by_yard_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        location:
+          column:
+            name: location
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateYardYardByYardIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - location
+          - name
+          - updatedAt
+          - yardId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateYardYardByYardIdResponse
+  description: Responses from the 'update_yard_yard_by_yard_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[YardYard!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateYardYardByYardIdResponse
+    inputTypeName: UpdateYardYardByYardIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_yard_yard_by_yard_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateYardYardByYardIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateYardYardByYardId
+  outputType: UpdateYardYardByYardIdResponse!
+  arguments:
+    - name: keyYardId
+      type: Uuid!
+    - name: postCheck
+      type: YardYardBoolExp
+      description: Update permission post-condition predicate over the 'yard_yard'
+        collection
+    - name: preCheck
+      type: YardYardBoolExp
+      description: Update permission pre-condition predicate over the 'yard_yard' collection
+    - name: updateColumns
+      type: UpdateYardYardByYardIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_yard_yard_by_yard_id
+    argumentMapping:
+      keyYardId: key_yard_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateYardYardByYardId
+    rootFieldKind: Mutation
+  description: Update any row on the 'yard_yard' collection using the 'yard_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateYardYardByYardId
+  permissions:
+    - role: admin
+      allowExecution: true
+

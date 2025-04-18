@@ -1,0 +1,344 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsCreatedAt
+  description: Update the 'created_at' column in the 'orders_linked_tickets' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsCreatedAt
+    inputTypeName: UpdateColumnOrdersLinkedTicketsCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsLinkedTicketId
+  description: Update the 'linked_ticket_id' column in the 'orders_linked_tickets'
+    collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsLinkedTicketId
+    inputTypeName: UpdateColumnOrdersLinkedTicketsLinkedTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_linked_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsLinkedTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsNetWeight
+  description: Update the 'net_weight' column in the 'orders_linked_tickets' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsNetWeight
+    inputTypeName: UpdateColumnOrdersLinkedTicketsNetWeightInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_net_weight
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsNetWeight
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsOrderId
+  description: Update the 'order_id' column in the 'orders_linked_tickets' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsOrderId
+    inputTypeName: UpdateColumnOrdersLinkedTicketsOrderIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_order_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsOrderId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsTicketId
+  description: Update the 'ticket_id' column in the 'orders_linked_tickets' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsTicketId
+    inputTypeName: UpdateColumnOrdersLinkedTicketsTicketIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_ticket_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsTicketId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersLinkedTicketsUpdatedAt
+  description: Update the 'updated_at' column in the 'orders_linked_tickets' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersLinkedTicketsUpdatedAt
+    inputTypeName: UpdateColumnOrdersLinkedTicketsUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_linked_tickets_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersLinkedTicketsUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersLinkedTicketsByLinkedTicketIdUpdateColumns
+  description: Update the columns of the 'orders_linked_tickets' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnOrdersLinkedTicketsCreatedAt
+      description: Update the 'created_at' column in the 'orders_linked_tickets' collection.
+    - name: linkedTicketId
+      type: UpdateColumnOrdersLinkedTicketsLinkedTicketId
+      description: Update the 'linked_ticket_id' column in the 'orders_linked_tickets'
+        collection.
+    - name: netWeight
+      type: UpdateColumnOrdersLinkedTicketsNetWeight
+      description: Update the 'net_weight' column in the 'orders_linked_tickets' collection.
+    - name: orderId
+      type: UpdateColumnOrdersLinkedTicketsOrderId
+      description: Update the 'order_id' column in the 'orders_linked_tickets' collection.
+    - name: ticketId
+      type: UpdateColumnOrdersLinkedTicketsTicketId
+      description: Update the 'ticket_id' column in the 'orders_linked_tickets' collection.
+    - name: updatedAt
+      type: UpdateColumnOrdersLinkedTicketsUpdatedAt
+      description: Update the 'updated_at' column in the 'orders_linked_tickets' collection.
+  graphql:
+    typeName: UpdateOrdersLinkedTicketsByLinkedTicketIdUpdateColumns
+    inputTypeName: UpdateOrdersLinkedTicketsByLinkedTicketIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_linked_tickets_by_linked_ticket_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        linkedTicketId:
+          column:
+            name: linked_ticket_id
+        netWeight:
+          column:
+            name: net_weight
+        orderId:
+          column:
+            name: order_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersLinkedTicketsByLinkedTicketIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - linkedTicketId
+          - netWeight
+          - orderId
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersLinkedTicketsByLinkedTicketIdResponse
+  description: Responses from the
+    'update_orders_linked_tickets_by_linked_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersLinkedTickets!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateOrdersLinkedTicketsByLinkedTicketIdResponse
+    inputTypeName: UpdateOrdersLinkedTicketsByLinkedTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_linked_tickets_by_linked_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersLinkedTicketsByLinkedTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateOrdersLinkedTicketsByLinkedTicketId
+  outputType: UpdateOrdersLinkedTicketsByLinkedTicketIdResponse!
+  arguments:
+    - name: keyLinkedTicketId
+      type: Uuid!
+    - name: postCheck
+      type: OrdersLinkedTicketsBoolExp
+      description: Update permission post-condition predicate over the
+        'orders_linked_tickets' collection
+    - name: preCheck
+      type: OrdersLinkedTicketsBoolExp
+      description: Update permission pre-condition predicate over the
+        'orders_linked_tickets' collection
+    - name: updateColumns
+      type: UpdateOrdersLinkedTicketsByLinkedTicketIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_orders_linked_tickets_by_linked_ticket_id
+    argumentMapping:
+      keyLinkedTicketId: key_linked_ticket_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateOrdersLinkedTicketsByLinkedTicketId
+    rootFieldKind: Mutation
+  description: Update any row on the 'orders_linked_tickets' collection using the
+    'linked_ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateOrdersLinkedTicketsByLinkedTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,291 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FinanceInvoice
+  fields:
+    - name: amount
+      type: Numeric!
+    - name: createdAt
+      type: Timestamptz!
+    - name: currency
+      type: CurrencyEnum!
+    - name: dueDate
+      type: Date!
+    - name: invoiceId
+      type: Uuid!
+    - name: issuedAt
+      type: Timestamptz!
+    - name: orderId
+      type: Uuid
+    - name: status
+      type: InvoiceStatusEnum!
+    - name: ticketId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: FinanceInvoice
+    inputTypeName: FinanceInvoiceInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: finance_invoice
+      fieldMapping:
+        amount:
+          column:
+            name: amount
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        dueDate:
+          column:
+            name: due_date
+        invoiceId:
+          column:
+            name: invoice_id
+        issuedAt:
+          column:
+            name: issued_at
+        orderId:
+          column:
+            name: order_id
+        status:
+          column:
+            name: status
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FinanceInvoice
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - createdAt
+          - currency
+          - dueDate
+          - invoiceId
+          - issuedAt
+          - orderId
+          - status
+          - ticketId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FinanceInvoiceBoolExp
+  operand:
+    object:
+      type: FinanceInvoice
+      comparableFields:
+        - fieldName: amount
+          booleanExpressionType: NumericBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: currency
+          booleanExpressionType: CurrencyEnumBoolExp
+        - fieldName: dueDate
+          booleanExpressionType: DateBoolExp
+        - fieldName: invoiceId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: issuedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: orderId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: status
+          booleanExpressionType: InvoiceStatusEnumBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: ordersAbstractOrder
+        - relationshipName: ticketingWeightTicket
+        - relationshipName: financePayments
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FinanceInvoiceBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FinanceInvoiceAggExp
+  operand:
+    object:
+      aggregatedType: FinanceInvoice
+      aggregatableFields:
+        - fieldName: amount
+          aggregateExpression: NumericAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: currency
+          aggregateExpression: CurrencyEnumAggExp
+        - fieldName: dueDate
+          aggregateExpression: DateAggExp
+        - fieldName: invoiceId
+          aggregateExpression: UuidAggExp
+        - fieldName: issuedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: orderId
+          aggregateExpression: UuidAggExp
+        - fieldName: status
+          aggregateExpression: InvoiceStatusEnumAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FinanceInvoiceAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FinanceInvoiceOrderByExp
+  operand:
+    object:
+      orderedType: FinanceInvoice
+      orderableFields:
+        - fieldName: amount
+          orderByExpression: NumericOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: currency
+          orderByExpression: CurrencyEnumOrderByExp
+        - fieldName: dueDate
+          orderByExpression: DateOrderByExp
+        - fieldName: invoiceId
+          orderByExpression: UuidOrderByExp
+        - fieldName: issuedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: orderId
+          orderByExpression: UuidOrderByExp
+        - fieldName: status
+          orderByExpression: InvoiceStatusEnumOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: ordersAbstractOrder
+        - relationshipName: ticketingWeightTicket
+  graphql:
+    expressionTypeName: FinanceInvoiceOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FinanceInvoice
+  objectType: FinanceInvoice
+  source:
+    dataConnectorName: scrappers_api
+    collection: finance_invoice
+  filterExpressionType: FinanceInvoiceBoolExp
+  aggregateExpression: FinanceInvoiceAggExp
+  orderByExpression: FinanceInvoiceOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: financeInvoice
+      subscription:
+        rootField: financeInvoice
+    selectUniques:
+      - queryRootField: financeInvoiceByInvoiceId
+        uniqueIdentifier:
+          - invoiceId
+        subscription:
+          rootField: financeInvoiceByInvoiceId
+    filterInputTypeName: FinanceInvoiceFilterInput
+    aggregate:
+      queryRootField: financeInvoiceAggregate
+      subscription:
+        rootField: financeInvoiceAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FinanceInvoice
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersAbstractOrder
+  sourceType: FinanceInvoice
+  target:
+    model:
+      name: OrdersAbstractOrder
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: orderId
+      target:
+        modelField:
+          - fieldName: orderId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTicket
+  sourceType: FinanceInvoice
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: financePayments
+  sourceType: FinanceInvoice
+  target:
+    model:
+      name: FinancePayment
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: FinancePaymentAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: invoiceId
+      target:
+        modelField:
+          - fieldName: invoiceId
+  graphql:
+    aggregateFieldName: financePaymentsAggregate
+

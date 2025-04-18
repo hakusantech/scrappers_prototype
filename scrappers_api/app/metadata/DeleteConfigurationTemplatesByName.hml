@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteConfigurationTemplatesByNameResponse
+  description: Responses from the 'delete_configuration_templates_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationTemplates!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteConfigurationTemplatesByNameResponse
+    inputTypeName: DeleteConfigurationTemplatesByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_configuration_templates_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteConfigurationTemplatesByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteConfigurationTemplatesByName
+  outputType: DeleteConfigurationTemplatesByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: preCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Delete permission predicate over the 'configuration_templates' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_configuration_templates_by_name
+    argumentMapping:
+      keyName: key_name
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteConfigurationTemplatesByName
+    rootFieldKind: Mutation
+  description: Delete any row on the 'configuration_templates' collection using
+    the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteConfigurationTemplatesByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

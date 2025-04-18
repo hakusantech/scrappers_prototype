@@ -1,0 +1,200 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TicketingAttachments
+  fields:
+    - name: attachmentId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: ticketId
+      type: Uuid!
+    - name: type
+      type: AttachmentTypeEnum!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: url
+      type: Text!
+  graphql:
+    typeName: TicketingAttachments
+    inputTypeName: TicketingAttachmentsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: ticketing_attachments
+      fieldMapping:
+        attachmentId:
+          column:
+            name: attachment_id
+        createdAt:
+          column:
+            name: created_at
+        ticketId:
+          column:
+            name: ticket_id
+        type:
+          column:
+            name: type
+        updatedAt:
+          column:
+            name: updated_at
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TicketingAttachments
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - attachmentId
+          - createdAt
+          - ticketId
+          - type
+          - updatedAt
+          - url
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketingAttachmentsBoolExp
+  operand:
+    object:
+      type: TicketingAttachments
+      comparableFields:
+        - fieldName: attachmentId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: type
+          booleanExpressionType: AttachmentTypeEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: url
+          booleanExpressionType: TextBoolExp
+      comparableRelationships:
+        - relationshipName: ticketingWeightTicket
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketingAttachmentsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketingAttachmentsAggExp
+  operand:
+    object:
+      aggregatedType: TicketingAttachments
+      aggregatableFields:
+        - fieldName: attachmentId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: type
+          aggregateExpression: AttachmentTypeEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: url
+          aggregateExpression: TextAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: TicketingAttachmentsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketingAttachmentsOrderByExp
+  operand:
+    object:
+      orderedType: TicketingAttachments
+      orderableFields:
+        - fieldName: attachmentId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: type
+          orderByExpression: AttachmentTypeEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: url
+          orderByExpression: TextOrderByExp
+      orderableRelationships:
+        - relationshipName: ticketingWeightTicket
+  graphql:
+    expressionTypeName: TicketingAttachmentsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: TicketingAttachments
+  objectType: TicketingAttachments
+  source:
+    dataConnectorName: scrappers_api
+    collection: ticketing_attachments
+  filterExpressionType: TicketingAttachmentsBoolExp
+  aggregateExpression: TicketingAttachmentsAggExp
+  orderByExpression: TicketingAttachmentsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ticketingAttachments
+      subscription:
+        rootField: ticketingAttachments
+    selectUniques:
+      - queryRootField: ticketingAttachmentsByAttachmentId
+        uniqueIdentifier:
+          - attachmentId
+        subscription:
+          rootField: ticketingAttachmentsByAttachmentId
+    filterInputTypeName: TicketingAttachmentsFilterInput
+    aggregate:
+      queryRootField: ticketingAttachmentsAggregate
+      subscription:
+        rootField: ticketingAttachmentsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: TicketingAttachments
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTicket
+  sourceType: TicketingAttachments
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+

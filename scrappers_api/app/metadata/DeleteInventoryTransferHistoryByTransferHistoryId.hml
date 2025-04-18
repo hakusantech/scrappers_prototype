@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteInventoryTransferHistoryByTransferHistoryIdResponse
+  description: Responses from the
+    'delete_inventory_transfer_history_by_transfer_history_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryTransferHistory!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteInventoryTransferHistoryByTransferHistoryIdResponse
+    inputTypeName: DeleteInventoryTransferHistoryByTransferHistoryIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_inventory_transfer_history_by_transfer_history_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteInventoryTransferHistoryByTransferHistoryIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInventoryTransferHistoryByTransferHistoryId
+  outputType: DeleteInventoryTransferHistoryByTransferHistoryIdResponse!
+  arguments:
+    - name: keyTransferHistoryId
+      type: Uuid!
+    - name: preCheck
+      type: InventoryTransferHistoryBoolExp
+      description: Delete permission predicate over the 'inventory_transfer_history'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_inventory_transfer_history_by_transfer_history_id
+    argumentMapping:
+      keyTransferHistoryId: key_transfer_history_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteInventoryTransferHistoryByTransferHistoryId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'inventory_transfer_history' collection using
+    the 'transfer_history_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInventoryTransferHistoryByTransferHistoryId
+  permissions:
+    - role: admin
+      allowExecution: true
+

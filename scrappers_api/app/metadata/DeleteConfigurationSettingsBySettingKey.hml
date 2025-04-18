@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteConfigurationSettingsBySettingKeyResponse
+  description: Responses from the 'delete_configuration_settings_by_setting_key' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationSettings!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteConfigurationSettingsBySettingKeyResponse
+    inputTypeName: DeleteConfigurationSettingsBySettingKeyResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_configuration_settings_by_setting_key_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteConfigurationSettingsBySettingKeyResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteConfigurationSettingsBySettingKey
+  outputType: DeleteConfigurationSettingsBySettingKeyResponse!
+  arguments:
+    - name: keySettingKey
+      type: Text!
+    - name: preCheck
+      type: ConfigurationSettingsBoolExp
+      description: Delete permission predicate over the 'configuration_settings' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_configuration_settings_by_setting_key
+    argumentMapping:
+      keySettingKey: key_setting_key
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteConfigurationSettingsBySettingKey
+    rootFieldKind: Mutation
+  description: Delete any row on the 'configuration_settings' collection using the
+    'setting_key' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteConfigurationSettingsBySettingKey
+  permissions:
+    - role: admin
+      allowExecution: true
+

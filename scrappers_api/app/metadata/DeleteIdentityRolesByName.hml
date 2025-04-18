@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteIdentityRolesByNameResponse
+  description: Responses from the 'delete_identity_roles_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityRoles!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteIdentityRolesByNameResponse
+    inputTypeName: DeleteIdentityRolesByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_identity_roles_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteIdentityRolesByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteIdentityRolesByName
+  outputType: DeleteIdentityRolesByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: preCheck
+      type: IdentityRolesBoolExp
+      description: Delete permission predicate over the 'identity_roles' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_identity_roles_by_name
+    argumentMapping:
+      keyName: key_name
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteIdentityRolesByName
+    rootFieldKind: Mutation
+  description: Delete any row on the 'identity_roles' collection using the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteIdentityRolesByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

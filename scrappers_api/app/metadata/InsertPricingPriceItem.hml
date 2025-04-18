@@ -1,0 +1,150 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingPriceItemObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: currency
+      type: CurrencyEnum
+    - name: materialId
+      type: Uuid!
+    - name: maxQty
+      type: Numeric
+    - name: minQty
+      type: Numeric
+    - name: priceItemId
+      type: Uuid
+    - name: priceListId
+      type: Uuid!
+    - name: unitPrice
+      type: Numeric!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertPricingPriceItemObject
+    inputTypeName: InsertPricingPriceItemObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_price_item_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        materialId:
+          column:
+            name: material_id
+        maxQty:
+          column:
+            name: max_qty
+        minQty:
+          column:
+            name: min_qty
+        priceItemId:
+          column:
+            name: price_item_id
+        priceListId:
+          column:
+            name: price_list_id
+        unitPrice:
+          column:
+            name: unit_price
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingPriceItemObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - currency
+          - materialId
+          - maxQty
+          - minQty
+          - priceItemId
+          - priceListId
+          - unitPrice
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingPriceItemResponse
+  description: Responses from the 'insert_pricing_price_item' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceItem!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertPricingPriceItemResponse
+    inputTypeName: InsertPricingPriceItemResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_price_item_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingPriceItemResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPricingPriceItem
+  outputType: InsertPricingPriceItemResponse!
+  arguments:
+    - name: objects
+      type: "[InsertPricingPriceItemObject!]!"
+    - name: postCheck
+      type: PricingPriceItemBoolExp
+      description: Insert permission predicate over the 'pricing_price_item' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_pricing_price_item
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertPricingPriceItem
+    rootFieldKind: Mutation
+  description: Insert into the pricing_price_item table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPricingPriceItem
+  permissions:
+    - role: admin
+      allowExecution: true
+

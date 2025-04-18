@@ -1,0 +1,163 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingComplianceInfoByTicketIdUpdateColumns
+  description: Update the columns of the 'ticketing_compliance_info' collection
+  fields:
+    - name: complianceInfoId
+      type: UpdateColumnTicketingComplianceInfoComplianceInfoId
+      description: Update the 'compliance_info_id' column in the
+        'ticketing_compliance_info' collection.
+    - name: createdAt
+      type: UpdateColumnTicketingComplianceInfoCreatedAt
+      description: Update the 'created_at' column in the 'ticketing_compliance_info'
+        collection.
+    - name: fingerprintHash
+      type: UpdateColumnTicketingComplianceInfoFingerprintHash
+      description: Update the 'fingerprint_hash' column in the
+        'ticketing_compliance_info' collection.
+    - name: idScanUrl
+      type: UpdateColumnTicketingComplianceInfoIdScanUrl
+      description: Update the 'id_scan_url' column in the 'ticketing_compliance_info'
+        collection.
+    - name: identityId
+      type: UpdateColumnTicketingComplianceInfoIdentityId
+      description: Update the 'identity_id' column in the 'ticketing_compliance_info'
+        collection.
+    - name: ticketId
+      type: UpdateColumnTicketingComplianceInfoTicketId
+      description: Update the 'ticket_id' column in the 'ticketing_compliance_info'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnTicketingComplianceInfoUpdatedAt
+      description: Update the 'updated_at' column in the 'ticketing_compliance_info'
+        collection.
+  graphql:
+    typeName: UpdateTicketingComplianceInfoByTicketIdUpdateColumns
+    inputTypeName: UpdateTicketingComplianceInfoByTicketIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_compliance_info_by_ticket_id_update_columns
+      fieldMapping:
+        complianceInfoId:
+          column:
+            name: compliance_info_id
+        createdAt:
+          column:
+            name: created_at
+        fingerprintHash:
+          column:
+            name: fingerprint_hash
+        idScanUrl:
+          column:
+            name: id_scan_url
+        identityId:
+          column:
+            name: identity_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingComplianceInfoByTicketIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complianceInfoId
+          - createdAt
+          - fingerprintHash
+          - idScanUrl
+          - identityId
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateTicketingComplianceInfoByTicketIdResponse
+  description: Responses from the 'update_ticketing_compliance_info_by_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingComplianceInfo!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateTicketingComplianceInfoByTicketIdResponse
+    inputTypeName: UpdateTicketingComplianceInfoByTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_ticketing_compliance_info_by_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateTicketingComplianceInfoByTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateTicketingComplianceInfoByTicketId
+  outputType: UpdateTicketingComplianceInfoByTicketIdResponse!
+  arguments:
+    - name: keyTicketId
+      type: Uuid!
+    - name: postCheck
+      type: TicketingComplianceInfoBoolExp
+      description: Update permission post-condition predicate over the
+        'ticketing_compliance_info' collection
+    - name: preCheck
+      type: TicketingComplianceInfoBoolExp
+      description: Update permission pre-condition predicate over the
+        'ticketing_compliance_info' collection
+    - name: updateColumns
+      type: UpdateTicketingComplianceInfoByTicketIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_ticketing_compliance_info_by_ticket_id
+    argumentMapping:
+      keyTicketId: key_ticket_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateTicketingComplianceInfoByTicketId
+    rootFieldKind: Mutation
+  description: Update any row on the 'ticketing_compliance_info' collection using
+    the 'ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateTicketingComplianceInfoByTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

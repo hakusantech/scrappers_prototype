@@ -1,0 +1,144 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertDispatchDispatchJobObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: dispatchJobId
+      type: Uuid
+    - name: driverId
+      type: Uuid!
+    - name: lotId
+      type: Uuid!
+    - name: scheduledTime
+      type: Timestamptz!
+    - name: status
+      type: DispatchStatusEnum!
+    - name: truckId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertDispatchDispatchJobObject
+    inputTypeName: InsertDispatchDispatchJobObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_dispatch_dispatch_job_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        dispatchJobId:
+          column:
+            name: dispatch_job_id
+        driverId:
+          column:
+            name: driver_id
+        lotId:
+          column:
+            name: lot_id
+        scheduledTime:
+          column:
+            name: scheduled_time
+        status:
+          column:
+            name: status
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertDispatchDispatchJobObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - dispatchJobId
+          - driverId
+          - lotId
+          - scheduledTime
+          - status
+          - truckId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertDispatchDispatchJobResponse
+  description: Responses from the 'insert_dispatch_dispatch_job' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[DispatchDispatchJob!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertDispatchDispatchJobResponse
+    inputTypeName: InsertDispatchDispatchJobResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_dispatch_dispatch_job_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertDispatchDispatchJobResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertDispatchDispatchJob
+  outputType: InsertDispatchDispatchJobResponse!
+  arguments:
+    - name: objects
+      type: "[InsertDispatchDispatchJobObject!]!"
+    - name: postCheck
+      type: DispatchDispatchJobBoolExp
+      description: Insert permission predicate over the 'dispatch_dispatch_job' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_dispatch_dispatch_job
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertDispatchDispatchJob
+    rootFieldKind: Mutation
+  description: Insert into the dispatch_dispatch_job table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertDispatchDispatchJob
+  permissions:
+    - role: admin
+      allowExecution: true
+

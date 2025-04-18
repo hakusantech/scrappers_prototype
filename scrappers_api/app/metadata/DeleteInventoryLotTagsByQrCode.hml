@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteInventoryLotTagsByQrCodeResponse
+  description: Responses from the 'delete_inventory_lot_tags_by_qr_code' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryLotTags!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteInventoryLotTagsByQrCodeResponse
+    inputTypeName: DeleteInventoryLotTagsByQrCodeResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_inventory_lot_tags_by_qr_code_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteInventoryLotTagsByQrCodeResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteInventoryLotTagsByQrCode
+  outputType: DeleteInventoryLotTagsByQrCodeResponse!
+  arguments:
+    - name: keyQrCode
+      type: Text!
+    - name: preCheck
+      type: InventoryLotTagsBoolExp
+      description: Delete permission predicate over the 'inventory_lot_tags' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_inventory_lot_tags_by_qr_code
+    argumentMapping:
+      keyQrCode: key_qr_code
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteInventoryLotTagsByQrCode
+    rootFieldKind: Mutation
+  description: Delete any row on the 'inventory_lot_tags' collection using the 'qr_code' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteInventoryLotTagsByQrCode
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteSupportKbArticleByTitleResponse
+  description: Responses from the 'delete_support_kb_article_by_title' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportKbArticle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteSupportKbArticleByTitleResponse
+    inputTypeName: DeleteSupportKbArticleByTitleResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_support_kb_article_by_title_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteSupportKbArticleByTitleResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteSupportKbArticleByTitle
+  outputType: DeleteSupportKbArticleByTitleResponse!
+  arguments:
+    - name: keyTitle
+      type: Text!
+    - name: preCheck
+      type: SupportKbArticleBoolExp
+      description: Delete permission predicate over the 'support_kb_article' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_support_kb_article_by_title
+    argumentMapping:
+      keyTitle: key_title
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteSupportKbArticleByTitle
+    rootFieldKind: Mutation
+  description: Delete any row on the 'support_kb_article' collection using the 'title' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteSupportKbArticleByTitle
+  permissions:
+    - role: admin
+      allowExecution: true
+

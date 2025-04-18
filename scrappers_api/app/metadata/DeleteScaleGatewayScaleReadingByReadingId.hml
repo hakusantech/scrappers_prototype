@@ -1,0 +1,75 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteScaleGatewayScaleReadingByReadingIdResponse
+  description: Responses from the
+    'delete_scale_gateway_scale_reading_by_reading_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ScaleGatewayScaleReading!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteScaleGatewayScaleReadingByReadingIdResponse
+    inputTypeName: DeleteScaleGatewayScaleReadingByReadingIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_scale_gateway_scale_reading_by_reading_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteScaleGatewayScaleReadingByReadingIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteScaleGatewayScaleReadingByReadingId
+  outputType: DeleteScaleGatewayScaleReadingByReadingIdResponse!
+  arguments:
+    - name: keyReadingId
+      type: Uuid!
+    - name: preCheck
+      type: ScaleGatewayScaleReadingBoolExp
+      description: Delete permission predicate over the 'scale_gateway_scale_reading'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_scale_gateway_scale_reading_by_reading_id
+    argumentMapping:
+      keyReadingId: key_reading_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteScaleGatewayScaleReadingByReadingId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'scale_gateway_scale_reading' collection
+    using the 'reading_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteScaleGatewayScaleReadingByReadingId
+  permissions:
+    - role: admin
+      allowExecution: true
+

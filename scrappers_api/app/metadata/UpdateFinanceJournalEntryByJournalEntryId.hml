@@ -1,0 +1,345 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryCreatedAt
+  description: Update the 'created_at' column in the 'finance_journal_entry' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryCreatedAt
+    inputTypeName: UpdateColumnFinanceJournalEntryCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryData
+  description: Update the 'data' column in the 'finance_journal_entry' collection
+  fields:
+    - name: set
+      type: Jsonb!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryData
+    inputTypeName: UpdateColumnFinanceJournalEntryDataInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_data
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryData
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryDescription
+  description: Update the 'description' column in the 'finance_journal_entry' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryDescription
+    inputTypeName: UpdateColumnFinanceJournalEntryDescriptionInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_description
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryDescription
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryEntryDate
+  description: Update the 'entry_date' column in the 'finance_journal_entry' collection
+  fields:
+    - name: set
+      type: Date!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryEntryDate
+    inputTypeName: UpdateColumnFinanceJournalEntryEntryDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_entry_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryEntryDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryJournalEntryId
+  description: Update the 'journal_entry_id' column in the 'finance_journal_entry'
+    collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryJournalEntryId
+    inputTypeName: UpdateColumnFinanceJournalEntryJournalEntryIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_journal_entry_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryJournalEntryId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFinanceJournalEntryUpdatedAt
+  description: Update the 'updated_at' column in the 'finance_journal_entry' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFinanceJournalEntryUpdatedAt
+    inputTypeName: UpdateColumnFinanceJournalEntryUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_finance_journal_entry_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFinanceJournalEntryUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFinanceJournalEntryByJournalEntryIdUpdateColumns
+  description: Update the columns of the 'finance_journal_entry' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnFinanceJournalEntryCreatedAt
+      description: Update the 'created_at' column in the 'finance_journal_entry' collection.
+    - name: data
+      type: UpdateColumnFinanceJournalEntryData
+      description: Update the 'data' column in the 'finance_journal_entry' collection.
+    - name: description
+      type: UpdateColumnFinanceJournalEntryDescription
+      description: Update the 'description' column in the 'finance_journal_entry'
+        collection.
+    - name: entryDate
+      type: UpdateColumnFinanceJournalEntryEntryDate
+      description: Update the 'entry_date' column in the 'finance_journal_entry' collection.
+    - name: journalEntryId
+      type: UpdateColumnFinanceJournalEntryJournalEntryId
+      description: Update the 'journal_entry_id' column in the 'finance_journal_entry'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnFinanceJournalEntryUpdatedAt
+      description: Update the 'updated_at' column in the 'finance_journal_entry' collection.
+  graphql:
+    typeName: UpdateFinanceJournalEntryByJournalEntryIdUpdateColumns
+    inputTypeName: UpdateFinanceJournalEntryByJournalEntryIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_finance_journal_entry_by_journal_entry_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        data:
+          column:
+            name: data
+        description:
+          column:
+            name: description
+        entryDate:
+          column:
+            name: entry_date
+        journalEntryId:
+          column:
+            name: journal_entry_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFinanceJournalEntryByJournalEntryIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - data
+          - description
+          - entryDate
+          - journalEntryId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFinanceJournalEntryByJournalEntryIdResponse
+  description: Responses from the
+    'update_finance_journal_entry_by_journal_entry_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceJournalEntry!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFinanceJournalEntryByJournalEntryIdResponse
+    inputTypeName: UpdateFinanceJournalEntryByJournalEntryIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_finance_journal_entry_by_journal_entry_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFinanceJournalEntryByJournalEntryIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFinanceJournalEntryByJournalEntryId
+  outputType: UpdateFinanceJournalEntryByJournalEntryIdResponse!
+  arguments:
+    - name: keyJournalEntryId
+      type: Uuid!
+    - name: postCheck
+      type: FinanceJournalEntryBoolExp
+      description: Update permission post-condition predicate over the
+        'finance_journal_entry' collection
+    - name: preCheck
+      type: FinanceJournalEntryBoolExp
+      description: Update permission pre-condition predicate over the
+        'finance_journal_entry' collection
+    - name: updateColumns
+      type: UpdateFinanceJournalEntryByJournalEntryIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_finance_journal_entry_by_journal_entry_id
+    argumentMapping:
+      keyJournalEntryId: key_journal_entry_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFinanceJournalEntryByJournalEntryId
+    rootFieldKind: Mutation
+  description: Update any row on the 'finance_journal_entry' collection using the
+    'journal_entry_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFinanceJournalEntryByJournalEntryId
+  permissions:
+    - role: admin
+      allowExecution: true
+

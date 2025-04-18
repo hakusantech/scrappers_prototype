@@ -1,0 +1,205 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InventoryLotTags
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: lotId
+      type: Uuid!
+    - name: lotTagId
+      type: Uuid!
+    - name: printedAt
+      type: Timestamptz!
+    - name: qrCode
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: InventoryLotTags
+    inputTypeName: InventoryLotTagsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: inventory_lot_tags
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        lotId:
+          column:
+            name: lot_id
+        lotTagId:
+          column:
+            name: lot_tag_id
+        printedAt:
+          column:
+            name: printed_at
+        qrCode:
+          column:
+            name: qr_code
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InventoryLotTags
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - lotId
+          - lotTagId
+          - printedAt
+          - qrCode
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: InventoryLotTagsBoolExp
+  operand:
+    object:
+      type: InventoryLotTags
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: lotId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: lotTagId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: printedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: qrCode
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: inventoryInventoryLot
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: InventoryLotTagsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: InventoryLotTagsAggExp
+  operand:
+    object:
+      aggregatedType: InventoryLotTags
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: lotId
+          aggregateExpression: UuidAggExp
+        - fieldName: lotTagId
+          aggregateExpression: UuidAggExp
+        - fieldName: printedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: qrCode
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: InventoryLotTagsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: InventoryLotTagsOrderByExp
+  operand:
+    object:
+      orderedType: InventoryLotTags
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: lotId
+          orderByExpression: UuidOrderByExp
+        - fieldName: lotTagId
+          orderByExpression: UuidOrderByExp
+        - fieldName: printedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: qrCode
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: inventoryInventoryLot
+  graphql:
+    expressionTypeName: InventoryLotTagsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: InventoryLotTags
+  objectType: InventoryLotTags
+  source:
+    dataConnectorName: scrappers_api
+    collection: inventory_lot_tags
+  filterExpressionType: InventoryLotTagsBoolExp
+  aggregateExpression: InventoryLotTagsAggExp
+  orderByExpression: InventoryLotTagsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: inventoryLotTags
+      subscription:
+        rootField: inventoryLotTags
+    selectUniques:
+      - queryRootField: inventoryLotTagsByLotTagId
+        uniqueIdentifier:
+          - lotTagId
+        subscription:
+          rootField: inventoryLotTagsByLotTagId
+      - queryRootField: inventoryLotTagsByQrCode
+        uniqueIdentifier:
+          - qrCode
+        subscription:
+          rootField: inventoryLotTagsByQrCode
+    filterInputTypeName: InventoryLotTagsFilterInput
+    aggregate:
+      queryRootField: inventoryLotTagsAggregate
+      subscription:
+        rootField: inventoryLotTagsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: InventoryLotTags
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLot
+  sourceType: InventoryLotTags
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: lotId
+      target:
+        modelField:
+          - fieldName: lotId
+

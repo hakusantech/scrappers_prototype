@@ -1,0 +1,207 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: IdentityRoles
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: name
+      type: Text!
+    - name: roleId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: IdentityRoles
+    inputTypeName: IdentityRolesInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: identity_roles
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        roleId:
+          column:
+            name: role_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: IdentityRoles
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - name
+          - roleId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: IdentityRolesBoolExp
+  operand:
+    object:
+      type: IdentityRoles
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: roleId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: identityRolePermissions
+        - relationshipName: identityUserRoles
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: IdentityRolesBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: IdentityRolesAggExp
+  operand:
+    object:
+      aggregatedType: IdentityRoles
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: roleId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: IdentityRolesAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: IdentityRolesOrderByExp
+  operand:
+    object:
+      orderedType: IdentityRoles
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: roleId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: IdentityRolesOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: IdentityRoles
+  objectType: IdentityRoles
+  source:
+    dataConnectorName: scrappers_api
+    collection: identity_roles
+  filterExpressionType: IdentityRolesBoolExp
+  aggregateExpression: IdentityRolesAggExp
+  orderByExpression: IdentityRolesOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: identityRoles
+      subscription:
+        rootField: identityRoles
+    selectUniques:
+      - queryRootField: identityRolesByName
+        uniqueIdentifier:
+          - name
+        subscription:
+          rootField: identityRolesByName
+      - queryRootField: identityRolesByRoleId
+        uniqueIdentifier:
+          - roleId
+        subscription:
+          rootField: identityRolesByRoleId
+    filterInputTypeName: IdentityRolesFilterInput
+    aggregate:
+      queryRootField: identityRolesAggregate
+      subscription:
+        rootField: identityRolesAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: IdentityRoles
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityRolePermissions
+  sourceType: IdentityRoles
+  target:
+    model:
+      name: IdentityRolePermissions
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: IdentityRolePermissionsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: roleId
+      target:
+        modelField:
+          - fieldName: roleId
+  graphql:
+    aggregateFieldName: identityRolePermissionsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: identityUserRoles
+  sourceType: IdentityRoles
+  target:
+    model:
+      name: IdentityUserRoles
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: IdentityUserRolesAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: roleId
+      target:
+        modelField:
+          - fieldName: roleId
+  graphql:
+    aggregateFieldName: identityUserRolesAggregate
+

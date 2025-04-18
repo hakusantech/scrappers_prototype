@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingWeightTicketByTicketIdResponse
+  description: Responses from the 'delete_ticketing_weight_ticket_by_ticket_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingWeightTicket!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingWeightTicketByTicketIdResponse
+    inputTypeName: DeleteTicketingWeightTicketByTicketIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_weight_ticket_by_ticket_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingWeightTicketByTicketIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingWeightTicketByTicketId
+  outputType: DeleteTicketingWeightTicketByTicketIdResponse!
+  arguments:
+    - name: keyTicketId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingWeightTicketBoolExp
+      description: Delete permission predicate over the 'ticketing_weight_ticket' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_weight_ticket_by_ticket_id
+    argumentMapping:
+      keyTicketId: key_ticket_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingWeightTicketByTicketId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_weight_ticket' collection using
+    the 'ticket_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingWeightTicketByTicketId
+  permissions:
+    - role: admin
+      allowExecution: true
+

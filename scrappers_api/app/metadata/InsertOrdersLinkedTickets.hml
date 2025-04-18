@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersLinkedTicketsObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: linkedTicketId
+      type: Uuid
+    - name: netWeight
+      type: Numeric!
+    - name: orderId
+      type: Uuid!
+    - name: ticketId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertOrdersLinkedTicketsObject
+    inputTypeName: InsertOrdersLinkedTicketsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_linked_tickets_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        linkedTicketId:
+          column:
+            name: linked_ticket_id
+        netWeight:
+          column:
+            name: net_weight
+        orderId:
+          column:
+            name: order_id
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersLinkedTicketsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - linkedTicketId
+          - netWeight
+          - orderId
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertOrdersLinkedTicketsResponse
+  description: Responses from the 'insert_orders_linked_tickets' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersLinkedTickets!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertOrdersLinkedTicketsResponse
+    inputTypeName: InsertOrdersLinkedTicketsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_orders_linked_tickets_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertOrdersLinkedTicketsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertOrdersLinkedTickets
+  outputType: InsertOrdersLinkedTicketsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertOrdersLinkedTicketsObject!]!"
+    - name: postCheck
+      type: OrdersLinkedTicketsBoolExp
+      description: Insert permission predicate over the 'orders_linked_tickets' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_orders_linked_tickets
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertOrdersLinkedTickets
+    rootFieldKind: Mutation
+  description: Insert into the orders_linked_tickets table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertOrdersLinkedTickets
+  permissions:
+    - role: admin
+      allowExecution: true
+

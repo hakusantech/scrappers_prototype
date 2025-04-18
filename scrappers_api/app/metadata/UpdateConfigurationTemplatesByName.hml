@@ -1,0 +1,305 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnConfigurationTemplatesContent
+  description: Update the 'content' column in the 'configuration_templates' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnConfigurationTemplatesContent
+    inputTypeName: UpdateColumnConfigurationTemplatesContentInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_configuration_templates_content
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnConfigurationTemplatesContent
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnConfigurationTemplatesCreatedAt
+  description: Update the 'created_at' column in the 'configuration_templates' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnConfigurationTemplatesCreatedAt
+    inputTypeName: UpdateColumnConfigurationTemplatesCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_configuration_templates_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnConfigurationTemplatesCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnConfigurationTemplatesName
+  description: Update the 'name' column in the 'configuration_templates' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnConfigurationTemplatesName
+    inputTypeName: UpdateColumnConfigurationTemplatesNameInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_configuration_templates_name
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnConfigurationTemplatesName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnConfigurationTemplatesTemplateId
+  description: Update the 'template_id' column in the 'configuration_templates' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnConfigurationTemplatesTemplateId
+    inputTypeName: UpdateColumnConfigurationTemplatesTemplateIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_configuration_templates_template_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnConfigurationTemplatesTemplateId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnConfigurationTemplatesUpdatedAt
+  description: Update the 'updated_at' column in the 'configuration_templates' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnConfigurationTemplatesUpdatedAt
+    inputTypeName: UpdateColumnConfigurationTemplatesUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_configuration_templates_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnConfigurationTemplatesUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByNameUpdateColumns
+  description: Update the columns of the 'configuration_templates' collection
+  fields:
+    - name: content
+      type: UpdateColumnConfigurationTemplatesContent
+      description: Update the 'content' column in the 'configuration_templates' collection.
+    - name: createdAt
+      type: UpdateColumnConfigurationTemplatesCreatedAt
+      description: Update the 'created_at' column in the 'configuration_templates'
+        collection.
+    - name: name
+      type: UpdateColumnConfigurationTemplatesName
+      description: Update the 'name' column in the 'configuration_templates' collection.
+    - name: templateId
+      type: UpdateColumnConfigurationTemplatesTemplateId
+      description: Update the 'template_id' column in the 'configuration_templates'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnConfigurationTemplatesUpdatedAt
+      description: Update the 'updated_at' column in the 'configuration_templates'
+        collection.
+  graphql:
+    typeName: UpdateConfigurationTemplatesByNameUpdateColumns
+    inputTypeName: UpdateConfigurationTemplatesByNameUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_templates_by_name_update_columns
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        templateId:
+          column:
+            name: template_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationTemplatesByNameUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - name
+          - templateId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByNameResponse
+  description: Responses from the 'update_configuration_templates_by_name' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationTemplates!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateConfigurationTemplatesByNameResponse
+    inputTypeName: UpdateConfigurationTemplatesByNameResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_templates_by_name_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationTemplatesByNameResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByName
+  outputType: UpdateConfigurationTemplatesByNameResponse!
+  arguments:
+    - name: keyName
+      type: Text!
+    - name: postCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Update permission post-condition predicate over the
+        'configuration_templates' collection
+    - name: preCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Update permission pre-condition predicate over the
+        'configuration_templates' collection
+    - name: updateColumns
+      type: UpdateConfigurationTemplatesByNameUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_configuration_templates_by_name
+    argumentMapping:
+      keyName: key_name
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateConfigurationTemplatesByName
+    rootFieldKind: Mutation
+  description: Update any row on the 'configuration_templates' collection using
+    the 'name' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateConfigurationTemplatesByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

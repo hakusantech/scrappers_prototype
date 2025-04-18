@@ -1,0 +1,134 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetVehicleByVehicleIdUpdateColumns
+  description: Update the columns of the 'fleet_vehicle' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnFleetVehicleCreatedAt
+      description: Update the 'created_at' column in the 'fleet_vehicle' collection.
+    - name: plateNumber
+      type: UpdateColumnFleetVehiclePlateNumber
+      description: Update the 'plate_number' column in the 'fleet_vehicle' collection.
+    - name: updatedAt
+      type: UpdateColumnFleetVehicleUpdatedAt
+      description: Update the 'updated_at' column in the 'fleet_vehicle' collection.
+    - name: vehicleId
+      type: UpdateColumnFleetVehicleVehicleId
+      description: Update the 'vehicle_id' column in the 'fleet_vehicle' collection.
+  graphql:
+    typeName: UpdateFleetVehicleByVehicleIdUpdateColumns
+    inputTypeName: UpdateFleetVehicleByVehicleIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_vehicle_by_vehicle_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        updatedAt:
+          column:
+            name: updated_at
+        vehicleId:
+          column:
+            name: vehicle_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetVehicleByVehicleIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - plateNumber
+          - updatedAt
+          - vehicleId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetVehicleByVehicleIdResponse
+  description: Responses from the 'update_fleet_vehicle_by_vehicle_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetVehicle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFleetVehicleByVehicleIdResponse
+    inputTypeName: UpdateFleetVehicleByVehicleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_vehicle_by_vehicle_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetVehicleByVehicleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFleetVehicleByVehicleId
+  outputType: UpdateFleetVehicleByVehicleIdResponse!
+  arguments:
+    - name: keyVehicleId
+      type: Uuid!
+    - name: postCheck
+      type: FleetVehicleBoolExp
+      description: Update permission post-condition predicate over the 'fleet_vehicle'
+        collection
+    - name: preCheck
+      type: FleetVehicleBoolExp
+      description: Update permission pre-condition predicate over the 'fleet_vehicle'
+        collection
+    - name: updateColumns
+      type: UpdateFleetVehicleByVehicleIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_fleet_vehicle_by_vehicle_id
+    argumentMapping:
+      keyVehicleId: key_vehicle_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFleetVehicleByVehicleId
+    rootFieldKind: Mutation
+  description: Update any row on the 'fleet_vehicle' collection using the 'vehicle_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFleetVehicleByVehicleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,156 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ConfigurationSettings
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: settingKey
+      type: Text!
+    - name: settingValue
+      type: Jsonb!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: ConfigurationSettings
+    inputTypeName: ConfigurationSettingsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: configuration_settings
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        settingKey:
+          column:
+            name: setting_key
+        settingValue:
+          column:
+            name: setting_value
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ConfigurationSettings
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - settingKey
+          - settingValue
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ConfigurationSettingsBoolExp
+  operand:
+    object:
+      type: ConfigurationSettings
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: settingKey
+          booleanExpressionType: TextBoolExp
+        - fieldName: settingValue
+          booleanExpressionType: JsonbBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ConfigurationSettingsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ConfigurationSettingsAggExp
+  operand:
+    object:
+      aggregatedType: ConfigurationSettings
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: settingKey
+          aggregateExpression: TextAggExp
+        - fieldName: settingValue
+          aggregateExpression: JsonbAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ConfigurationSettingsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ConfigurationSettingsOrderByExp
+  operand:
+    object:
+      orderedType: ConfigurationSettings
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: settingKey
+          orderByExpression: TextOrderByExp
+        - fieldName: settingValue
+          orderByExpression: JsonbOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: ConfigurationSettingsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ConfigurationSettings
+  objectType: ConfigurationSettings
+  source:
+    dataConnectorName: scrappers_api
+    collection: configuration_settings
+  filterExpressionType: ConfigurationSettingsBoolExp
+  aggregateExpression: ConfigurationSettingsAggExp
+  orderByExpression: ConfigurationSettingsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: configurationSettings
+      subscription:
+        rootField: configurationSettings
+    selectUniques:
+      - queryRootField: configurationSettingsBySettingKey
+        uniqueIdentifier:
+          - settingKey
+        subscription:
+          rootField: configurationSettingsBySettingKey
+    filterInputTypeName: ConfigurationSettingsFilterInput
+    aggregate:
+      queryRootField: configurationSettingsAggregate
+      subscription:
+        rootField: configurationSettingsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ConfigurationSettings
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

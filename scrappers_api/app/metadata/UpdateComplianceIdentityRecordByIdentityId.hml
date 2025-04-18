@@ -1,0 +1,434 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordCreatedAt
+  description: Update the 'created_at' column in the 'compliance_identity_record' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordCreatedAt
+    inputTypeName: UpdateColumnComplianceIdentityRecordCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordDocumentNumber
+  description: Update the 'document_number' column in the
+    'compliance_identity_record' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordDocumentNumber
+    inputTypeName: UpdateColumnComplianceIdentityRecordDocumentNumberInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_document_number
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordDocumentNumber
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordDocumentType
+  description: Update the 'document_type' column in the
+    'compliance_identity_record' collection
+  fields:
+    - name: set
+      type: DocumentTypeEnum
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordDocumentType
+    inputTypeName: UpdateColumnComplianceIdentityRecordDocumentTypeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_document_type
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordDocumentType
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordExpiryDate
+  description: Update the 'expiry_date' column in the 'compliance_identity_record'
+    collection
+  fields:
+    - name: set
+      type: Date
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordExpiryDate
+    inputTypeName: UpdateColumnComplianceIdentityRecordExpiryDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_expiry_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordExpiryDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordIdentityId
+  description: Update the 'identity_id' column in the 'compliance_identity_record'
+    collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordIdentityId
+    inputTypeName: UpdateColumnComplianceIdentityRecordIdentityIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_identity_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordIdentityId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordIndividualName
+  description: Update the 'individual_name' column in the
+    'compliance_identity_record' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordIndividualName
+    inputTypeName: UpdateColumnComplianceIdentityRecordIndividualNameInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_individual_name
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordIndividualName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordIssuedDate
+  description: Update the 'issued_date' column in the 'compliance_identity_record'
+    collection
+  fields:
+    - name: set
+      type: Date
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordIssuedDate
+    inputTypeName: UpdateColumnComplianceIdentityRecordIssuedDateInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_issued_date
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordIssuedDate
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplianceIdentityRecordUpdatedAt
+  description: Update the 'updated_at' column in the 'compliance_identity_record' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplianceIdentityRecordUpdatedAt
+    inputTypeName: UpdateColumnComplianceIdentityRecordUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_compliance_identity_record_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplianceIdentityRecordUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateComplianceIdentityRecordByIdentityIdUpdateColumns
+  description: Update the columns of the 'compliance_identity_record' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnComplianceIdentityRecordCreatedAt
+      description: Update the 'created_at' column in the 'compliance_identity_record'
+        collection.
+    - name: documentNumber
+      type: UpdateColumnComplianceIdentityRecordDocumentNumber
+      description: Update the 'document_number' column in the
+        'compliance_identity_record' collection.
+    - name: documentType
+      type: UpdateColumnComplianceIdentityRecordDocumentType
+      description: Update the 'document_type' column in the
+        'compliance_identity_record' collection.
+    - name: expiryDate
+      type: UpdateColumnComplianceIdentityRecordExpiryDate
+      description: Update the 'expiry_date' column in the 'compliance_identity_record'
+        collection.
+    - name: identityId
+      type: UpdateColumnComplianceIdentityRecordIdentityId
+      description: Update the 'identity_id' column in the 'compliance_identity_record'
+        collection.
+    - name: individualName
+      type: UpdateColumnComplianceIdentityRecordIndividualName
+      description: Update the 'individual_name' column in the
+        'compliance_identity_record' collection.
+    - name: issuedDate
+      type: UpdateColumnComplianceIdentityRecordIssuedDate
+      description: Update the 'issued_date' column in the 'compliance_identity_record'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnComplianceIdentityRecordUpdatedAt
+      description: Update the 'updated_at' column in the 'compliance_identity_record'
+        collection.
+  graphql:
+    typeName: UpdateComplianceIdentityRecordByIdentityIdUpdateColumns
+    inputTypeName: UpdateComplianceIdentityRecordByIdentityIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_compliance_identity_record_by_identity_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        documentNumber:
+          column:
+            name: document_number
+        documentType:
+          column:
+            name: document_type
+        expiryDate:
+          column:
+            name: expiry_date
+        identityId:
+          column:
+            name: identity_id
+        individualName:
+          column:
+            name: individual_name
+        issuedDate:
+          column:
+            name: issued_date
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateComplianceIdentityRecordByIdentityIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - documentNumber
+          - documentType
+          - expiryDate
+          - identityId
+          - individualName
+          - issuedDate
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateComplianceIdentityRecordByIdentityIdResponse
+  description: Responses from the
+    'update_compliance_identity_record_by_identity_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ComplianceIdentityRecord!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateComplianceIdentityRecordByIdentityIdResponse
+    inputTypeName: UpdateComplianceIdentityRecordByIdentityIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_compliance_identity_record_by_identity_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateComplianceIdentityRecordByIdentityIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateComplianceIdentityRecordByIdentityId
+  outputType: UpdateComplianceIdentityRecordByIdentityIdResponse!
+  arguments:
+    - name: keyIdentityId
+      type: Uuid!
+    - name: postCheck
+      type: ComplianceIdentityRecordBoolExp
+      description: Update permission post-condition predicate over the
+        'compliance_identity_record' collection
+    - name: preCheck
+      type: ComplianceIdentityRecordBoolExp
+      description: Update permission pre-condition predicate over the
+        'compliance_identity_record' collection
+    - name: updateColumns
+      type: UpdateComplianceIdentityRecordByIdentityIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_compliance_identity_record_by_identity_id
+    argumentMapping:
+      keyIdentityId: key_identity_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateComplianceIdentityRecordByIdentityId
+    rootFieldKind: Mutation
+  description: Update any row on the 'compliance_identity_record' collection using
+    the 'identity_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateComplianceIdentityRecordByIdentityId
+  permissions:
+    - role: admin
+      allowExecution: true
+

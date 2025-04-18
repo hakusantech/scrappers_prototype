@@ -1,0 +1,163 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReportingReportDefinitionByReportDefinitionIdUpdateColumns
+  description: Update the columns of the 'reporting_report_definition' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnReportingReportDefinitionCreatedAt
+      description: Update the 'created_at' column in the 'reporting_report_definition'
+        collection.
+    - name: description
+      type: UpdateColumnReportingReportDefinitionDescription
+      description: Update the 'description' column in the
+        'reporting_report_definition' collection.
+    - name: name
+      type: UpdateColumnReportingReportDefinitionName
+      description: Update the 'name' column in the 'reporting_report_definition' collection.
+    - name: query
+      type: UpdateColumnReportingReportDefinitionQuery
+      description: Update the 'query' column in the 'reporting_report_definition'
+        collection.
+    - name: reportDefinitionId
+      type: UpdateColumnReportingReportDefinitionReportDefinitionId
+      description: Update the 'report_definition_id' column in the
+        'reporting_report_definition' collection.
+    - name: schedule
+      type: UpdateColumnReportingReportDefinitionSchedule
+      description: Update the 'schedule' column in the 'reporting_report_definition'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnReportingReportDefinitionUpdatedAt
+      description: Update the 'updated_at' column in the 'reporting_report_definition'
+        collection.
+  graphql:
+    typeName: UpdateReportingReportDefinitionByReportDefinitionIdUpdateColumns
+    inputTypeName: UpdateReportingReportDefinitionByReportDefinitionIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_reporting_report_definition_by_report_definition_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        description:
+          column:
+            name: description
+        name:
+          column:
+            name: name
+        query:
+          column:
+            name: query
+        reportDefinitionId:
+          column:
+            name: report_definition_id
+        schedule:
+          column:
+            name: schedule
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReportingReportDefinitionByReportDefinitionIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - description
+          - name
+          - query
+          - reportDefinitionId
+          - schedule
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReportingReportDefinitionByReportDefinitionIdResponse
+  description: Responses from the
+    'update_reporting_report_definition_by_report_definition_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReportingReportDefinition!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateReportingReportDefinitionByReportDefinitionIdResponse
+    inputTypeName: UpdateReportingReportDefinitionByReportDefinitionIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_reporting_report_definition_by_report_definition_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReportingReportDefinitionByReportDefinitionIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateReportingReportDefinitionByReportDefinitionId
+  outputType: UpdateReportingReportDefinitionByReportDefinitionIdResponse!
+  arguments:
+    - name: keyReportDefinitionId
+      type: Uuid!
+    - name: postCheck
+      type: ReportingReportDefinitionBoolExp
+      description: Update permission post-condition predicate over the
+        'reporting_report_definition' collection
+    - name: preCheck
+      type: ReportingReportDefinitionBoolExp
+      description: Update permission pre-condition predicate over the
+        'reporting_report_definition' collection
+    - name: updateColumns
+      type: UpdateReportingReportDefinitionByReportDefinitionIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_reporting_report_definition_by_report_definition_id
+    argumentMapping:
+      keyReportDefinitionId: key_report_definition_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateReportingReportDefinitionByReportDefinitionId
+    rootFieldKind: Mutation
+  description: Update any row on the 'reporting_report_definition' collection
+    using the 'report_definition_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateReportingReportDefinitionByReportDefinitionId
+  permissions:
+    - role: admin
+      allowExecution: true
+

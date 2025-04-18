@@ -1,0 +1,2312 @@
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Timestamptz
+  graphql:
+    typeName: Timestamptz
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TimestamptzBoolExp
+  operand:
+    scalar:
+      type: Timestamptz
+      comparisonOperators:
+        - name: _eq
+          argumentType: Timestamptz!
+        - name: _gt
+          argumentType: Timestamptz!
+        - name: _gte
+          argumentType: Timestamptz!
+        - name: _in
+          argumentType: "[Timestamptz!]!"
+        - name: _lt
+          argumentType: Timestamptz!
+        - name: _lte
+          argumentType: Timestamptz!
+        - name: _neq
+          argumentType: Timestamptz!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: timestamptz
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TimestamptzBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: timestamptz
+  representation: Timestamptz
+  graphql:
+    comparisonExpressionTypeName: TimestamptzComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Text
+  graphql:
+    typeName: Text
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TextBoolExp
+  operand:
+    scalar:
+      type: Text
+      comparisonOperators:
+        - name: _eq
+          argumentType: Text!
+        - name: _gt
+          argumentType: Text!
+        - name: _gte
+          argumentType: Text!
+        - name: _ilike
+          argumentType: Text!
+        - name: _in
+          argumentType: "[Text!]!"
+        - name: _iregex
+          argumentType: Text!
+        - name: _like
+          argumentType: Text!
+        - name: _lt
+          argumentType: Text!
+        - name: _lte
+          argumentType: Text!
+        - name: _neq
+          argumentType: Text!
+        - name: _nilike
+          argumentType: Text!
+        - name: _niregex
+          argumentType: Text!
+        - name: _nlike
+          argumentType: Text!
+        - name: _nregex
+          argumentType: Text!
+        - name: _regex
+          argumentType: Text!
+        - name: starts_with
+          argumentType: Text!
+        - name: ts_match_tt
+          argumentType: Text!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: text
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TextBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: text
+  representation: Text
+  graphql:
+    comparisonExpressionTypeName: TextComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: DocumentTypeEnum
+  graphql:
+    typeName: DocumentTypeEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: DocumentTypeEnumBoolExp
+  operand:
+    scalar:
+      type: DocumentTypeEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: DocumentTypeEnum!
+        - name: _gt
+          argumentType: DocumentTypeEnum!
+        - name: _gte
+          argumentType: DocumentTypeEnum!
+        - name: _in
+          argumentType: "[DocumentTypeEnum!]!"
+        - name: _lt
+          argumentType: DocumentTypeEnum!
+        - name: _lte
+          argumentType: DocumentTypeEnum!
+        - name: _neq
+          argumentType: DocumentTypeEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: document_type_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: DocumentTypeEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: document_type_enum
+  representation: DocumentTypeEnum
+  graphql:
+    comparisonExpressionTypeName: DocumentTypeEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Date
+  graphql:
+    typeName: Date
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: DateBoolExp
+  operand:
+    scalar:
+      type: Date
+      comparisonOperators:
+        - name: _eq
+          argumentType: Date!
+        - name: _gt
+          argumentType: Date!
+        - name: _gte
+          argumentType: Date!
+        - name: _in
+          argumentType: "[Date!]!"
+        - name: _lt
+          argumentType: Date!
+        - name: _lte
+          argumentType: Date!
+        - name: _neq
+          argumentType: Date!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: date
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: DateBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: date
+  representation: Date
+  graphql:
+    comparisonExpressionTypeName: DateComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Uuid
+  graphql:
+    typeName: Uuid
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: UuidBoolExp
+  operand:
+    scalar:
+      type: Uuid
+      comparisonOperators:
+        - name: _eq
+          argumentType: Uuid!
+        - name: _gt
+          argumentType: Uuid!
+        - name: _gte
+          argumentType: Uuid!
+        - name: _in
+          argumentType: "[Uuid!]!"
+        - name: _lt
+          argumentType: Uuid!
+        - name: _lte
+          argumentType: Uuid!
+        - name: _neq
+          argumentType: Uuid!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: uuid
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: UuidBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: uuid
+  representation: Uuid
+  graphql:
+    comparisonExpressionTypeName: UuidComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TimestamptzAggExp
+  operand:
+    scalar:
+      aggregatedType: Timestamptz
+      aggregationFunctions:
+        - name: max
+          returnType: Timestamptz
+        - name: min
+          returnType: Timestamptz
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: timestamptz
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: TimestamptzAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TextAggExp
+  operand:
+    scalar:
+      aggregatedType: Text
+      aggregationFunctions:
+        - name: max
+          returnType: Text
+        - name: min
+          returnType: Text
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: text
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: TextAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: DocumentTypeEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: DocumentTypeEnum
+      aggregationFunctions:
+        - name: max
+          returnType: DocumentTypeEnum
+        - name: min
+          returnType: DocumentTypeEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: document_type_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: DocumentTypeEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: DateAggExp
+  operand:
+    scalar:
+      aggregatedType: Date
+      aggregationFunctions:
+        - name: max
+          returnType: Date
+        - name: min
+          returnType: Date
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: date
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: DateAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: UuidAggExp
+  operand:
+    scalar:
+      aggregatedType: Uuid
+      aggregationFunctions: []
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: uuid
+          functionMapping: {}
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: UuidAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TimestamptzOrderByExp
+  operand:
+    scalar:
+      orderedType: Timestamptz
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: TimestamptzOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TextOrderByExp
+  operand:
+    scalar:
+      orderedType: Text
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: TextOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: DocumentTypeEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: DocumentTypeEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: DocumentTypeEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: DateOrderByExp
+  operand:
+    scalar:
+      orderedType: Date
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: DateOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: UuidOrderByExp
+  operand:
+    scalar:
+      orderedType: Uuid
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: UuidOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: CustomFieldContextEnum
+  graphql:
+    typeName: CustomFieldContextEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CustomFieldContextEnumBoolExp
+  operand:
+    scalar:
+      type: CustomFieldContextEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: CustomFieldContextEnum!
+        - name: _gt
+          argumentType: CustomFieldContextEnum!
+        - name: _gte
+          argumentType: CustomFieldContextEnum!
+        - name: _in
+          argumentType: "[CustomFieldContextEnum!]!"
+        - name: _lt
+          argumentType: CustomFieldContextEnum!
+        - name: _lte
+          argumentType: CustomFieldContextEnum!
+        - name: _neq
+          argumentType: CustomFieldContextEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: custom_field_context_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CustomFieldContextEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: custom_field_context_enum
+  representation: CustomFieldContextEnum
+  graphql:
+    comparisonExpressionTypeName: CustomFieldContextEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: CustomFieldTypeEnum
+  graphql:
+    typeName: CustomFieldTypeEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CustomFieldTypeEnumBoolExp
+  operand:
+    scalar:
+      type: CustomFieldTypeEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: CustomFieldTypeEnum!
+        - name: _gt
+          argumentType: CustomFieldTypeEnum!
+        - name: _gte
+          argumentType: CustomFieldTypeEnum!
+        - name: _in
+          argumentType: "[CustomFieldTypeEnum!]!"
+        - name: _lt
+          argumentType: CustomFieldTypeEnum!
+        - name: _lte
+          argumentType: CustomFieldTypeEnum!
+        - name: _neq
+          argumentType: CustomFieldTypeEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: custom_field_type_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CustomFieldTypeEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: custom_field_type_enum
+  representation: CustomFieldTypeEnum
+  graphql:
+    comparisonExpressionTypeName: CustomFieldTypeEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Jsonb
+  graphql:
+    typeName: Jsonb
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: JsonbBoolExp
+  operand:
+    scalar:
+      type: Jsonb
+      comparisonOperators:
+        - name: _eq
+          argumentType: Jsonb!
+        - name: _gt
+          argumentType: Jsonb!
+        - name: _gte
+          argumentType: Jsonb!
+        - name: _in
+          argumentType: "[Jsonb!]!"
+        - name: _lt
+          argumentType: Jsonb!
+        - name: _lte
+          argumentType: Jsonb!
+        - name: _neq
+          argumentType: Jsonb!
+        - name: jsonb_contained
+          argumentType: Jsonb!
+        - name: jsonb_contains
+          argumentType: Jsonb!
+        - name: jsonb_exists
+          argumentType: Text!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: jsonb
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: JsonbBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: jsonb
+  representation: Jsonb
+  graphql:
+    comparisonExpressionTypeName: JsonbComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CustomFieldContextEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: CustomFieldContextEnum
+      aggregationFunctions:
+        - name: max
+          returnType: CustomFieldContextEnum
+        - name: min
+          returnType: CustomFieldContextEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: custom_field_context_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: CustomFieldContextEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CustomFieldTypeEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: CustomFieldTypeEnum
+      aggregationFunctions:
+        - name: max
+          returnType: CustomFieldTypeEnum
+        - name: min
+          returnType: CustomFieldTypeEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: custom_field_type_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: CustomFieldTypeEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: JsonbAggExp
+  operand:
+    scalar:
+      aggregatedType: Jsonb
+      aggregationFunctions: []
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: jsonb
+          functionMapping: {}
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: JsonbAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: CustomFieldContextEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: CustomFieldContextEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: CustomFieldContextEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: CustomFieldTypeEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: CustomFieldTypeEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: CustomFieldTypeEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: JsonbOrderByExp
+  operand:
+    scalar:
+      orderedType: Jsonb
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: JsonbOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: DispatchStatusEnum
+  graphql:
+    typeName: DispatchStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: DispatchStatusEnumBoolExp
+  operand:
+    scalar:
+      type: DispatchStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: DispatchStatusEnum!
+        - name: _gt
+          argumentType: DispatchStatusEnum!
+        - name: _gte
+          argumentType: DispatchStatusEnum!
+        - name: _in
+          argumentType: "[DispatchStatusEnum!]!"
+        - name: _lt
+          argumentType: DispatchStatusEnum!
+        - name: _lte
+          argumentType: DispatchStatusEnum!
+        - name: _neq
+          argumentType: DispatchStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: dispatch_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: DispatchStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: dispatch_status_enum
+  representation: DispatchStatusEnum
+  graphql:
+    comparisonExpressionTypeName: DispatchStatusEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: DispatchStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: DispatchStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: DispatchStatusEnum
+        - name: min
+          returnType: DispatchStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: dispatch_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: DispatchStatusEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: DispatchStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: DispatchStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: DispatchStatusEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Numeric
+  graphql:
+    typeName: Numeric
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: NumericBoolExp
+  operand:
+    scalar:
+      type: Numeric
+      comparisonOperators:
+        - name: _eq
+          argumentType: Numeric!
+        - name: _gt
+          argumentType: Numeric!
+        - name: _gte
+          argumentType: Numeric!
+        - name: _in
+          argumentType: "[Numeric!]!"
+        - name: _lt
+          argumentType: Numeric!
+        - name: _lte
+          argumentType: Numeric!
+        - name: _neq
+          argumentType: Numeric!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: numeric
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: NumericBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: numeric
+  representation: Numeric
+  graphql:
+    comparisonExpressionTypeName: NumericComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: CurrencyEnum
+  graphql:
+    typeName: CurrencyEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CurrencyEnumBoolExp
+  operand:
+    scalar:
+      type: CurrencyEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: CurrencyEnum!
+        - name: _gt
+          argumentType: CurrencyEnum!
+        - name: _gte
+          argumentType: CurrencyEnum!
+        - name: _in
+          argumentType: "[CurrencyEnum!]!"
+        - name: _lt
+          argumentType: CurrencyEnum!
+        - name: _lte
+          argumentType: CurrencyEnum!
+        - name: _neq
+          argumentType: CurrencyEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: currency_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CurrencyEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: currency_enum
+  representation: CurrencyEnum
+  graphql:
+    comparisonExpressionTypeName: CurrencyEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: InvoiceStatusEnum
+  graphql:
+    typeName: InvoiceStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: InvoiceStatusEnumBoolExp
+  operand:
+    scalar:
+      type: InvoiceStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: InvoiceStatusEnum!
+        - name: _gt
+          argumentType: InvoiceStatusEnum!
+        - name: _gte
+          argumentType: InvoiceStatusEnum!
+        - name: _in
+          argumentType: "[InvoiceStatusEnum!]!"
+        - name: _lt
+          argumentType: InvoiceStatusEnum!
+        - name: _lte
+          argumentType: InvoiceStatusEnum!
+        - name: _neq
+          argumentType: InvoiceStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: invoice_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: InvoiceStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: invoice_status_enum
+  representation: InvoiceStatusEnum
+  graphql:
+    comparisonExpressionTypeName: InvoiceStatusEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: NumericAggExp
+  operand:
+    scalar:
+      aggregatedType: Numeric
+      aggregationFunctions:
+        - name: avg
+          returnType: Numeric
+        - name: max
+          returnType: Numeric
+        - name: min
+          returnType: Numeric
+        - name: stddev
+          returnType: Numeric
+        - name: stddev_pop
+          returnType: Numeric
+        - name: stddev_samp
+          returnType: Numeric
+        - name: sum
+          returnType: Numeric
+        - name: var_pop
+          returnType: Numeric
+        - name: var_samp
+          returnType: Numeric
+        - name: variance
+          returnType: Numeric
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: numeric
+          functionMapping:
+            avg:
+              name: avg
+            max:
+              name: max
+            min:
+              name: min
+            stddev:
+              name: stddev
+            stddev_pop:
+              name: stddev_pop
+            stddev_samp:
+              name: stddev_samp
+            sum:
+              name: sum
+            var_pop:
+              name: var_pop
+            var_samp:
+              name: var_samp
+            variance:
+              name: variance
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: NumericAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CurrencyEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: CurrencyEnum
+      aggregationFunctions:
+        - name: max
+          returnType: CurrencyEnum
+        - name: min
+          returnType: CurrencyEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: currency_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: CurrencyEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: InvoiceStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: InvoiceStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: InvoiceStatusEnum
+        - name: min
+          returnType: InvoiceStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: invoice_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: InvoiceStatusEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: NumericOrderByExp
+  operand:
+    scalar:
+      orderedType: Numeric
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: NumericOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: CurrencyEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: CurrencyEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: CurrencyEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: InvoiceStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: InvoiceStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: InvoiceStatusEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: PaymentMethodEnum
+  graphql:
+    typeName: PaymentMethodEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PaymentMethodEnumBoolExp
+  operand:
+    scalar:
+      type: PaymentMethodEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: PaymentMethodEnum!
+        - name: _gt
+          argumentType: PaymentMethodEnum!
+        - name: _gte
+          argumentType: PaymentMethodEnum!
+        - name: _in
+          argumentType: "[PaymentMethodEnum!]!"
+        - name: _lt
+          argumentType: PaymentMethodEnum!
+        - name: _lte
+          argumentType: PaymentMethodEnum!
+        - name: _neq
+          argumentType: PaymentMethodEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: payment_method_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PaymentMethodEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: payment_method_enum
+  representation: PaymentMethodEnum
+  graphql:
+    comparisonExpressionTypeName: PaymentMethodEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PaymentMethodEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: PaymentMethodEnum
+      aggregationFunctions:
+        - name: max
+          returnType: PaymentMethodEnum
+        - name: min
+          returnType: PaymentMethodEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: payment_method_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: PaymentMethodEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PaymentMethodEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: PaymentMethodEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: PaymentMethodEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: AuditResourceEnum
+  graphql:
+    typeName: AuditResourceEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: AuditResourceEnumBoolExp
+  operand:
+    scalar:
+      type: AuditResourceEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: AuditResourceEnum!
+        - name: _gt
+          argumentType: AuditResourceEnum!
+        - name: _gte
+          argumentType: AuditResourceEnum!
+        - name: _in
+          argumentType: "[AuditResourceEnum!]!"
+        - name: _lt
+          argumentType: AuditResourceEnum!
+        - name: _lte
+          argumentType: AuditResourceEnum!
+        - name: _neq
+          argumentType: AuditResourceEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: audit_resource_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: AuditResourceEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: audit_resource_enum
+  representation: AuditResourceEnum
+  graphql:
+    comparisonExpressionTypeName: AuditResourceEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: AuditResourceEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: AuditResourceEnum
+      aggregationFunctions:
+        - name: max
+          returnType: AuditResourceEnum
+        - name: min
+          returnType: AuditResourceEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: audit_resource_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: AuditResourceEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: AuditResourceEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: AuditResourceEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: AuditResourceEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: LotStateEnum
+  graphql:
+    typeName: LotStateEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: LotStateEnumBoolExp
+  operand:
+    scalar:
+      type: LotStateEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: LotStateEnum!
+        - name: _gt
+          argumentType: LotStateEnum!
+        - name: _gte
+          argumentType: LotStateEnum!
+        - name: _in
+          argumentType: "[LotStateEnum!]!"
+        - name: _lt
+          argumentType: LotStateEnum!
+        - name: _lte
+          argumentType: LotStateEnum!
+        - name: _neq
+          argumentType: LotStateEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: lot_state_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: LotStateEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: lot_state_enum
+  representation: LotStateEnum
+  graphql:
+    comparisonExpressionTypeName: LotStateEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: UnitEnum
+  graphql:
+    typeName: UnitEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: UnitEnumBoolExp
+  operand:
+    scalar:
+      type: UnitEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: UnitEnum!
+        - name: _gt
+          argumentType: UnitEnum!
+        - name: _gte
+          argumentType: UnitEnum!
+        - name: _in
+          argumentType: "[UnitEnum!]!"
+        - name: _lt
+          argumentType: UnitEnum!
+        - name: _lte
+          argumentType: UnitEnum!
+        - name: _neq
+          argumentType: UnitEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: unit_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: UnitEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: unit_enum
+  representation: UnitEnum
+  graphql:
+    comparisonExpressionTypeName: UnitEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: LotStateEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: LotStateEnum
+      aggregationFunctions:
+        - name: max
+          returnType: LotStateEnum
+        - name: min
+          returnType: LotStateEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: lot_state_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: LotStateEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: UnitEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: UnitEnum
+      aggregationFunctions:
+        - name: max
+          returnType: UnitEnum
+        - name: min
+          returnType: UnitEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: unit_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: UnitEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: LotStateEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: LotStateEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: LotStateEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: UnitEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: UnitEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: UnitEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: PaymentTermsEnum
+  graphql:
+    typeName: PaymentTermsEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PaymentTermsEnumBoolExp
+  operand:
+    scalar:
+      type: PaymentTermsEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: PaymentTermsEnum!
+        - name: _gt
+          argumentType: PaymentTermsEnum!
+        - name: _gte
+          argumentType: PaymentTermsEnum!
+        - name: _in
+          argumentType: "[PaymentTermsEnum!]!"
+        - name: _lt
+          argumentType: PaymentTermsEnum!
+        - name: _lte
+          argumentType: PaymentTermsEnum!
+        - name: _neq
+          argumentType: PaymentTermsEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: payment_terms_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PaymentTermsEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: payment_terms_enum
+  representation: PaymentTermsEnum
+  graphql:
+    comparisonExpressionTypeName: PaymentTermsEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: OrderStatusEnum
+  graphql:
+    typeName: OrderStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: OrderStatusEnumBoolExp
+  operand:
+    scalar:
+      type: OrderStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: OrderStatusEnum!
+        - name: _gt
+          argumentType: OrderStatusEnum!
+        - name: _gte
+          argumentType: OrderStatusEnum!
+        - name: _in
+          argumentType: "[OrderStatusEnum!]!"
+        - name: _lt
+          argumentType: OrderStatusEnum!
+        - name: _lte
+          argumentType: OrderStatusEnum!
+        - name: _neq
+          argumentType: OrderStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: order_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: OrderStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: order_status_enum
+  representation: OrderStatusEnum
+  graphql:
+    comparisonExpressionTypeName: OrderStatusEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PaymentTermsEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: PaymentTermsEnum
+      aggregationFunctions:
+        - name: max
+          returnType: PaymentTermsEnum
+        - name: min
+          returnType: PaymentTermsEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: payment_terms_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: PaymentTermsEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: OrderStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: OrderStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: OrderStatusEnum
+        - name: min
+          returnType: OrderStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: order_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: OrderStatusEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PaymentTermsEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: PaymentTermsEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: PaymentTermsEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: OrderStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: OrderStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: OrderStatusEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: PriceListStatusEnum
+  graphql:
+    typeName: PriceListStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PriceListStatusEnumBoolExp
+  operand:
+    scalar:
+      type: PriceListStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: PriceListStatusEnum!
+        - name: _gt
+          argumentType: PriceListStatusEnum!
+        - name: _gte
+          argumentType: PriceListStatusEnum!
+        - name: _in
+          argumentType: "[PriceListStatusEnum!]!"
+        - name: _lt
+          argumentType: PriceListStatusEnum!
+        - name: _lte
+          argumentType: PriceListStatusEnum!
+        - name: _neq
+          argumentType: PriceListStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: price_list_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PriceListStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: price_list_status_enum
+  representation: PriceListStatusEnum
+  graphql:
+    comparisonExpressionTypeName: PriceListStatusEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: PriceListStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: PriceListStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: PriceListStatusEnum
+        - name: min
+          returnType: PriceListStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: price_list_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: PriceListStatusEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: PriceListStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: PriceListStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: PriceListStatusEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: ScheduleEnum
+  graphql:
+    typeName: ScheduleEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ScheduleEnumBoolExp
+  operand:
+    scalar:
+      type: ScheduleEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: ScheduleEnum!
+        - name: _gt
+          argumentType: ScheduleEnum!
+        - name: _gte
+          argumentType: ScheduleEnum!
+        - name: _in
+          argumentType: "[ScheduleEnum!]!"
+        - name: _lt
+          argumentType: ScheduleEnum!
+        - name: _lte
+          argumentType: ScheduleEnum!
+        - name: _neq
+          argumentType: ScheduleEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: schedule_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ScheduleEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: schedule_enum
+  representation: ScheduleEnum
+  graphql:
+    comparisonExpressionTypeName: ScheduleEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ScheduleEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: ScheduleEnum
+      aggregationFunctions:
+        - name: max
+          returnType: ScheduleEnum
+        - name: min
+          returnType: ScheduleEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: schedule_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: ScheduleEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ScheduleEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: ScheduleEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: ScheduleEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: SupportTicketStatusEnum
+  graphql:
+    typeName: SupportTicketStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: SupportTicketStatusEnumBoolExp
+  operand:
+    scalar:
+      type: SupportTicketStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: SupportTicketStatusEnum!
+        - name: _gt
+          argumentType: SupportTicketStatusEnum!
+        - name: _gte
+          argumentType: SupportTicketStatusEnum!
+        - name: _in
+          argumentType: "[SupportTicketStatusEnum!]!"
+        - name: _lt
+          argumentType: SupportTicketStatusEnum!
+        - name: _lte
+          argumentType: SupportTicketStatusEnum!
+        - name: _neq
+          argumentType: SupportTicketStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: support_ticket_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: SupportTicketStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: support_ticket_status_enum
+  representation: SupportTicketStatusEnum
+  graphql:
+    comparisonExpressionTypeName: SupportTicketStatusEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: SupportTicketStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: SupportTicketStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: SupportTicketStatusEnum
+        - name: min
+          returnType: SupportTicketStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: support_ticket_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: SupportTicketStatusEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: SupportTicketStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: SupportTicketStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: SupportTicketStatusEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: AttachmentTypeEnum
+  graphql:
+    typeName: AttachmentTypeEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: AttachmentTypeEnumBoolExp
+  operand:
+    scalar:
+      type: AttachmentTypeEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: AttachmentTypeEnum!
+        - name: _gt
+          argumentType: AttachmentTypeEnum!
+        - name: _gte
+          argumentType: AttachmentTypeEnum!
+        - name: _in
+          argumentType: "[AttachmentTypeEnum!]!"
+        - name: _lt
+          argumentType: AttachmentTypeEnum!
+        - name: _lte
+          argumentType: AttachmentTypeEnum!
+        - name: _neq
+          argumentType: AttachmentTypeEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: attachment_type_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: AttachmentTypeEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: attachment_type_enum
+  representation: AttachmentTypeEnum
+  graphql:
+    comparisonExpressionTypeName: AttachmentTypeEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: AttachmentTypeEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: AttachmentTypeEnum
+      aggregationFunctions:
+        - name: max
+          returnType: AttachmentTypeEnum
+        - name: min
+          returnType: AttachmentTypeEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: attachment_type_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: AttachmentTypeEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: AttachmentTypeEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: AttachmentTypeEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: AttachmentTypeEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: TicketStatusEnum
+  graphql:
+    typeName: TicketStatusEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketStatusEnumBoolExp
+  operand:
+    scalar:
+      type: TicketStatusEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: TicketStatusEnum!
+        - name: _gt
+          argumentType: TicketStatusEnum!
+        - name: _gte
+          argumentType: TicketStatusEnum!
+        - name: _in
+          argumentType: "[TicketStatusEnum!]!"
+        - name: _lt
+          argumentType: TicketStatusEnum!
+        - name: _lte
+          argumentType: TicketStatusEnum!
+        - name: _neq
+          argumentType: TicketStatusEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: ticket_status_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketStatusEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: ticket_status_enum
+  representation: TicketStatusEnum
+  graphql:
+    comparisonExpressionTypeName: TicketStatusEnumComparisonExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: TicketTypeEnum
+  graphql:
+    typeName: TicketTypeEnum
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketTypeEnumBoolExp
+  operand:
+    scalar:
+      type: TicketTypeEnum
+      comparisonOperators:
+        - name: _eq
+          argumentType: TicketTypeEnum!
+        - name: _gt
+          argumentType: TicketTypeEnum!
+        - name: _gte
+          argumentType: TicketTypeEnum!
+        - name: _in
+          argumentType: "[TicketTypeEnum!]!"
+        - name: _lt
+          argumentType: TicketTypeEnum!
+        - name: _lte
+          argumentType: TicketTypeEnum!
+        - name: _neq
+          argumentType: TicketTypeEnum!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: ticket_type_enum
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketTypeEnumBoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: ticket_type_enum
+  representation: TicketTypeEnum
+  graphql:
+    comparisonExpressionTypeName: TicketTypeEnumComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketStatusEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: TicketStatusEnum
+      aggregationFunctions:
+        - name: max
+          returnType: TicketStatusEnum
+        - name: min
+          returnType: TicketStatusEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: ticket_status_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: TicketStatusEnumAggExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketTypeEnumAggExp
+  operand:
+    scalar:
+      aggregatedType: TicketTypeEnum
+      aggregationFunctions:
+        - name: max
+          returnType: TicketTypeEnum
+        - name: min
+          returnType: TicketTypeEnum
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: ticket_type_enum
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: TicketTypeEnumAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketStatusEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: TicketStatusEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: TicketStatusEnumOrderByExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketTypeEnumOrderByExp
+  operand:
+    scalar:
+      orderedType: TicketTypeEnum
+      enableOrderByDirections:
+        enableAll: true
+  graphql:
+    expressionTypeName: TicketTypeEnumOrderByExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Int4
+  graphql:
+    typeName: Int4
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: Int4BoolExp
+  operand:
+    scalar:
+      type: Int4
+      comparisonOperators: []
+      dataConnectorOperatorMapping:
+        - dataConnectorName: scrappers_api
+          dataConnectorScalarType: int4
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: Int4BoolExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: scrappers_api
+  dataConnectorScalarType: int4
+  representation: Int4
+  graphql:
+    comparisonExpressionTypeName: Int4ComparisonExp
+

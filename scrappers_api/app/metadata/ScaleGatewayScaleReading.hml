@@ -1,0 +1,200 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ScaleGatewayScaleReading
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: deviceId
+      type: Uuid!
+    - name: readingId
+      type: Uuid!
+    - name: recordedAt
+      type: Timestamptz!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: weight
+      type: Numeric!
+  graphql:
+    typeName: ScaleGatewayScaleReading
+    inputTypeName: ScaleGatewayScaleReadingInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: scale_gateway_scale_reading
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        deviceId:
+          column:
+            name: device_id
+        readingId:
+          column:
+            name: reading_id
+        recordedAt:
+          column:
+            name: recorded_at
+        updatedAt:
+          column:
+            name: updated_at
+        weight:
+          column:
+            name: weight
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ScaleGatewayScaleReading
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - deviceId
+          - readingId
+          - recordedAt
+          - updatedAt
+          - weight
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ScaleGatewayScaleReadingBoolExp
+  operand:
+    object:
+      type: ScaleGatewayScaleReading
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: deviceId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: readingId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: recordedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: weight
+          booleanExpressionType: NumericBoolExp
+      comparableRelationships:
+        - relationshipName: scaleGatewayScaleDevice
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ScaleGatewayScaleReadingBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ScaleGatewayScaleReadingAggExp
+  operand:
+    object:
+      aggregatedType: ScaleGatewayScaleReading
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: deviceId
+          aggregateExpression: UuidAggExp
+        - fieldName: readingId
+          aggregateExpression: UuidAggExp
+        - fieldName: recordedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: weight
+          aggregateExpression: NumericAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ScaleGatewayScaleReadingAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ScaleGatewayScaleReadingOrderByExp
+  operand:
+    object:
+      orderedType: ScaleGatewayScaleReading
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: deviceId
+          orderByExpression: UuidOrderByExp
+        - fieldName: readingId
+          orderByExpression: UuidOrderByExp
+        - fieldName: recordedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: weight
+          orderByExpression: NumericOrderByExp
+      orderableRelationships:
+        - relationshipName: scaleGatewayScaleDevice
+  graphql:
+    expressionTypeName: ScaleGatewayScaleReadingOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ScaleGatewayScaleReading
+  objectType: ScaleGatewayScaleReading
+  source:
+    dataConnectorName: scrappers_api
+    collection: scale_gateway_scale_reading
+  filterExpressionType: ScaleGatewayScaleReadingBoolExp
+  aggregateExpression: ScaleGatewayScaleReadingAggExp
+  orderByExpression: ScaleGatewayScaleReadingOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: scaleGatewayScaleReading
+      subscription:
+        rootField: scaleGatewayScaleReading
+    selectUniques:
+      - queryRootField: scaleGatewayScaleReadingByReadingId
+        uniqueIdentifier:
+          - readingId
+        subscription:
+          rootField: scaleGatewayScaleReadingByReadingId
+    filterInputTypeName: ScaleGatewayScaleReadingFilterInput
+    aggregate:
+      queryRootField: scaleGatewayScaleReadingAggregate
+      subscription:
+        rootField: scaleGatewayScaleReadingAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ScaleGatewayScaleReading
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: scaleGatewayScaleDevice
+  sourceType: ScaleGatewayScaleReading
+  target:
+    model:
+      name: ScaleGatewayScaleDevice
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: deviceId
+      target:
+        modelField:
+          - fieldName: deviceId
+

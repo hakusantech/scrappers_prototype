@@ -1,0 +1,458 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineCreatedAt
+  description: Update the 'created_at' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineCreatedAt
+    inputTypeName: UpdateColumnOrdersOrderLineCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineLotRef
+  description: Update the 'lot_ref' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineLotRef
+    inputTypeName: UpdateColumnOrdersOrderLineLotRefInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_lot_ref
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineLotRef
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineMaterialId
+  description: Update the 'material_id' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineMaterialId
+    inputTypeName: UpdateColumnOrdersOrderLineMaterialIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_material_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineMaterialId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineOrderId
+  description: Update the 'order_id' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineOrderId
+    inputTypeName: UpdateColumnOrdersOrderLineOrderIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_order_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineOrderId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineOrderLineId
+  description: Update the 'order_line_id' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineOrderLineId
+    inputTypeName: UpdateColumnOrdersOrderLineOrderLineIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_order_line_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineOrderLineId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLinePrice
+  description: Update the 'price' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLinePrice
+    inputTypeName: UpdateColumnOrdersOrderLinePriceInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_price
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLinePrice
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineQuantity
+  description: Update the 'quantity' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Numeric!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineQuantity
+    inputTypeName: UpdateColumnOrdersOrderLineQuantityInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_quantity
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineQuantity
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineUnit
+  description: Update the 'unit' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: UnitEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineUnit
+    inputTypeName: UpdateColumnOrdersOrderLineUnitInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_unit
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineUnit
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnOrdersOrderLineUpdatedAt
+  description: Update the 'updated_at' column in the 'orders_order_line' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnOrdersOrderLineUpdatedAt
+    inputTypeName: UpdateColumnOrdersOrderLineUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_orders_order_line_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnOrdersOrderLineUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersOrderLineByOrderLineIdUpdateColumns
+  description: Update the columns of the 'orders_order_line' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnOrdersOrderLineCreatedAt
+      description: Update the 'created_at' column in the 'orders_order_line' collection.
+    - name: lotRef
+      type: UpdateColumnOrdersOrderLineLotRef
+      description: Update the 'lot_ref' column in the 'orders_order_line' collection.
+    - name: materialId
+      type: UpdateColumnOrdersOrderLineMaterialId
+      description: Update the 'material_id' column in the 'orders_order_line' collection.
+    - name: orderId
+      type: UpdateColumnOrdersOrderLineOrderId
+      description: Update the 'order_id' column in the 'orders_order_line' collection.
+    - name: orderLineId
+      type: UpdateColumnOrdersOrderLineOrderLineId
+      description: Update the 'order_line_id' column in the 'orders_order_line' collection.
+    - name: price
+      type: UpdateColumnOrdersOrderLinePrice
+      description: Update the 'price' column in the 'orders_order_line' collection.
+    - name: quantity
+      type: UpdateColumnOrdersOrderLineQuantity
+      description: Update the 'quantity' column in the 'orders_order_line' collection.
+    - name: unit
+      type: UpdateColumnOrdersOrderLineUnit
+      description: Update the 'unit' column in the 'orders_order_line' collection.
+    - name: updatedAt
+      type: UpdateColumnOrdersOrderLineUpdatedAt
+      description: Update the 'updated_at' column in the 'orders_order_line' collection.
+  graphql:
+    typeName: UpdateOrdersOrderLineByOrderLineIdUpdateColumns
+    inputTypeName: UpdateOrdersOrderLineByOrderLineIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_order_line_by_order_line_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        lotRef:
+          column:
+            name: lot_ref
+        materialId:
+          column:
+            name: material_id
+        orderId:
+          column:
+            name: order_id
+        orderLineId:
+          column:
+            name: order_line_id
+        price:
+          column:
+            name: price
+        quantity:
+          column:
+            name: quantity
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersOrderLineByOrderLineIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - lotRef
+          - materialId
+          - orderId
+          - orderLineId
+          - price
+          - quantity
+          - unit
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateOrdersOrderLineByOrderLineIdResponse
+  description: Responses from the 'update_orders_order_line_by_order_line_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersOrderLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateOrdersOrderLineByOrderLineIdResponse
+    inputTypeName: UpdateOrdersOrderLineByOrderLineIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_orders_order_line_by_order_line_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateOrdersOrderLineByOrderLineIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateOrdersOrderLineByOrderLineId
+  outputType: UpdateOrdersOrderLineByOrderLineIdResponse!
+  arguments:
+    - name: keyOrderLineId
+      type: Uuid!
+    - name: postCheck
+      type: OrdersOrderLineBoolExp
+      description: Update permission post-condition predicate over the
+        'orders_order_line' collection
+    - name: preCheck
+      type: OrdersOrderLineBoolExp
+      description: Update permission pre-condition predicate over the
+        'orders_order_line' collection
+    - name: updateColumns
+      type: UpdateOrdersOrderLineByOrderLineIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_orders_order_line_by_order_line_id
+    argumentMapping:
+      keyOrderLineId: key_order_line_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateOrdersOrderLineByOrderLineId
+    rootFieldKind: Mutation
+  description: Update any row on the 'orders_order_line' collection using the
+    'order_line_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateOrdersOrderLineByOrderLineId
+  permissions:
+    - role: admin
+      allowExecution: true
+

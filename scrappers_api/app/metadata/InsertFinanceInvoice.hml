@@ -1,0 +1,156 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFinanceInvoiceObject
+  fields:
+    - name: amount
+      type: Numeric!
+    - name: createdAt
+      type: Timestamptz
+    - name: currency
+      type: CurrencyEnum
+    - name: dueDate
+      type: Date!
+    - name: invoiceId
+      type: Uuid
+    - name: issuedAt
+      type: Timestamptz!
+    - name: orderId
+      type: Uuid
+    - name: status
+      type: InvoiceStatusEnum!
+    - name: ticketId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertFinanceInvoiceObject
+    inputTypeName: InsertFinanceInvoiceObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_finance_invoice_object
+      fieldMapping:
+        amount:
+          column:
+            name: amount
+        createdAt:
+          column:
+            name: created_at
+        currency:
+          column:
+            name: currency
+        dueDate:
+          column:
+            name: due_date
+        invoiceId:
+          column:
+            name: invoice_id
+        issuedAt:
+          column:
+            name: issued_at
+        orderId:
+          column:
+            name: order_id
+        status:
+          column:
+            name: status
+        ticketId:
+          column:
+            name: ticket_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFinanceInvoiceObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - createdAt
+          - currency
+          - dueDate
+          - invoiceId
+          - issuedAt
+          - orderId
+          - status
+          - ticketId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFinanceInvoiceResponse
+  description: Responses from the 'insert_finance_invoice' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceInvoice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertFinanceInvoiceResponse
+    inputTypeName: InsertFinanceInvoiceResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_finance_invoice_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFinanceInvoiceResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertFinanceInvoice
+  outputType: InsertFinanceInvoiceResponse!
+  arguments:
+    - name: objects
+      type: "[InsertFinanceInvoiceObject!]!"
+    - name: postCheck
+      type: FinanceInvoiceBoolExp
+      description: Insert permission predicate over the 'finance_invoice' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_finance_invoice
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertFinanceInvoice
+    rootFieldKind: Mutation
+  description: Insert into the finance_invoice table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertFinanceInvoice
+  permissions:
+    - role: admin
+      allowExecution: true
+

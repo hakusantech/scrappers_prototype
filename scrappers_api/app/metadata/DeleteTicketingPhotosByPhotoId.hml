@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteTicketingPhotosByPhotoIdResponse
+  description: Responses from the 'delete_ticketing_photos_by_photo_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[TicketingPhotos!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteTicketingPhotosByPhotoIdResponse
+    inputTypeName: DeleteTicketingPhotosByPhotoIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_ticketing_photos_by_photo_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteTicketingPhotosByPhotoIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteTicketingPhotosByPhotoId
+  outputType: DeleteTicketingPhotosByPhotoIdResponse!
+  arguments:
+    - name: keyPhotoId
+      type: Uuid!
+    - name: preCheck
+      type: TicketingPhotosBoolExp
+      description: Delete permission predicate over the 'ticketing_photos' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_ticketing_photos_by_photo_id
+    argumentMapping:
+      keyPhotoId: key_photo_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteTicketingPhotosByPhotoId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ticketing_photos' collection using the 'photo_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteTicketingPhotosByPhotoId
+  permissions:
+    - role: admin
+      allowExecution: true
+

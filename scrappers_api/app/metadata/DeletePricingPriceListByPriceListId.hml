@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeletePricingPriceListByPriceListIdResponse
+  description: Responses from the 'delete_pricing_price_list_by_price_list_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceList!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeletePricingPriceListByPriceListIdResponse
+    inputTypeName: DeletePricingPriceListByPriceListIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_pricing_price_list_by_price_list_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeletePricingPriceListByPriceListIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePricingPriceListByPriceListId
+  outputType: DeletePricingPriceListByPriceListIdResponse!
+  arguments:
+    - name: keyPriceListId
+      type: Uuid!
+    - name: preCheck
+      type: PricingPriceListBoolExp
+      description: Delete permission predicate over the 'pricing_price_list' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_pricing_price_list_by_price_list_id
+    argumentMapping:
+      keyPriceListId: key_price_list_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deletePricingPriceListByPriceListId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'pricing_price_list' collection using the
+    'price_list_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePricingPriceListByPriceListId
+  permissions:
+    - role: admin
+      allowExecution: true
+

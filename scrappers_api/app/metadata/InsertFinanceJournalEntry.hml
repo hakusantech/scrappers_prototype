@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFinanceJournalEntryObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: data
+      type: Jsonb!
+    - name: description
+      type: Text
+    - name: entryDate
+      type: Date!
+    - name: journalEntryId
+      type: Uuid
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertFinanceJournalEntryObject
+    inputTypeName: InsertFinanceJournalEntryObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_finance_journal_entry_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        data:
+          column:
+            name: data
+        description:
+          column:
+            name: description
+        entryDate:
+          column:
+            name: entry_date
+        journalEntryId:
+          column:
+            name: journal_entry_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFinanceJournalEntryObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - data
+          - description
+          - entryDate
+          - journalEntryId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertFinanceJournalEntryResponse
+  description: Responses from the 'insert_finance_journal_entry' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FinanceJournalEntry!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertFinanceJournalEntryResponse
+    inputTypeName: InsertFinanceJournalEntryResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_finance_journal_entry_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertFinanceJournalEntryResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertFinanceJournalEntry
+  outputType: InsertFinanceJournalEntryResponse!
+  arguments:
+    - name: objects
+      type: "[InsertFinanceJournalEntryObject!]!"
+    - name: postCheck
+      type: FinanceJournalEntryBoolExp
+      description: Insert permission predicate over the 'finance_journal_entry' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_finance_journal_entry
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertFinanceJournalEntry
+    rootFieldKind: Mutation
+  description: Insert into the finance_journal_entry table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertFinanceJournalEntry
+  permissions:
+    - role: admin
+      allowExecution: true
+

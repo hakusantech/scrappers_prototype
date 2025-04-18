@@ -1,0 +1,301 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetDriverCreatedAt
+  description: Update the 'created_at' column in the 'fleet_driver' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetDriverCreatedAt
+    inputTypeName: UpdateColumnFleetDriverCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_driver_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetDriverCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetDriverDriverId
+  description: Update the 'driver_id' column in the 'fleet_driver' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetDriverDriverId
+    inputTypeName: UpdateColumnFleetDriverDriverIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_driver_driver_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetDriverDriverId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetDriverLicenseNo
+  description: Update the 'license_no' column in the 'fleet_driver' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetDriverLicenseNo
+    inputTypeName: UpdateColumnFleetDriverLicenseNoInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_driver_license_no
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetDriverLicenseNo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetDriverName
+  description: Update the 'name' column in the 'fleet_driver' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetDriverName
+    inputTypeName: UpdateColumnFleetDriverNameInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_driver_name
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetDriverName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetDriverUpdatedAt
+  description: Update the 'updated_at' column in the 'fleet_driver' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetDriverUpdatedAt
+    inputTypeName: UpdateColumnFleetDriverUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_driver_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetDriverUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetDriverByDriverIdUpdateColumns
+  description: Update the columns of the 'fleet_driver' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnFleetDriverCreatedAt
+      description: Update the 'created_at' column in the 'fleet_driver' collection.
+    - name: driverId
+      type: UpdateColumnFleetDriverDriverId
+      description: Update the 'driver_id' column in the 'fleet_driver' collection.
+    - name: licenseNo
+      type: UpdateColumnFleetDriverLicenseNo
+      description: Update the 'license_no' column in the 'fleet_driver' collection.
+    - name: name
+      type: UpdateColumnFleetDriverName
+      description: Update the 'name' column in the 'fleet_driver' collection.
+    - name: updatedAt
+      type: UpdateColumnFleetDriverUpdatedAt
+      description: Update the 'updated_at' column in the 'fleet_driver' collection.
+  graphql:
+    typeName: UpdateFleetDriverByDriverIdUpdateColumns
+    inputTypeName: UpdateFleetDriverByDriverIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_driver_by_driver_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        driverId:
+          column:
+            name: driver_id
+        licenseNo:
+          column:
+            name: license_no
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetDriverByDriverIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - driverId
+          - licenseNo
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetDriverByDriverIdResponse
+  description: Responses from the 'update_fleet_driver_by_driver_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetDriver!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFleetDriverByDriverIdResponse
+    inputTypeName: UpdateFleetDriverByDriverIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_driver_by_driver_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetDriverByDriverIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFleetDriverByDriverId
+  outputType: UpdateFleetDriverByDriverIdResponse!
+  arguments:
+    - name: keyDriverId
+      type: Uuid!
+    - name: postCheck
+      type: FleetDriverBoolExp
+      description: Update permission post-condition predicate over the 'fleet_driver'
+        collection
+    - name: preCheck
+      type: FleetDriverBoolExp
+      description: Update permission pre-condition predicate over the 'fleet_driver'
+        collection
+    - name: updateColumns
+      type: UpdateFleetDriverByDriverIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_fleet_driver_by_driver_id
+    argumentMapping:
+      keyDriverId: key_driver_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFleetDriverByDriverId
+    rootFieldKind: Mutation
+  description: Update any row on the 'fleet_driver' collection using the 'driver_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFleetDriverByDriverId
+  permissions:
+    - role: admin
+      allowExecution: true
+

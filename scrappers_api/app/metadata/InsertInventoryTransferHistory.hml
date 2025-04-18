@@ -1,0 +1,145 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertInventoryTransferHistoryObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: fromYardId
+      type: Uuid!
+    - name: lotId
+      type: Uuid!
+    - name: quantity
+      type: Numeric!
+    - name: toYardId
+      type: Uuid!
+    - name: transferHistoryId
+      type: Uuid
+    - name: transferredAt
+      type: Timestamptz
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertInventoryTransferHistoryObject
+    inputTypeName: InsertInventoryTransferHistoryObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_inventory_transfer_history_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        fromYardId:
+          column:
+            name: from_yard_id
+        lotId:
+          column:
+            name: lot_id
+        quantity:
+          column:
+            name: quantity
+        toYardId:
+          column:
+            name: to_yard_id
+        transferHistoryId:
+          column:
+            name: transfer_history_id
+        transferredAt:
+          column:
+            name: transferred_at
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertInventoryTransferHistoryObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - fromYardId
+          - lotId
+          - quantity
+          - toYardId
+          - transferHistoryId
+          - transferredAt
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertInventoryTransferHistoryResponse
+  description: Responses from the 'insert_inventory_transfer_history' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[InventoryTransferHistory!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertInventoryTransferHistoryResponse
+    inputTypeName: InsertInventoryTransferHistoryResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_inventory_transfer_history_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertInventoryTransferHistoryResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertInventoryTransferHistory
+  outputType: InsertInventoryTransferHistoryResponse!
+  arguments:
+    - name: objects
+      type: "[InsertInventoryTransferHistoryObject!]!"
+    - name: postCheck
+      type: InventoryTransferHistoryBoolExp
+      description: Insert permission predicate over the 'inventory_transfer_history'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_inventory_transfer_history
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertInventoryTransferHistory
+    rootFieldKind: Mutation
+  description: Insert into the inventory_transfer_history table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertInventoryTransferHistory
+  permissions:
+    - role: admin
+      allowExecution: true
+

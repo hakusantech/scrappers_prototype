@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteMasterMaterialByCodeResponse
+  description: Responses from the 'delete_master_material_by_code' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MasterMaterial!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteMasterMaterialByCodeResponse
+    inputTypeName: DeleteMasterMaterialByCodeResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_master_material_by_code_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteMasterMaterialByCodeResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteMasterMaterialByCode
+  outputType: DeleteMasterMaterialByCodeResponse!
+  arguments:
+    - name: keyCode
+      type: Text!
+    - name: preCheck
+      type: MasterMaterialBoolExp
+      description: Delete permission predicate over the 'master_material' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_master_material_by_code
+    argumentMapping:
+      keyCode: key_code
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteMasterMaterialByCode
+    rootFieldKind: Mutation
+  description: Delete any row on the 'master_material' collection using the 'code' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteMasterMaterialByCode
+  permissions:
+    - role: admin
+      allowExecution: true
+

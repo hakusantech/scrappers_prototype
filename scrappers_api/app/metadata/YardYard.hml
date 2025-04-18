@@ -1,0 +1,265 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: YardYard
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: location
+      type: Text
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: yardId
+      type: Uuid!
+  graphql:
+    typeName: YardYard
+    inputTypeName: YardYardInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: yard_yard
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        location:
+          column:
+            name: location
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+        yardId:
+          column:
+            name: yard_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: YardYard
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - location
+          - name
+          - updatedAt
+          - yardId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: YardYardBoolExp
+  operand:
+    object:
+      type: YardYard
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: location
+          booleanExpressionType: TextBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: yardId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: inventoryInventoryLots
+        - relationshipName: inventoryTransferHistories
+        - relationshipName: inventoryTransferHistoriesByToYardId
+        - relationshipName: ticketingWeightTickets
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: YardYardBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: YardYardAggExp
+  operand:
+    object:
+      aggregatedType: YardYard
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: location
+          aggregateExpression: TextAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: yardId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: YardYardAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: YardYardOrderByExp
+  operand:
+    object:
+      orderedType: YardYard
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: location
+          orderByExpression: TextOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: yardId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: YardYardOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: YardYard
+  objectType: YardYard
+  source:
+    dataConnectorName: scrappers_api
+    collection: yard_yard
+  filterExpressionType: YardYardBoolExp
+  aggregateExpression: YardYardAggExp
+  orderByExpression: YardYardOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: yardYard
+      subscription:
+        rootField: yardYard
+    selectUniques:
+      - queryRootField: yardYardByName
+        uniqueIdentifier:
+          - name
+        subscription:
+          rootField: yardYardByName
+      - queryRootField: yardYardByYardId
+        uniqueIdentifier:
+          - yardId
+        subscription:
+          rootField: yardYardByYardId
+    filterInputTypeName: YardYardFilterInput
+    aggregate:
+      queryRootField: yardYardAggregate
+      subscription:
+        rootField: yardYardAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: YardYard
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLots
+  sourceType: YardYard
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryInventoryLotAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: yardId
+  graphql:
+    aggregateFieldName: inventoryInventoryLotsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryTransferHistories
+  sourceType: YardYard
+  target:
+    model:
+      name: InventoryTransferHistory
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryTransferHistoryAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: fromYardId
+  graphql:
+    aggregateFieldName: inventoryTransferHistoriesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryTransferHistoriesByToYardId
+  sourceType: YardYard
+  target:
+    model:
+      name: InventoryTransferHistory
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryTransferHistoryAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: toYardId
+  graphql:
+    aggregateFieldName: inventoryTransferHistoriesByToYardIdAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTickets
+  sourceType: YardYard
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingWeightTicketAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: yardId
+      target:
+        modelField:
+          - fieldName: yardId
+  graphql:
+    aggregateFieldName: ticketingWeightTicketsAggregate
+

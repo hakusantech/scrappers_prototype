@@ -1,0 +1,77 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteIdentityUserRolesByRoleIdAndUserIdResponse
+  description: Responses from the
+    'delete_identity_user_roles_by_role_id_and_user_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityUserRoles!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteIdentityUserRolesByRoleIdAndUserIdResponse
+    inputTypeName: DeleteIdentityUserRolesByRoleIdAndUserIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_identity_user_roles_by_role_id_and_user_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteIdentityUserRolesByRoleIdAndUserIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteIdentityUserRolesByRoleIdAndUserId
+  outputType: DeleteIdentityUserRolesByRoleIdAndUserIdResponse!
+  arguments:
+    - name: keyRoleId
+      type: Uuid!
+    - name: keyUserId
+      type: Uuid!
+    - name: preCheck
+      type: IdentityUserRolesBoolExp
+      description: Delete permission predicate over the 'identity_user_roles' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_identity_user_roles_by_role_id_and_user_id
+    argumentMapping:
+      keyRoleId: key_role_id
+      keyUserId: key_user_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteIdentityUserRolesByRoleIdAndUserId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'identity_user_roles' collection using the
+    'role_id' and 'user_id' keys
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteIdentityUserRolesByRoleIdAndUserId
+  permissions:
+    - role: admin
+      allowExecution: true
+

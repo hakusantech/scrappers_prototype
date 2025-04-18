@@ -1,0 +1,302 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSupportKbArticleContent
+  description: Update the 'content' column in the 'support_kb_article' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSupportKbArticleContent
+    inputTypeName: UpdateColumnSupportKbArticleContentInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_support_kb_article_content
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSupportKbArticleContent
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSupportKbArticleCreatedAt
+  description: Update the 'created_at' column in the 'support_kb_article' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSupportKbArticleCreatedAt
+    inputTypeName: UpdateColumnSupportKbArticleCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_support_kb_article_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSupportKbArticleCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSupportKbArticleKbArticleId
+  description: Update the 'kb_article_id' column in the 'support_kb_article' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSupportKbArticleKbArticleId
+    inputTypeName: UpdateColumnSupportKbArticleKbArticleIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_support_kb_article_kb_article_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSupportKbArticleKbArticleId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSupportKbArticleTitle
+  description: Update the 'title' column in the 'support_kb_article' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSupportKbArticleTitle
+    inputTypeName: UpdateColumnSupportKbArticleTitleInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_support_kb_article_title
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSupportKbArticleTitle
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSupportKbArticleUpdatedAt
+  description: Update the 'updated_at' column in the 'support_kb_article' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSupportKbArticleUpdatedAt
+    inputTypeName: UpdateColumnSupportKbArticleUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_support_kb_article_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSupportKbArticleUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSupportKbArticleByKbArticleIdUpdateColumns
+  description: Update the columns of the 'support_kb_article' collection
+  fields:
+    - name: content
+      type: UpdateColumnSupportKbArticleContent
+      description: Update the 'content' column in the 'support_kb_article' collection.
+    - name: createdAt
+      type: UpdateColumnSupportKbArticleCreatedAt
+      description: Update the 'created_at' column in the 'support_kb_article' collection.
+    - name: kbArticleId
+      type: UpdateColumnSupportKbArticleKbArticleId
+      description: Update the 'kb_article_id' column in the 'support_kb_article' collection.
+    - name: title
+      type: UpdateColumnSupportKbArticleTitle
+      description: Update the 'title' column in the 'support_kb_article' collection.
+    - name: updatedAt
+      type: UpdateColumnSupportKbArticleUpdatedAt
+      description: Update the 'updated_at' column in the 'support_kb_article' collection.
+  graphql:
+    typeName: UpdateSupportKbArticleByKbArticleIdUpdateColumns
+    inputTypeName: UpdateSupportKbArticleByKbArticleIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_support_kb_article_by_kb_article_id_update_columns
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        kbArticleId:
+          column:
+            name: kb_article_id
+        title:
+          column:
+            name: title
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSupportKbArticleByKbArticleIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - kbArticleId
+          - title
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSupportKbArticleByKbArticleIdResponse
+  description: Responses from the 'update_support_kb_article_by_kb_article_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[SupportKbArticle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateSupportKbArticleByKbArticleIdResponse
+    inputTypeName: UpdateSupportKbArticleByKbArticleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_support_kb_article_by_kb_article_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSupportKbArticleByKbArticleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateSupportKbArticleByKbArticleId
+  outputType: UpdateSupportKbArticleByKbArticleIdResponse!
+  arguments:
+    - name: keyKbArticleId
+      type: Uuid!
+    - name: postCheck
+      type: SupportKbArticleBoolExp
+      description: Update permission post-condition predicate over the
+        'support_kb_article' collection
+    - name: preCheck
+      type: SupportKbArticleBoolExp
+      description: Update permission pre-condition predicate over the
+        'support_kb_article' collection
+    - name: updateColumns
+      type: UpdateSupportKbArticleByKbArticleIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_support_kb_article_by_kb_article_id
+    argumentMapping:
+      keyKbArticleId: key_kb_article_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateSupportKbArticleByKbArticleId
+    rootFieldKind: Mutation
+  description: Update any row on the 'support_kb_article' collection using the
+    'kb_article_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateSupportKbArticleByKbArticleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

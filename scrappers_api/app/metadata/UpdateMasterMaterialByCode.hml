@@ -1,0 +1,340 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialCode
+  description: Update the 'code' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialCode
+    inputTypeName: UpdateColumnMasterMaterialCodeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_code
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialCode
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialCreatedAt
+  description: Update the 'created_at' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialCreatedAt
+    inputTypeName: UpdateColumnMasterMaterialCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialDefaultUnit
+  description: Update the 'default_unit' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: UnitEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialDefaultUnit
+    inputTypeName: UpdateColumnMasterMaterialDefaultUnitInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_default_unit
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialDefaultUnit
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialMaterialId
+  description: Update the 'material_id' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialMaterialId
+    inputTypeName: UpdateColumnMasterMaterialMaterialIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_material_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialMaterialId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialName
+  description: Update the 'name' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialName
+    inputTypeName: UpdateColumnMasterMaterialNameInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_name
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialName
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnMasterMaterialUpdatedAt
+  description: Update the 'updated_at' column in the 'master_material' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnMasterMaterialUpdatedAt
+    inputTypeName: UpdateColumnMasterMaterialUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_master_material_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnMasterMaterialUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateMasterMaterialByCodeUpdateColumns
+  description: Update the columns of the 'master_material' collection
+  fields:
+    - name: code
+      type: UpdateColumnMasterMaterialCode
+      description: Update the 'code' column in the 'master_material' collection.
+    - name: createdAt
+      type: UpdateColumnMasterMaterialCreatedAt
+      description: Update the 'created_at' column in the 'master_material' collection.
+    - name: defaultUnit
+      type: UpdateColumnMasterMaterialDefaultUnit
+      description: Update the 'default_unit' column in the 'master_material' collection.
+    - name: materialId
+      type: UpdateColumnMasterMaterialMaterialId
+      description: Update the 'material_id' column in the 'master_material' collection.
+    - name: name
+      type: UpdateColumnMasterMaterialName
+      description: Update the 'name' column in the 'master_material' collection.
+    - name: updatedAt
+      type: UpdateColumnMasterMaterialUpdatedAt
+      description: Update the 'updated_at' column in the 'master_material' collection.
+  graphql:
+    typeName: UpdateMasterMaterialByCodeUpdateColumns
+    inputTypeName: UpdateMasterMaterialByCodeUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_master_material_by_code_update_columns
+      fieldMapping:
+        code:
+          column:
+            name: code
+        createdAt:
+          column:
+            name: created_at
+        defaultUnit:
+          column:
+            name: default_unit
+        materialId:
+          column:
+            name: material_id
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateMasterMaterialByCodeUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - createdAt
+          - defaultUnit
+          - materialId
+          - name
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateMasterMaterialByCodeResponse
+  description: Responses from the 'update_master_material_by_code' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[MasterMaterial!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateMasterMaterialByCodeResponse
+    inputTypeName: UpdateMasterMaterialByCodeResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_master_material_by_code_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateMasterMaterialByCodeResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateMasterMaterialByCode
+  outputType: UpdateMasterMaterialByCodeResponse!
+  arguments:
+    - name: keyCode
+      type: Text!
+    - name: postCheck
+      type: MasterMaterialBoolExp
+      description: Update permission post-condition predicate over the
+        'master_material' collection
+    - name: preCheck
+      type: MasterMaterialBoolExp
+      description: Update permission pre-condition predicate over the
+        'master_material' collection
+    - name: updateColumns
+      type: UpdateMasterMaterialByCodeUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_master_material_by_code
+    argumentMapping:
+      keyCode: key_code
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateMasterMaterialByCode
+    rootFieldKind: Mutation
+  description: Update any row on the 'master_material' collection using the 'code' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateMasterMaterialByCode
+  permissions:
+    - role: admin
+      allowExecution: true
+

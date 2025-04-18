@@ -1,0 +1,347 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceCreatedAt
+  description: Update the 'created_at' column in the 'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceCreatedAt
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceDeviceId
+  description: Update the 'device_id' column in the 'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceDeviceId
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceDeviceIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_device_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceDeviceId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceLocation
+  description: Update the 'location' column in the 'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceLocation
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceLocationInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_location
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceLocation
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceModel
+  description: Update the 'model' column in the 'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceModel
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceModelInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_model
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceModel
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceSerialNumber
+  description: Update the 'serial_number' column in the
+    'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceSerialNumber
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceSerialNumberInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_serial_number
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceSerialNumber
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnScaleGatewayScaleDeviceUpdatedAt
+  description: Update the 'updated_at' column in the 'scale_gateway_scale_device' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnScaleGatewayScaleDeviceUpdatedAt
+    inputTypeName: UpdateColumnScaleGatewayScaleDeviceUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_scale_gateway_scale_device_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnScaleGatewayScaleDeviceUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateScaleGatewayScaleDeviceByDeviceIdUpdateColumns
+  description: Update the columns of the 'scale_gateway_scale_device' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnScaleGatewayScaleDeviceCreatedAt
+      description: Update the 'created_at' column in the 'scale_gateway_scale_device'
+        collection.
+    - name: deviceId
+      type: UpdateColumnScaleGatewayScaleDeviceDeviceId
+      description: Update the 'device_id' column in the 'scale_gateway_scale_device'
+        collection.
+    - name: location
+      type: UpdateColumnScaleGatewayScaleDeviceLocation
+      description: Update the 'location' column in the 'scale_gateway_scale_device'
+        collection.
+    - name: model
+      type: UpdateColumnScaleGatewayScaleDeviceModel
+      description: Update the 'model' column in the 'scale_gateway_scale_device' collection.
+    - name: serialNumber
+      type: UpdateColumnScaleGatewayScaleDeviceSerialNumber
+      description: Update the 'serial_number' column in the
+        'scale_gateway_scale_device' collection.
+    - name: updatedAt
+      type: UpdateColumnScaleGatewayScaleDeviceUpdatedAt
+      description: Update the 'updated_at' column in the 'scale_gateway_scale_device'
+        collection.
+  graphql:
+    typeName: UpdateScaleGatewayScaleDeviceByDeviceIdUpdateColumns
+    inputTypeName: UpdateScaleGatewayScaleDeviceByDeviceIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_scale_gateway_scale_device_by_device_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        deviceId:
+          column:
+            name: device_id
+        location:
+          column:
+            name: location
+        model:
+          column:
+            name: model
+        serialNumber:
+          column:
+            name: serial_number
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateScaleGatewayScaleDeviceByDeviceIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - deviceId
+          - location
+          - model
+          - serialNumber
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateScaleGatewayScaleDeviceByDeviceIdResponse
+  description: Responses from the 'update_scale_gateway_scale_device_by_device_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ScaleGatewayScaleDevice!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateScaleGatewayScaleDeviceByDeviceIdResponse
+    inputTypeName: UpdateScaleGatewayScaleDeviceByDeviceIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_scale_gateway_scale_device_by_device_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateScaleGatewayScaleDeviceByDeviceIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateScaleGatewayScaleDeviceByDeviceId
+  outputType: UpdateScaleGatewayScaleDeviceByDeviceIdResponse!
+  arguments:
+    - name: keyDeviceId
+      type: Uuid!
+    - name: postCheck
+      type: ScaleGatewayScaleDeviceBoolExp
+      description: Update permission post-condition predicate over the
+        'scale_gateway_scale_device' collection
+    - name: preCheck
+      type: ScaleGatewayScaleDeviceBoolExp
+      description: Update permission pre-condition predicate over the
+        'scale_gateway_scale_device' collection
+    - name: updateColumns
+      type: UpdateScaleGatewayScaleDeviceByDeviceIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_scale_gateway_scale_device_by_device_id
+    argumentMapping:
+      keyDeviceId: key_device_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateScaleGatewayScaleDeviceByDeviceId
+    rootFieldKind: Mutation
+  description: Update any row on the 'scale_gateway_scale_device' collection using
+    the 'device_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateScaleGatewayScaleDeviceByDeviceId
+  permissions:
+    - role: admin
+      allowExecution: true
+

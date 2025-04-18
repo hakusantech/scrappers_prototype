@@ -1,0 +1,145 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByTemplateIdUpdateColumns
+  description: Update the columns of the 'configuration_templates' collection
+  fields:
+    - name: content
+      type: UpdateColumnConfigurationTemplatesContent
+      description: Update the 'content' column in the 'configuration_templates' collection.
+    - name: createdAt
+      type: UpdateColumnConfigurationTemplatesCreatedAt
+      description: Update the 'created_at' column in the 'configuration_templates'
+        collection.
+    - name: name
+      type: UpdateColumnConfigurationTemplatesName
+      description: Update the 'name' column in the 'configuration_templates' collection.
+    - name: templateId
+      type: UpdateColumnConfigurationTemplatesTemplateId
+      description: Update the 'template_id' column in the 'configuration_templates'
+        collection.
+    - name: updatedAt
+      type: UpdateColumnConfigurationTemplatesUpdatedAt
+      description: Update the 'updated_at' column in the 'configuration_templates'
+        collection.
+  graphql:
+    typeName: UpdateConfigurationTemplatesByTemplateIdUpdateColumns
+    inputTypeName: UpdateConfigurationTemplatesByTemplateIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_templates_by_template_id_update_columns
+      fieldMapping:
+        content:
+          column:
+            name: content
+        createdAt:
+          column:
+            name: created_at
+        name:
+          column:
+            name: name
+        templateId:
+          column:
+            name: template_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationTemplatesByTemplateIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - content
+          - createdAt
+          - name
+          - templateId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByTemplateIdResponse
+  description: Responses from the 'update_configuration_templates_by_template_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationTemplates!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateConfigurationTemplatesByTemplateIdResponse
+    inputTypeName: UpdateConfigurationTemplatesByTemplateIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_configuration_templates_by_template_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateConfigurationTemplatesByTemplateIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateConfigurationTemplatesByTemplateId
+  outputType: UpdateConfigurationTemplatesByTemplateIdResponse!
+  arguments:
+    - name: keyTemplateId
+      type: Uuid!
+    - name: postCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Update permission post-condition predicate over the
+        'configuration_templates' collection
+    - name: preCheck
+      type: ConfigurationTemplatesBoolExp
+      description: Update permission pre-condition predicate over the
+        'configuration_templates' collection
+    - name: updateColumns
+      type: UpdateConfigurationTemplatesByTemplateIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_configuration_templates_by_template_id
+    argumentMapping:
+      keyTemplateId: key_template_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateConfigurationTemplatesByTemplateId
+    rootFieldKind: Mutation
+  description: Update any row on the 'configuration_templates' collection using
+    the 'template_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateConfigurationTemplatesByTemplateId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,422 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobCreatedAt
+  description: Update the 'created_at' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobCreatedAt
+    inputTypeName: UpdateColumnDispatchDispatchJobCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobDispatchJobId
+  description: Update the 'dispatch_job_id' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobDispatchJobId
+    inputTypeName: UpdateColumnDispatchDispatchJobDispatchJobIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_dispatch_job_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobDispatchJobId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobDriverId
+  description: Update the 'driver_id' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobDriverId
+    inputTypeName: UpdateColumnDispatchDispatchJobDriverIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_driver_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobDriverId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobLotId
+  description: Update the 'lot_id' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobLotId
+    inputTypeName: UpdateColumnDispatchDispatchJobLotIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_lot_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobLotId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobScheduledTime
+  description: Update the 'scheduled_time' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobScheduledTime
+    inputTypeName: UpdateColumnDispatchDispatchJobScheduledTimeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_scheduled_time
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobScheduledTime
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobStatus
+  description: Update the 'status' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: DispatchStatusEnum!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobStatus
+    inputTypeName: UpdateColumnDispatchDispatchJobStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobTruckId
+  description: Update the 'truck_id' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobTruckId
+    inputTypeName: UpdateColumnDispatchDispatchJobTruckIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_truck_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobTruckId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnDispatchDispatchJobUpdatedAt
+  description: Update the 'updated_at' column in the 'dispatch_dispatch_job' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnDispatchDispatchJobUpdatedAt
+    inputTypeName: UpdateColumnDispatchDispatchJobUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_dispatch_dispatch_job_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnDispatchDispatchJobUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateDispatchDispatchJobByDispatchJobIdUpdateColumns
+  description: Update the columns of the 'dispatch_dispatch_job' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnDispatchDispatchJobCreatedAt
+      description: Update the 'created_at' column in the 'dispatch_dispatch_job' collection.
+    - name: dispatchJobId
+      type: UpdateColumnDispatchDispatchJobDispatchJobId
+      description: Update the 'dispatch_job_id' column in the 'dispatch_dispatch_job'
+        collection.
+    - name: driverId
+      type: UpdateColumnDispatchDispatchJobDriverId
+      description: Update the 'driver_id' column in the 'dispatch_dispatch_job' collection.
+    - name: lotId
+      type: UpdateColumnDispatchDispatchJobLotId
+      description: Update the 'lot_id' column in the 'dispatch_dispatch_job' collection.
+    - name: scheduledTime
+      type: UpdateColumnDispatchDispatchJobScheduledTime
+      description: Update the 'scheduled_time' column in the 'dispatch_dispatch_job'
+        collection.
+    - name: status
+      type: UpdateColumnDispatchDispatchJobStatus
+      description: Update the 'status' column in the 'dispatch_dispatch_job' collection.
+    - name: truckId
+      type: UpdateColumnDispatchDispatchJobTruckId
+      description: Update the 'truck_id' column in the 'dispatch_dispatch_job' collection.
+    - name: updatedAt
+      type: UpdateColumnDispatchDispatchJobUpdatedAt
+      description: Update the 'updated_at' column in the 'dispatch_dispatch_job' collection.
+  graphql:
+    typeName: UpdateDispatchDispatchJobByDispatchJobIdUpdateColumns
+    inputTypeName: UpdateDispatchDispatchJobByDispatchJobIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_dispatch_dispatch_job_by_dispatch_job_id_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        dispatchJobId:
+          column:
+            name: dispatch_job_id
+        driverId:
+          column:
+            name: driver_id
+        lotId:
+          column:
+            name: lot_id
+        scheduledTime:
+          column:
+            name: scheduled_time
+        status:
+          column:
+            name: status
+        truckId:
+          column:
+            name: truck_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateDispatchDispatchJobByDispatchJobIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - dispatchJobId
+          - driverId
+          - lotId
+          - scheduledTime
+          - status
+          - truckId
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateDispatchDispatchJobByDispatchJobIdResponse
+  description: Responses from the
+    'update_dispatch_dispatch_job_by_dispatch_job_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[DispatchDispatchJob!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateDispatchDispatchJobByDispatchJobIdResponse
+    inputTypeName: UpdateDispatchDispatchJobByDispatchJobIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_dispatch_dispatch_job_by_dispatch_job_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateDispatchDispatchJobByDispatchJobIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateDispatchDispatchJobByDispatchJobId
+  outputType: UpdateDispatchDispatchJobByDispatchJobIdResponse!
+  arguments:
+    - name: keyDispatchJobId
+      type: Uuid!
+    - name: postCheck
+      type: DispatchDispatchJobBoolExp
+      description: Update permission post-condition predicate over the
+        'dispatch_dispatch_job' collection
+    - name: preCheck
+      type: DispatchDispatchJobBoolExp
+      description: Update permission pre-condition predicate over the
+        'dispatch_dispatch_job' collection
+    - name: updateColumns
+      type: UpdateDispatchDispatchJobByDispatchJobIdUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_dispatch_dispatch_job_by_dispatch_job_id
+    argumentMapping:
+      keyDispatchJobId: key_dispatch_job_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateDispatchDispatchJobByDispatchJobId
+    rootFieldKind: Mutation
+  description: Update any row on the 'dispatch_dispatch_job' collection using the
+    'dispatch_job_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateDispatchDispatchJobByDispatchJobId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,244 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TicketingMaterialLine
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: grade
+      type: Text
+    - name: materialId
+      type: Uuid!
+    - name: materialLineId
+      type: Uuid!
+    - name: quantity
+      type: Numeric!
+    - name: ticketId
+      type: Uuid!
+    - name: unit
+      type: UnitEnum!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: TicketingMaterialLine
+    inputTypeName: TicketingMaterialLineInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: ticketing_material_line
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        grade:
+          column:
+            name: grade
+        materialId:
+          column:
+            name: material_id
+        materialLineId:
+          column:
+            name: material_line_id
+        quantity:
+          column:
+            name: quantity
+        ticketId:
+          column:
+            name: ticket_id
+        unit:
+          column:
+            name: unit
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TicketingMaterialLine
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - grade
+          - materialId
+          - materialLineId
+          - quantity
+          - ticketId
+          - unit
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketingMaterialLineBoolExp
+  operand:
+    object:
+      type: TicketingMaterialLine
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: grade
+          booleanExpressionType: TextBoolExp
+        - fieldName: materialId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: materialLineId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: quantity
+          booleanExpressionType: NumericBoolExp
+        - fieldName: ticketId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: unit
+          booleanExpressionType: UnitEnumBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: masterMaterial
+        - relationshipName: ticketingWeightTicket
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketingMaterialLineBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketingMaterialLineAggExp
+  operand:
+    object:
+      aggregatedType: TicketingMaterialLine
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: grade
+          aggregateExpression: TextAggExp
+        - fieldName: materialId
+          aggregateExpression: UuidAggExp
+        - fieldName: materialLineId
+          aggregateExpression: UuidAggExp
+        - fieldName: quantity
+          aggregateExpression: NumericAggExp
+        - fieldName: ticketId
+          aggregateExpression: UuidAggExp
+        - fieldName: unit
+          aggregateExpression: UnitEnumAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: TicketingMaterialLineAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketingMaterialLineOrderByExp
+  operand:
+    object:
+      orderedType: TicketingMaterialLine
+      orderableFields:
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: grade
+          orderByExpression: TextOrderByExp
+        - fieldName: materialId
+          orderByExpression: UuidOrderByExp
+        - fieldName: materialLineId
+          orderByExpression: UuidOrderByExp
+        - fieldName: quantity
+          orderByExpression: NumericOrderByExp
+        - fieldName: ticketId
+          orderByExpression: UuidOrderByExp
+        - fieldName: unit
+          orderByExpression: UnitEnumOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: masterMaterial
+        - relationshipName: ticketingWeightTicket
+  graphql:
+    expressionTypeName: TicketingMaterialLineOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: TicketingMaterialLine
+  objectType: TicketingMaterialLine
+  source:
+    dataConnectorName: scrappers_api
+    collection: ticketing_material_line
+  filterExpressionType: TicketingMaterialLineBoolExp
+  aggregateExpression: TicketingMaterialLineAggExp
+  orderByExpression: TicketingMaterialLineOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ticketingMaterialLine
+      subscription:
+        rootField: ticketingMaterialLine
+    selectUniques:
+      - queryRootField: ticketingMaterialLineByMaterialLineId
+        uniqueIdentifier:
+          - materialLineId
+        subscription:
+          rootField: ticketingMaterialLineByMaterialLineId
+    filterInputTypeName: TicketingMaterialLineFilterInput
+    aggregate:
+      queryRootField: ticketingMaterialLineAggregate
+      subscription:
+        rootField: ticketingMaterialLineAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: TicketingMaterialLine
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: masterMaterial
+  sourceType: TicketingMaterialLine
+  target:
+    model:
+      name: MasterMaterial
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingWeightTicket
+  sourceType: TicketingMaterialLine
+  target:
+    model:
+      name: TicketingWeightTicket
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: ticketId
+      target:
+        modelField:
+          - fieldName: ticketId
+

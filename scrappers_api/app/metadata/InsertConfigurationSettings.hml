@@ -1,0 +1,120 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationSettingsObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: settingKey
+      type: Text!
+    - name: settingValue
+      type: Jsonb!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertConfigurationSettingsObject
+    inputTypeName: InsertConfigurationSettingsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_settings_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        settingKey:
+          column:
+            name: setting_key
+        settingValue:
+          column:
+            name: setting_value
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationSettingsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - settingKey
+          - settingValue
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertConfigurationSettingsResponse
+  description: Responses from the 'insert_configuration_settings' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ConfigurationSettings!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertConfigurationSettingsResponse
+    inputTypeName: InsertConfigurationSettingsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_configuration_settings_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertConfigurationSettingsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertConfigurationSettings
+  outputType: InsertConfigurationSettingsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertConfigurationSettingsObject!]!"
+    - name: postCheck
+      type: ConfigurationSettingsBoolExp
+      description: Insert permission predicate over the 'configuration_settings' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_configuration_settings
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertConfigurationSettings
+    rootFieldKind: Mutation
+  description: Insert into the configuration_settings table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertConfigurationSettings
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,262 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetVehicleCreatedAt
+  description: Update the 'created_at' column in the 'fleet_vehicle' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetVehicleCreatedAt
+    inputTypeName: UpdateColumnFleetVehicleCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_vehicle_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetVehicleCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetVehiclePlateNumber
+  description: Update the 'plate_number' column in the 'fleet_vehicle' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetVehiclePlateNumber
+    inputTypeName: UpdateColumnFleetVehiclePlateNumberInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_vehicle_plate_number
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetVehiclePlateNumber
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetVehicleUpdatedAt
+  description: Update the 'updated_at' column in the 'fleet_vehicle' collection
+  fields:
+    - name: set
+      type: Timestamptz!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetVehicleUpdatedAt
+    inputTypeName: UpdateColumnFleetVehicleUpdatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_vehicle_updated_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetVehicleUpdatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnFleetVehicleVehicleId
+  description: Update the 'vehicle_id' column in the 'fleet_vehicle' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnFleetVehicleVehicleId
+    inputTypeName: UpdateColumnFleetVehicleVehicleIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_column_fleet_vehicle_vehicle_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnFleetVehicleVehicleId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetVehicleByPlateNumberUpdateColumns
+  description: Update the columns of the 'fleet_vehicle' collection
+  fields:
+    - name: createdAt
+      type: UpdateColumnFleetVehicleCreatedAt
+      description: Update the 'created_at' column in the 'fleet_vehicle' collection.
+    - name: plateNumber
+      type: UpdateColumnFleetVehiclePlateNumber
+      description: Update the 'plate_number' column in the 'fleet_vehicle' collection.
+    - name: updatedAt
+      type: UpdateColumnFleetVehicleUpdatedAt
+      description: Update the 'updated_at' column in the 'fleet_vehicle' collection.
+    - name: vehicleId
+      type: UpdateColumnFleetVehicleVehicleId
+      description: Update the 'vehicle_id' column in the 'fleet_vehicle' collection.
+  graphql:
+    typeName: UpdateFleetVehicleByPlateNumberUpdateColumns
+    inputTypeName: UpdateFleetVehicleByPlateNumberUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_vehicle_by_plate_number_update_columns
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        plateNumber:
+          column:
+            name: plate_number
+        updatedAt:
+          column:
+            name: updated_at
+        vehicleId:
+          column:
+            name: vehicle_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetVehicleByPlateNumberUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - plateNumber
+          - updatedAt
+          - vehicleId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateFleetVehicleByPlateNumberResponse
+  description: Responses from the 'update_fleet_vehicle_by_plate_number' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetVehicle!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateFleetVehicleByPlateNumberResponse
+    inputTypeName: UpdateFleetVehicleByPlateNumberResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: update_fleet_vehicle_by_plate_number_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateFleetVehicleByPlateNumberResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateFleetVehicleByPlateNumber
+  outputType: UpdateFleetVehicleByPlateNumberResponse!
+  arguments:
+    - name: keyPlateNumber
+      type: Text!
+    - name: postCheck
+      type: FleetVehicleBoolExp
+      description: Update permission post-condition predicate over the 'fleet_vehicle'
+        collection
+    - name: preCheck
+      type: FleetVehicleBoolExp
+      description: Update permission pre-condition predicate over the 'fleet_vehicle'
+        collection
+    - name: updateColumns
+      type: UpdateFleetVehicleByPlateNumberUpdateColumns!
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: update_fleet_vehicle_by_plate_number
+    argumentMapping:
+      keyPlateNumber: key_plate_number
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateFleetVehicleByPlateNumber
+    rootFieldKind: Mutation
+  description: Update any row on the 'fleet_vehicle' collection using the 'plate_number' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateFleetVehicleByPlateNumber
+  permissions:
+    - role: admin
+      allowExecution: true
+

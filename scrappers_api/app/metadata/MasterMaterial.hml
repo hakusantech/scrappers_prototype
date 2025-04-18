@@ -1,0 +1,277 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: MasterMaterial
+  fields:
+    - name: code
+      type: Text!
+    - name: createdAt
+      type: Timestamptz!
+    - name: defaultUnit
+      type: UnitEnum!
+    - name: materialId
+      type: Uuid!
+    - name: name
+      type: Text!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: MasterMaterial
+    inputTypeName: MasterMaterialInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: master_material
+      fieldMapping:
+        code:
+          column:
+            name: code
+        createdAt:
+          column:
+            name: created_at
+        defaultUnit:
+          column:
+            name: default_unit
+        materialId:
+          column:
+            name: material_id
+        name:
+          column:
+            name: name
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: MasterMaterial
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - code
+          - createdAt
+          - defaultUnit
+          - materialId
+          - name
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: MasterMaterialBoolExp
+  operand:
+    object:
+      type: MasterMaterial
+      comparableFields:
+        - fieldName: code
+          booleanExpressionType: TextBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: defaultUnit
+          booleanExpressionType: UnitEnumBoolExp
+        - fieldName: materialId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: inventoryInventoryLots
+        - relationshipName: ordersOrderLines
+        - relationshipName: pricingPriceItems
+        - relationshipName: ticketingMaterialLines
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: MasterMaterialBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: MasterMaterialAggExp
+  operand:
+    object:
+      aggregatedType: MasterMaterial
+      aggregatableFields:
+        - fieldName: code
+          aggregateExpression: TextAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: defaultUnit
+          aggregateExpression: UnitEnumAggExp
+        - fieldName: materialId
+          aggregateExpression: UuidAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: MasterMaterialAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: MasterMaterialOrderByExp
+  operand:
+    object:
+      orderedType: MasterMaterial
+      orderableFields:
+        - fieldName: code
+          orderByExpression: TextOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: defaultUnit
+          orderByExpression: UnitEnumOrderByExp
+        - fieldName: materialId
+          orderByExpression: UuidOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: MasterMaterialOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: MasterMaterial
+  objectType: MasterMaterial
+  source:
+    dataConnectorName: scrappers_api
+    collection: master_material
+  filterExpressionType: MasterMaterialBoolExp
+  aggregateExpression: MasterMaterialAggExp
+  orderByExpression: MasterMaterialOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: masterMaterial
+      subscription:
+        rootField: masterMaterial
+    selectUniques:
+      - queryRootField: masterMaterialByCode
+        uniqueIdentifier:
+          - code
+        subscription:
+          rootField: masterMaterialByCode
+      - queryRootField: masterMaterialByMaterialId
+        uniqueIdentifier:
+          - materialId
+        subscription:
+          rootField: masterMaterialByMaterialId
+    filterInputTypeName: MasterMaterialFilterInput
+    aggregate:
+      queryRootField: masterMaterialAggregate
+      subscription:
+        rootField: masterMaterialAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: MasterMaterial
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: inventoryInventoryLots
+  sourceType: MasterMaterial
+  target:
+    model:
+      name: InventoryInventoryLot
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: InventoryInventoryLotAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+  graphql:
+    aggregateFieldName: inventoryInventoryLotsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ordersOrderLines
+  sourceType: MasterMaterial
+  target:
+    model:
+      name: OrdersOrderLine
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersOrderLineAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+  graphql:
+    aggregateFieldName: ordersOrderLinesAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: pricingPriceItems
+  sourceType: MasterMaterial
+  target:
+    model:
+      name: PricingPriceItem
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: PricingPriceItemAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+  graphql:
+    aggregateFieldName: pricingPriceItemsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingMaterialLines
+  sourceType: MasterMaterial
+  target:
+    model:
+      name: TicketingMaterialLine
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: TicketingMaterialLineAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: materialId
+      target:
+        modelField:
+          - fieldName: materialId
+  graphql:
+    aggregateFieldName: ticketingMaterialLinesAggregate
+

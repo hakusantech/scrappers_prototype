@@ -1,0 +1,138 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingPriceListObject
+  fields:
+    - name: createdAt
+      type: Timestamptz
+    - name: effectiveFrom
+      type: Date!
+    - name: effectiveTo
+      type: Date
+    - name: priceListId
+      type: Uuid
+    - name: scope
+      type: Text!
+    - name: status
+      type: PriceListStatusEnum!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: InsertPricingPriceListObject
+    inputTypeName: InsertPricingPriceListObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_price_list_object
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        effectiveFrom:
+          column:
+            name: effective_from
+        effectiveTo:
+          column:
+            name: effective_to
+        priceListId:
+          column:
+            name: price_list_id
+        scope:
+          column:
+            name: scope
+        status:
+          column:
+            name: status
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingPriceListObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - effectiveFrom
+          - effectiveTo
+          - priceListId
+          - scope
+          - status
+          - updatedAt
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertPricingPriceListResponse
+  description: Responses from the 'insert_pricing_price_list' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[PricingPriceList!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertPricingPriceListResponse
+    inputTypeName: InsertPricingPriceListResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: insert_pricing_price_list_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertPricingPriceListResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertPricingPriceList
+  outputType: InsertPricingPriceListResponse!
+  arguments:
+    - name: objects
+      type: "[InsertPricingPriceListObject!]!"
+    - name: postCheck
+      type: PricingPriceListBoolExp
+      description: Insert permission predicate over the 'pricing_price_list' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: insert_pricing_price_list
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertPricingPriceList
+    rootFieldKind: Mutation
+  description: Insert into the pricing_price_list table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertPricingPriceList
+  permissions:
+    - role: admin
+      allowExecution: true
+

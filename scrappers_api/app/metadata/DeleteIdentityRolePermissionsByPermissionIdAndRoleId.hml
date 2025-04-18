@@ -1,0 +1,78 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteIdentityRolePermissionsByPermissionIdAndRoleIdResponse
+  description: Responses from the
+    'delete_identity_role_permissions_by_permission_id_and_role_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[IdentityRolePermissions!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteIdentityRolePermissionsByPermissionIdAndRoleIdResponse
+    inputTypeName: DeleteIdentityRolePermissionsByPermissionIdAndRoleIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_identity_role_permissions_by_permission_id_and_role_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteIdentityRolePermissionsByPermissionIdAndRoleIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteIdentityRolePermissionsByPermissionIdAndRoleId
+  outputType: DeleteIdentityRolePermissionsByPermissionIdAndRoleIdResponse!
+  arguments:
+    - name: keyPermissionId
+      type: Uuid!
+    - name: keyRoleId
+      type: Uuid!
+    - name: preCheck
+      type: IdentityRolePermissionsBoolExp
+      description: Delete permission predicate over the 'identity_role_permissions'
+        collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_identity_role_permissions_by_permission_id_and_role_id
+    argumentMapping:
+      keyPermissionId: key_permission_id
+      keyRoleId: key_role_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteIdentityRolePermissionsByPermissionIdAndRoleId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'identity_role_permissions' collection using
+    the 'permission_id' and 'role_id' keys
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteIdentityRolePermissionsByPermissionIdAndRoleId
+  permissions:
+    - role: admin
+      allowExecution: true
+

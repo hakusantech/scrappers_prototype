@@ -1,0 +1,200 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: TicketingPhotos
+  fields:
+    - name: complianceInfoId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz!
+    - name: photoId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: uploadedAt
+      type: Timestamptz!
+    - name: url
+      type: Text!
+  graphql:
+    typeName: TicketingPhotos
+    inputTypeName: TicketingPhotosInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: ticketing_photos
+      fieldMapping:
+        complianceInfoId:
+          column:
+            name: compliance_info_id
+        createdAt:
+          column:
+            name: created_at
+        photoId:
+          column:
+            name: photo_id
+        updatedAt:
+          column:
+            name: updated_at
+        uploadedAt:
+          column:
+            name: uploaded_at
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: TicketingPhotos
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complianceInfoId
+          - createdAt
+          - photoId
+          - updatedAt
+          - uploadedAt
+          - url
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TicketingPhotosBoolExp
+  operand:
+    object:
+      type: TicketingPhotos
+      comparableFields:
+        - fieldName: complianceInfoId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: photoId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: uploadedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: url
+          booleanExpressionType: TextBoolExp
+      comparableRelationships:
+        - relationshipName: ticketingComplianceInfo
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TicketingPhotosBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TicketingPhotosAggExp
+  operand:
+    object:
+      aggregatedType: TicketingPhotos
+      aggregatableFields:
+        - fieldName: complianceInfoId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: photoId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: uploadedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: url
+          aggregateExpression: TextAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: TicketingPhotosAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: TicketingPhotosOrderByExp
+  operand:
+    object:
+      orderedType: TicketingPhotos
+      orderableFields:
+        - fieldName: complianceInfoId
+          orderByExpression: UuidOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: photoId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: uploadedAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: url
+          orderByExpression: TextOrderByExp
+      orderableRelationships:
+        - relationshipName: ticketingComplianceInfo
+  graphql:
+    expressionTypeName: TicketingPhotosOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: TicketingPhotos
+  objectType: TicketingPhotos
+  source:
+    dataConnectorName: scrappers_api
+    collection: ticketing_photos
+  filterExpressionType: TicketingPhotosBoolExp
+  aggregateExpression: TicketingPhotosAggExp
+  orderByExpression: TicketingPhotosOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: ticketingPhotos
+      subscription:
+        rootField: ticketingPhotos
+    selectUniques:
+      - queryRootField: ticketingPhotosByPhotoId
+        uniqueIdentifier:
+          - photoId
+        subscription:
+          rootField: ticketingPhotosByPhotoId
+    filterInputTypeName: TicketingPhotosFilterInput
+    aggregate:
+      queryRootField: ticketingPhotosAggregate
+      subscription:
+        rootField: ticketingPhotosAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: TicketingPhotos
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: ticketingComplianceInfo
+  sourceType: TicketingPhotos
+  target:
+    model:
+      name: TicketingComplianceInfo
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: complianceInfoId
+      target:
+        modelField:
+          - fieldName: complianceInfoId
+

@@ -1,0 +1,73 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteOrdersOrderLineByOrderLineIdResponse
+  description: Responses from the 'delete_orders_order_line_by_order_line_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[OrdersOrderLine!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteOrdersOrderLineByOrderLineIdResponse
+    inputTypeName: DeleteOrdersOrderLineByOrderLineIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_orders_order_line_by_order_line_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteOrdersOrderLineByOrderLineIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteOrdersOrderLineByOrderLineId
+  outputType: DeleteOrdersOrderLineByOrderLineIdResponse!
+  arguments:
+    - name: keyOrderLineId
+      type: Uuid!
+    - name: preCheck
+      type: OrdersOrderLineBoolExp
+      description: Delete permission predicate over the 'orders_order_line' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_orders_order_line_by_order_line_id
+    argumentMapping:
+      keyOrderLineId: key_order_line_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteOrdersOrderLineByOrderLineId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'orders_order_line' collection using the
+    'order_line_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteOrdersOrderLineByOrderLineId
+  permissions:
+    - role: admin
+      allowExecution: true
+

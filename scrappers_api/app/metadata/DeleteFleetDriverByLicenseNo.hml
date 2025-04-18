@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteFleetDriverByLicenseNoResponse
+  description: Responses from the 'delete_fleet_driver_by_license_no' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[FleetDriver!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteFleetDriverByLicenseNoResponse
+    inputTypeName: DeleteFleetDriverByLicenseNoResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: delete_fleet_driver_by_license_no_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteFleetDriverByLicenseNoResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteFleetDriverByLicenseNo
+  outputType: DeleteFleetDriverByLicenseNoResponse!
+  arguments:
+    - name: keyLicenseNo
+      type: Text!
+    - name: preCheck
+      type: FleetDriverBoolExp
+      description: Delete permission predicate over the 'fleet_driver' collection
+  source:
+    dataConnectorName: scrappers_api
+    dataConnectorCommand:
+      procedure: delete_fleet_driver_by_license_no
+    argumentMapping:
+      keyLicenseNo: key_license_no
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteFleetDriverByLicenseNo
+    rootFieldKind: Mutation
+  description: Delete any row on the 'fleet_driver' collection using the 'license_no' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteFleetDriverByLicenseNo
+  permissions:
+    - role: admin
+      allowExecution: true
+

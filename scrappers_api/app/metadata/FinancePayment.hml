@@ -1,0 +1,212 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FinancePayment
+  fields:
+    - name: amount
+      type: Numeric!
+    - name: createdAt
+      type: Timestamptz!
+    - name: invoiceId
+      type: Uuid!
+    - name: method
+      type: PaymentMethodEnum!
+    - name: paidAt
+      type: Timestamptz!
+    - name: paymentId
+      type: Uuid!
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: FinancePayment
+    inputTypeName: FinancePaymentInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: scrappers_api
+      dataConnectorObjectType: finance_payment
+      fieldMapping:
+        amount:
+          column:
+            name: amount
+        createdAt:
+          column:
+            name: created_at
+        invoiceId:
+          column:
+            name: invoice_id
+        method:
+          column:
+            name: method
+        paidAt:
+          column:
+            name: paid_at
+        paymentId:
+          column:
+            name: payment_id
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FinancePayment
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - createdAt
+          - invoiceId
+          - method
+          - paidAt
+          - paymentId
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: FinancePaymentBoolExp
+  operand:
+    object:
+      type: FinancePayment
+      comparableFields:
+        - fieldName: amount
+          booleanExpressionType: NumericBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: invoiceId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: method
+          booleanExpressionType: PaymentMethodEnumBoolExp
+        - fieldName: paidAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: paymentId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: financeInvoice
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: FinancePaymentBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: FinancePaymentAggExp
+  operand:
+    object:
+      aggregatedType: FinancePayment
+      aggregatableFields:
+        - fieldName: amount
+          aggregateExpression: NumericAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: invoiceId
+          aggregateExpression: UuidAggExp
+        - fieldName: method
+          aggregateExpression: PaymentMethodEnumAggExp
+        - fieldName: paidAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: paymentId
+          aggregateExpression: UuidAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: FinancePaymentAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: FinancePaymentOrderByExp
+  operand:
+    object:
+      orderedType: FinancePayment
+      orderableFields:
+        - fieldName: amount
+          orderByExpression: NumericOrderByExp
+        - fieldName: createdAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: invoiceId
+          orderByExpression: UuidOrderByExp
+        - fieldName: method
+          orderByExpression: PaymentMethodEnumOrderByExp
+        - fieldName: paidAt
+          orderByExpression: TimestamptzOrderByExp
+        - fieldName: paymentId
+          orderByExpression: UuidOrderByExp
+        - fieldName: updatedAt
+          orderByExpression: TimestamptzOrderByExp
+      orderableRelationships:
+        - relationshipName: financeInvoice
+  graphql:
+    expressionTypeName: FinancePaymentOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: FinancePayment
+  objectType: FinancePayment
+  source:
+    dataConnectorName: scrappers_api
+    collection: finance_payment
+  filterExpressionType: FinancePaymentBoolExp
+  aggregateExpression: FinancePaymentAggExp
+  orderByExpression: FinancePaymentOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: financePayment
+      subscription:
+        rootField: financePayment
+    selectUniques:
+      - queryRootField: financePaymentByPaymentId
+        uniqueIdentifier:
+          - paymentId
+        subscription:
+          rootField: financePaymentByPaymentId
+    filterInputTypeName: FinancePaymentFilterInput
+    aggregate:
+      queryRootField: financePaymentAggregate
+      subscription:
+        rootField: financePaymentAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: FinancePayment
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: financeInvoice
+  sourceType: FinancePayment
+  target:
+    model:
+      name: FinanceInvoice
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: invoiceId
+      target:
+        modelField:
+          - fieldName: invoiceId
+
