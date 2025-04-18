@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "get-graphql-schema": "^2.1.2"
+  }
+}
