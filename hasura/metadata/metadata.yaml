@@ -1,0 +1,13 @@
+version: 3
+tables: []
+actions: []
+custom_types:
+  enums: []
+  input_objects: []
+  objects: []
+  scalars: []
+remote_schemas: []
+functions: []
+subscriptions: []
+event_triggers: []
+cron_triggers: []

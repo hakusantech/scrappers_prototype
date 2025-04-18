@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Lint
+      run: npm run lint
+    
+    - name: Type check
+      run: npm run build --if-present
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Install Hasura CLI
+      run: curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+
+    - name: Validate Hasura metadata
+      run: hasura metadata validate --endpoint ${{ secrets.HASURA_ENDPOINT }}
+      env:
+        HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
